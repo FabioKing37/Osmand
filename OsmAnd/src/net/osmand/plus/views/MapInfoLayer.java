@@ -261,8 +261,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// we want that status bar lays over map stack controls
 		topMargin -= topRectPadding.top;
 
-		FrameLayout.LayoutParams flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
-				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.RIGHT);
+		FrameLayout.LayoutParams flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
+				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM);
 		flp.rightMargin = STATUS_BAR_MARGIN_X;
 		flp.topMargin = topMargin;
 		rightStack.setLayoutParams(flp);

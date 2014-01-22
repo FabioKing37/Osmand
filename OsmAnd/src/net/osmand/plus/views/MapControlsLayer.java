@@ -89,6 +89,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		return true;
 	}
 
+	//INicializa o Layer do Mapa
 	@Override
 	public void initLayer(final OsmandMapTileView view) {
 		this.view = view;
@@ -98,6 +99,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		
 		initZoomButtons(view, parent);
 
+		//Menu Button
 		initBackToMenuButton(view, parent);
 		
 		initRuler(view, parent);
@@ -122,7 +124,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			zoomOutButton.setEnabled(zoomOutEnabled);
 		}
 		
-		drawApplicationMode(canvas, nightMode != null && nightMode.isNightMode());
+		//drawApplicationMode(canvas, nightMode != null && nightMode.isNightMode());
 		
 		if(view.isZooming()){
 			showZoomLevel = true;
@@ -290,7 +292,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		backToMenuButton.setContentDescription(ctx.getString(R.string.backToMenu));
 		backToMenuButton.setBackgroundResource(R.drawable.map_btn_menu);
 		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
-					Gravity.BOTTOM | Gravity.LEFT);
+					Gravity.CENTER | Gravity.RIGHT);
 		parent.addView(backToMenuButton, params);
 		backToMenuButton.setEnabled(true);
 		

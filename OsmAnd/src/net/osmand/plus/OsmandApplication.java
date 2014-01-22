@@ -315,6 +315,8 @@ public class OsmandApplication extends Application implements ClientContext {
 				progressDialog.setMessage(getString(R.string.reading_indexes));
 				activity.showDialog(PROGRESS_DIALOG);
 				startDialog.setDialog(progressDialog);
+				
+				
 			} else if (startingWarnings != null) {
 				showWarnings(startingWarnings, activity);
 			}
@@ -523,6 +525,7 @@ public class OsmandApplication extends Application implements ClientContext {
 			synchronized (OsmandApplication.this) {
 				final ProgressDialog toDismiss;
 				if (startDialog != null) {
+					
 					toDismiss = startDialog.getDialog();
 				} else {
 					toDismiss = null;

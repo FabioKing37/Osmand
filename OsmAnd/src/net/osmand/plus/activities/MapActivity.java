@@ -153,6 +153,7 @@ public class MapActivity extends AccessibleActivity  {
 			}
 		});
 		
+		//Ver o que faz? - Pede para sacar mapas?
 		app.getResourceManager().getMapTileDownloader().addDownloaderCallback(new IMapDownloaderCallback(){
 			@Override
 			public void tileDownloaded(DownloadRequest request) {
@@ -165,6 +166,7 @@ public class MapActivity extends AccessibleActivity  {
 				}
 			}
 		});
+		//Aqui mete a progressBar?
 		createProgressBarForRouting();
 		mapLayers.createLayers(mapView);
 		// This situtation could be when navigation suddenly crashed and after restarting

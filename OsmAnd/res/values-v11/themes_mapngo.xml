@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="MapnGo" parent="@style/_MapnGo" />
+
+    <style name="_MapnGo" parent="android:Theme.Holo.Light">
+        <item name="expandable_category_color">@color/group_background</item>
+        <item name="reset_image">@drawable/ic_action_delete_light</item>
+        <item name="android:editTextBackground">@drawable/mapngo_edit_text_holo_light</item>
+        <item name="android:textColorHighlight">#99325871</item>
+        <item name="android:textSelectHandleLeft">@drawable/mapngo_text_select_handle_left</item>
+        <item name="android:textSelectHandleRight">@drawable/mapngo_text_select_handle_right</item>
+        <item name="android:textSelectHandle">@drawable/mapngo_text_select_handle_middle</item>
+        <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewMapnGo</item>
+        <item name="android:listChoiceIndicatorMultiple">@drawable/mapngo_btn_check_holo_light</item>
+        <item name="android:listChoiceIndicatorSingle">@drawable/mapngo_btn_radio_holo_light</item>
+        <item name="android:buttonStyle">@style/ButtonMapnGo</item>
+        <item name="android:imageButtonStyle">@style/ImageButtonMapnGo</item>
+        <item name="android:dropDownSpinnerStyle">@style/SpinnerMapnGo</item>
+        <item name="android:progressBarStyleHorizontal">@style/ProgressBarMapnGo</item>
+        <item name="android:seekBarStyle">@style/SeekBarMapnGo</item>
+        <item name="android:ratingBarStyle">@style/RatingBarMapnGo</item>
+        <item name="android:ratingBarStyleIndicator">@style/RatingBarBigMapnGo</item>
+        <item name="android:ratingBarStyleSmall">@style/RatingBarSmallMapnGo</item>
+        <item name="android:buttonStyleToggle">@style/ToggleMapnGo</item>
+        <item name="android:listChoiceBackgroundIndicator">@drawable/mapngo_list_selector_holo_light</item>
+        <item name="android:activatedBackgroundIndicator">@drawable/mapngo_activated_background_holo_light</item>
+        <item name="android:fastScrollThumbDrawable">@drawable/mapngo_fastscroll_thumb_holo</item>
+    </style>
+
+</resources>

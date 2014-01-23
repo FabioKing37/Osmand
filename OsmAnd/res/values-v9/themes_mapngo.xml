@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="MapnGo" parent="@style/_MapnGo">
+        <item name="expandable_category_color">@color/group_background</item>
+        <item name="reset_image">@drawable/ic_action_delete_light</item>
+        <item name="android:textSelectHandleLeft">@drawable/mapngo_text_select_handle_left</item>
+        <item name="android:textSelectHandleRight">@drawable/mapngo_text_select_handle_right</item>
+        <item name="android:textSelectHandle">@drawable/mapngo_text_select_handle_middle</item>
+    </style>
+
+</resources>

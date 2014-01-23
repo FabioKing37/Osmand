@@ -1,32 +1,57 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-	<style name="Dialog_Fullscreen" parent="android:Theme"> 
-		<item name="android:windowNoTitle">true</item> 
-		<item name="android:windowIsTranslucent">true</item>
-    	<item name="android:windowBackground">@color/color_transparent</item>
-    	<item name="android:windowContentOverlay">@null</item>
-    	<item name="android:backgroundDimEnabled">false</item>
-	</style>
-		
-	
-	<style name="ListText">
+
+    <style name="Dialog_Fullscreen" parent="android:Theme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/color_transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="ListText">
         <item name="android:textSize">20sp</item>
     </style>
+
     <style name="ListText.Small">
         <item name="android:textSize">17sp</item>
     </style>
-    
+
     <style name="OsmandListView" parent="@android:style/Widget.ListView">
         <item name="android:divider">@drawable/tab_text_separator</item>
     </style>
-    
-    
+     
     <style name="OsmandLightTheme" parent="Theme.Sherlock.Light">
         <item name="expandable_category_color">@color/group_background</item>
-        <item name="reset_image">@drawable/ic_action_delete_light</item> <!--  @drawable/a_1_navigation_cancel_light -->
-    </style>
+        <item name="reset_image">@drawable/ic_action_delete_light</item>
+        <item name="android:editTextStyle">@style/EditTextMapnGo</item>
+        <item name="android:textColorHighlight">#99325871</item>
+        <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewMapnGo</item>
+        <item name="android:checkboxStyle">@style/CheckBoxMapnGo</item>
+        <item name="android:radioButtonStyle">@style/RadioButtonMapnGo</item>
+        <item name="android:buttonStyle">@style/ButtonMapnGo</item>
+        <item name="android:imageButtonStyle">@style/ImageButtonMapnGo</item>
+         <!-- TODO: Dá erro no spinner
+        <item name="android:spinnerStyle">@style/SpinnerMapnGo</item>
+        <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemMapnGo</item>
+         -->
+        <item name="android:progressBarStyleHorizontal">@style/ProgressBarMapnGo</item>
+        <item name="android:seekBarStyle">@style/SeekBarMapnGo</item>
+        <item name="android:ratingBarStyle">@style/RatingBarMapnGo</item>
+        <item name="android:ratingBarStyleIndicator">@style/RatingBarBigMapnGo</item>
+        <item name="android:ratingBarStyleSmall">@style/RatingBarSmallMapnGo</item>
+        <item name="android:buttonStyleToggle">@style/ToggleMapnGo</item>
+        <item name="android:listViewStyle">@style/ListViewMapnGo</item>
+        <item name="android:listViewWhiteStyle">@style/ListViewMapnGo.White</item>
+        <item name="android:spinnerItemStyle">@style/SpinnerItemMapnGo</item>
+  </style>
+    
+    
+        
     <style name="OsmandLightDarkActionBarTheme" parent="Theme.Sherlock.Light.DarkActionBar">
-        <!--<item name="android:windowContentOverlay">@null</item>
+
+        <!--
+        <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@color/activity_background</item>
         <item name="android:colorBackground">@color/activity_background</item>
         <item name="android:colorBackgroundCacheHint">?android:attr/colorBackground</item>
@@ -34,61 +59,64 @@
         <item name="android:textColorPrimary">@color/activity_text</item>
         <item name="android:textColorSecondary">@color/activity_text</item>
         <item name="android:textColorTertiary">@color/activity_text</item>
-        <item name="android:listViewStyle">@style/OsmandListView</item> 
+        <item name="android:listViewStyle">@style/OsmandListView</item> 
         -->
-        <item name="reset_image">@drawable/ic_action_delete_light</item> <!--  @drawable/a_1_navigation_cancel_light -->
+        <item name="reset_image">@drawable/ic_action_delete_light</item>
+ <!-- @drawable/a_1_navigation_cancel_light -->
         <item name="expandable_category_color">@color/group_background</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBar</item>
     </style>
+
     <style name="OsmandDarkTheme" parent="Theme.Sherlock">
-        <item name="reset_image">@drawable/ic_action_delete_dark</item> <!--  @drawable/a_1_navigation_cancel_dark -->
+        <item name="reset_image">@drawable/ic_action_delete_dark</item>
+ <!-- @drawable/a_1_navigation_cancel_dark -->
         <item name="expandable_category_color">?android:attr/colorBackground</item>
-     </style>
-     
+    </style>
+
+
+
     <style name="Widget.Styled.ActionBar" parent="Widget.Sherlock.Light.ActionBar.Solid.Inverse">
         <item name="background">@drawable/bg_striped</item>
         <item name="android:background">@drawable/bg_striped</item>
     </style>
-     
-	
-	<!-- Dialog popup -->
-	<style name="Animations" />
-	<!-- PopDownMenu -->
-	<style name="Animations.PopDownMenu" />
-	
-	<style name="Animations.PopDownMenu.Left">
-		<item name="@android:windowEnterAnimation">@anim/grow_from_topleft_to_bottomright</item>
-		<item name="@android:windowExitAnimation">@anim/shrink_from_bottomright_to_topleft</item>
-	</style>
-	
-	<style name="Animations.PopDownMenu.Right">
-		<item name="@android:windowEnterAnimation">@anim/grow_from_topright_to_bottomleft</item>
-		<item name="@android:windowExitAnimation">@anim/shrink_from_bottomleft_to_topright</item>
-	</style>
-	
-	<style name="Animations.PopDownMenu.Center">
-		<item name="@android:windowEnterAnimation">@anim/grow_from_top</item>
-		<item name="@android:windowExitAnimation">@anim/shrink_from_bottom</item>
-	</style>
-	
-	<!-- PopUpMenu -->
-	<style name="Animations.PopUpMenu" />
-	
-	<style name="Animations.PopUpMenu.Left">
-		<item name="@android:windowEnterAnimation">@anim/grow_from_bottomleft_to_topright</item>
-		<item name="@android:windowExitAnimation">@anim/shrink_from_topright_to_bottomleft</item>
-	</style>
-	
-	<style name="Animations.PopUpMenu.Right">
-		<item name="@android:windowEnterAnimation">@anim/grow_from_bottomright_to_topleft</item>
-		<item name="@android:windowExitAnimation">@anim/shrink_from_topleft_to_bottomright</item>
-	</style>
-	
-	<style name="Animations.PopUpMenu.Center">
-		<item name="@android:windowEnterAnimation">@anim/grow_from_bottom</item>
-		<item name="@android:windowExitAnimation">@anim/shrink_from_top</item>
-	</style>
-	
-	        
+
+    <!-- Dialog popup -->
+    <style name="Animations" />
+    <!-- PopDownMenu -->
+    <style name="Animations.PopDownMenu" />
+
+    <style name="Animations.PopDownMenu.Left">
+        <item name="@android:windowEnterAnimation">@anim/grow_from_topleft_to_bottomright</item>
+        <item name="@android:windowExitAnimation">@anim/shrink_from_bottomright_to_topleft</item>
+    </style>
+
+    <style name="Animations.PopDownMenu.Right">
+        <item name="@android:windowEnterAnimation">@anim/grow_from_topright_to_bottomleft</item>
+        <item name="@android:windowExitAnimation">@anim/shrink_from_bottomleft_to_topright</item>
+    </style>
+
+    <style name="Animations.PopDownMenu.Center">
+        <item name="@android:windowEnterAnimation">@anim/grow_from_top</item>
+        <item name="@android:windowExitAnimation">@anim/shrink_from_bottom</item>
+    </style>
+
+    <!-- PopUpMenu -->
+    <style name="Animations.PopUpMenu" />
+
+    <style name="Animations.PopUpMenu.Left">
+        <item name="@android:windowEnterAnimation">@anim/grow_from_bottomleft_to_topright</item>
+        <item name="@android:windowExitAnimation">@anim/shrink_from_topright_to_bottomleft</item>
+    </style>
+
+    <style name="Animations.PopUpMenu.Right">
+        <item name="@android:windowEnterAnimation">@anim/grow_from_bottomright_to_topleft</item>
+        <item name="@android:windowExitAnimation">@anim/shrink_from_topleft_to_bottomright</item>
+    </style>
+
+    <style name="Animations.PopUpMenu.Center">
+        <item name="@android:windowEnterAnimation">@anim/grow_from_bottom</item>
+        <item name="@android:windowExitAnimation">@anim/shrink_from_top</item>
+    </style>
+
 </resources>

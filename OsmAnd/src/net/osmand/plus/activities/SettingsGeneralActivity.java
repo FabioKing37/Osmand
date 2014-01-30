@@ -46,6 +46,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 	private ListPreference drivingRegionPreference;
 
 	
+	@SuppressWarnings("deprecation")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);

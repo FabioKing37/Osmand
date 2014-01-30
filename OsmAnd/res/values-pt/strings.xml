@@ -1349,6 +1349,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="about_version">Versão:</string>
     <string name="about_settings">Sobre</string>
     <string name="about_settings_descr">Versão, licenças, membros do projecto</string>
+    <string name="tips_settings_descr">Algumas dicas sobre a aplicação</string>
     <string name="tips_and_tricks">Dicas</string>
     <string name="local_index_tile_data_zooms">Zooms descarregados: %1$s</string>
     <string name="local_index_tile_data_expire">Expira (minutos): %1$s</string>

@@ -1442,8 +1442,9 @@ public class OsmandSettings {
 	public static final int OSMAND_DARK_THEME = 0;
 	public static final int OSMAND_LIGHT_THEME = 1;
 	public static final int OSMAND_LIGHT_DARK_ACTIONBAR_THEME = 2;
+	//Tema Inicial
 	public final CommonPreference<Integer> OSMAND_THEME = 
-			new IntPreference("osmand_theme", OSMAND_DARK_THEME).makeGlobal().cache();
+			new IntPreference("osmand_theme", OSMAND_LIGHT_THEME).makeGlobal().cache();
 	
 	public boolean isLightActionBar(){
 		return OSMAND_THEME.get() == OSMAND_LIGHT_THEME;

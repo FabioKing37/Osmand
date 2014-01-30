@@ -45,6 +45,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 	private Preference localIndexes;
 	private Preference general;
 	private Preference routing;
+	private Preference tips;
 	private Preference about;
 	
 	@Override
@@ -73,12 +74,19 @@ public class SettingsActivity extends SettingsBaseActivity {
 				startActivity(new Intent(this, SettingsNavigationActivity.class));
 			} 
 		}
+
 		about = new Preference(this);
 		about.setOnPreferenceClickListener(this);
 		about.setSummary(R.string.about_settings_descr);
 		about.setTitle(R.string.about_settings);
 		about.setKey("about");
 		screen.addPreference(about);
+		/*tips = new Preference(this);	
+		tips.setOnPreferenceClickListener(this);
+		tips.setSummary(R.string.tips_settings_descr);
+		tips.setTitle(R.string.tips_and_tricks);
+		tips.setKey("tips");
+		screen.addPreference(tips);*/
     }
 
 	@Override

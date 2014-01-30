@@ -147,6 +147,7 @@ public class ContextMenuAdapter {
 			public View getView(int position, View convertView, ViewGroup parent) {
 				// User super class to create the View
 				View v = convertView;
+				
 				if (v == null) {
 					v = activity.getLayoutInflater().inflate(layoutId, null);
 				}

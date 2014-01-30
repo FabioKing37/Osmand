@@ -3,9 +3,7 @@
 <!-- Generated with http://android-holo-colors.com -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="MapnGo" parent="@style/_MapnGo" />
-
-    <style name="_MapnGo" parent="android:Theme.Holo.Light">
+     <style name="OsmandLightTheme" parent="Theme.Sherlock.Light">
         <item name="expandable_category_color">@color/group_background</item>
         <item name="reset_image">@drawable/ic_action_delete_light</item>
         <item name="android:editTextBackground">@drawable/mapngo_edit_text_holo_light</item>
@@ -28,6 +26,7 @@
         <item name="android:listChoiceBackgroundIndicator">@drawable/mapngo_list_selector_holo_light</item>
         <item name="android:activatedBackgroundIndicator">@drawable/mapngo_activated_background_holo_light</item>
         <item name="android:fastScrollThumbDrawable">@drawable/mapngo_fastscroll_thumb_holo</item>
+        <!-- <item name="android:actionBarStyle">@style/Widget.Styled.ActionBar</item>  -->
     </style>
 
 </resources>

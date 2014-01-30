@@ -123,7 +123,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if(zoomOutButton.isEnabled() != zoomOutEnabled){
 			zoomOutButton.setEnabled(zoomOutEnabled);
 		}
-		
+		//TODO: Ver se fica com a opção de mudar appMode
 		//drawApplicationMode(canvas, nightMode != null && nightMode.isNightMode());
 		
 		if(view.isZooming()){

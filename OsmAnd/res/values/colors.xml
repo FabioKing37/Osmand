@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<color name="color_transparent">#00000000</color>
-    
+    <color name="mapngo_color">#325871</color>
 	<!-- style colors  -->
 	<color name="group_background">#A5A5A5</color>
 	<!-- <color name="activity_background">#666666</color>  -->

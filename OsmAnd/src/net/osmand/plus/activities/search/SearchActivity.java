@@ -483,7 +483,7 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 
         @Override
         public void onPageScrollStateChanged(int state) {
-        }
-    }
+		}
+	}
 
 }

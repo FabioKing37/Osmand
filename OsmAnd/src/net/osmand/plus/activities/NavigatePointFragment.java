@@ -4,7 +4,6 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 import java.util.StringTokenizer;
-
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
@@ -13,6 +12,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.util.MapUtils;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.location.Location;
@@ -26,13 +26,13 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
+@SuppressLint("NewApi")
 public class NavigatePointFragment extends SherlockFragment implements SearchActivityChild {
 	int currentFormat = Location.FORMAT_DEGREES;
 	
@@ -48,6 +48,7 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 
 	private View view;
 
+	@SuppressLint("NewApi")
 	public View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.navigate_point, container, false);
 		setHasOptionsMenu(true);

@@ -43,7 +43,7 @@ public class NextTurnInfoWidget extends BaseMapWidget {
 		this.textPaint = textPaint;
 		this.subtextPaint = subtextPaint;
 
-
+		//Contorno na seta
 		paintBlack = new Paint();
 		paintBlack.setStyle(Style.STROKE);
 		paintBlack.setColor(Color.BLACK);

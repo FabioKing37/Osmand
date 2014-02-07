@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     File created by the Android Action Bar Style Generator
+
+     Copyright (C) 2011 The Android Open Source Project
+     Copyright (C) 2012 readyState Software Ltd
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+
+    <style name="OsmandDarkTheme" parent="Theme.Sherlock">
+        <item name="reset_image">@drawable/ic_action_delete_dark</item>
+        <!-- @drawable/a_1_navigation_cancel_dark -->
+        <item name="expandable_category_color">?android:attr/colorBackground</item>
+        <!-- ActionBar -->
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_mapandgoactionbar</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Mapandgoactionbar</item>
+        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Mapandgoactionbar</item>
+        <!--
+        <item name="android:popupMenuStyle">@style/PopupMenu.Mapandgoactionbar</item>       
+        <item name="android:actionDropDownStyle">@style/DropDownNav.Mapandgoactionbar</item>
+        -->
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.Mapandgoactionbar</item>
+        <item name="android:actionModeBackground">@drawable/cab_background_top_mapandgoactionbar</item>
+        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_mapandgoactionbar</item>
+        <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Mapandgoactionbar</item>
+    </style>
+
+    <style name="OsmandLightTheme" parent="@style/Theme.Sherlock.Light.DarkActionBar">
+        <item name="expandable_category_color">@color/group_background</item>
+        <item name="reset_image">@drawable/ic_action_delete_light</item>
+        <item name="android:editTextBackground">@drawable/mapngo_edit_text_holo_light</item>
+        <item name="android:textColorHighlight">#99325871</item>
+        <item name="android:textSelectHandleLeft">@drawable/mapngo_text_select_handle_left</item>
+        <item name="android:textSelectHandleRight">@drawable/mapngo_text_select_handle_right</item>
+        <item name="android:textSelectHandle">@drawable/mapngo_text_select_handle_middle</item>
+        <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewMapnGo</item>
+        <item name="android:listChoiceIndicatorMultiple">@drawable/mapngo_btn_check_holo_light</item>
+        <item name="android:listChoiceIndicatorSingle">@drawable/mapngo_btn_radio_holo_light</item>
+        <item name="android:buttonStyle">@style/ButtonMapnGo</item>
+        <item name="android:imageButtonStyle">@style/ImageButtonMapnGo</item>
+        <item name="android:dropDownSpinnerStyle">@style/SpinnerMapnGo</item>
+        <item name="android:progressBarStyleHorizontal">@style/ProgressBarMapnGo</item>
+        <item name="android:seekBarStyle">@style/SeekBarMapnGo</item>
+        <item name="android:ratingBarStyle">@style/RatingBarMapnGo</item>
+        <item name="android:ratingBarStyleIndicator">@style/RatingBarBigMapnGo</item>
+        <item name="android:ratingBarStyleSmall">@style/RatingBarSmallMapnGo</item>
+        <item name="android:buttonStyleToggle">@style/ToggleMapnGo</item>
+        <item name="android:listChoiceBackgroundIndicator">@drawable/mapngo_list_selector_holo_light</item>
+        <item name="android:activatedBackgroundIndicator">@drawable/mapngo_activated_background_holo_light</item>
+        <item name="android:fastScrollThumbDrawable">@drawable/mapngo_fastscroll_thumb_holo</item>
+
+        <!-- ACTIONBAR -->
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_mapandgoactionbar</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu.Mapandgoactionbar</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Mapandgoactionbar</item>
+        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Mapandgoactionbar</item>
+        <item name="android:actionDropDownStyle">@style/DropDownNav.Mapandgoactionbar</item>
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.Mapandgoactionbar</item>
+        <item name="android:actionModeBackground">@drawable/cab_background_top_mapandgoactionbar</item>
+        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_mapandgoactionbar</item>
+        <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Mapandgoactionbar</item>
+
+        <!-- Light.DarkActionBar specific -->
+        <item name="android:actionBarWidgetTheme">@style/Theme.Mapandgoactionbar.Widget</item>
+    </style>
+
+    <style name="ActionBar.Solid.Mapandgoactionbar" parent="@style/Widget.Sherlock.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@drawable/ab_solid_mapandgoactionbar</item>
+        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_mapandgoactionbar</item>
+        <item name="android:backgroundSplit">@drawable/ab_bottom_solid_mapandgoactionbar</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Mapandgoactionbar</item>
+        <item name="titleTextStyle">@style/TextActionBar</item>
+    </style>
+
+    <style name="TextActionBar" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <style name="ActionBar.Transparent.Mapandgoactionbar" parent="@style/Widget.Sherlock.ActionBar">
+        <item name="android:background">@drawable/ab_transparent_mapandgoactionbar</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Mapandgoactionbar</item>
+    </style>
+
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="Theme.Mapandgoactionbar.Widget" parent="@style/Theme.Sherlock">
+        <item name="android:popupMenuStyle">@style/PopupMenu.Mapandgoactionbar</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Mapandgoactionbar</item>
+    </style>
+
+</resources>

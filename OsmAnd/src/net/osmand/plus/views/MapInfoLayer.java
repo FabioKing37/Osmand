@@ -119,9 +119,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		this.view = view;
 		scaleCoefficient = view.getScaleCoefficient();
 
+		//Cores do Texto na Widget
 		paintText = new Paint();
 		paintText.setStyle(Style.FILL_AND_STROKE);
-		paintText.setColor(Color.BLACK);
+		paintText.setColor(Color.WHITE);
 		paintText.setTextSize(23 * scaleCoefficient);
 		paintText.setAntiAlias(true);
 		paintText.setStrokeWidth(4);
@@ -141,7 +142,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 		paintSmallSubText = new Paint();
 		paintSmallSubText.setStyle(Style.FILL_AND_STROKE);
-		paintSmallSubText.setColor(Color.BLACK);
+		paintSmallSubText.setColor(Color.WHITE);
 		paintSmallSubText.setTextSize(13 * scaleCoefficient);
 		paintSmallSubText.setAntiAlias(true);
 
@@ -205,7 +206,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.registerTopWidget(compassView, R.drawable.widget_compass, R.string.map_widget_compass, "compass", MapWidgetRegistry.LEFT_CONTROL, 5);
 		View config = createConfiguration();
 		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapWidgetRegistry.RIGHT_CONTROL, 10).required(ApplicationMode.DEFAULT);
-		mapInfoControls.registerTopWidget(monitoringServices.createMonitoringWidget(view, map), R.drawable.widget_monitoring, R.string.map_widget_monitoring_services,
+		 mapInfoControls.registerTopWidget(monitoringServices.createMonitoringWidget(view, map), R.drawable.widget_monitoring, R.string.map_widget_monitoring_services,
 				"monitoring_services", MapWidgetRegistry.LEFT_CONTROL, 12);
 		mapInfoControls.registerTopWidget(mic.createLockInfo(map), R.drawable.widget_lock_screen, R.string.bg_service_screen_lock, "bgService", 
 				MapWidgetRegistry.LEFT_CONTROL,  15);
@@ -261,25 +262,27 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// we want that status bar lays over map stack controls
 		topMargin -= topRectPadding.top;
 
+		//RightStack
 		FrameLayout.LayoutParams flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
 				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM);
 		flp.rightMargin = STATUS_BAR_MARGIN_X;
 		flp.topMargin = topMargin;
 		rightStack.setLayoutParams(flp);
 		
-		
+		//Lanes - Vias
 		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
 				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER_HORIZONTAL | Gravity.TOP);
 		flp.topMargin = (int) (topMargin  + scaleCoefficient * 8);
 		lanesControl.setLayoutParams(flp);
 		
-		
+		//Left - Direções
 		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
 				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.LEFT);
 		flp.leftMargin = STATUS_BAR_MARGIN_X;
 		flp.topMargin = topMargin;
 		leftStack.setLayoutParams(flp);
 
+		//StatusBAr
 		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
 				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.TOP);
 		flp.leftMargin = STATUS_BAR_MARGIN_X;
@@ -323,6 +326,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 	}
 
+	//TODO: Configurar Tela Dialog
 	public void openViewConfigureDialog() {
 		final OsmandSettings settings = view.getSettings();
 		
@@ -470,7 +474,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		if (themeId != calcThemeId) {
 			themeId = calcThemeId;
 			boolean textBold = following;
-			int textColor = nightMode ? 0xffC8C8C8:Color.BLACK ;
+			int textColor = nightMode ? 0xffC8C8C8:Color.WHITE ;
 			int textShadowColor = transparent && !nightMode? Color.WHITE : Color.TRANSPARENT ;
 			int boxTop;
 			int boxTopStack;
@@ -496,6 +500,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				expand = R.drawable.box_expand_t;
 				boxFree = view.getResources().getDrawable(R.drawable.box_night_free_simple);
 			} else {
+				//Res das boxes
 				boxTop = R.drawable.box_top;
 				boxTopStack = R.drawable.box_top_stack;
 				boxTopR = R.drawable.box_top_r;

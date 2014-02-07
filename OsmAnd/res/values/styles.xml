@@ -22,7 +22,7 @@
     </style>
 
     <!-- Tema adaptado com novos res -->
-    <style name="OsmandLightTheme" parent="Theme.Sherlock.Light">
+    <style name="OsmandLightTheme" parent="Theme.Sherlock.Light.DarkActionBar">
         <item name="expandable_category_color">@color/group_background</item>
         <item name="reset_image">@drawable/ic_action_delete_light</item>
         <item name="android:textColorHighlight">#99325871</item>
@@ -37,32 +37,43 @@
         <item name="android:ratingBarStyleIndicator">@style/RatingBarBigMapnGo</item>
         <item name="android:ratingBarStyleSmall">@style/RatingBarSmallMapnGo</item>
         <item name="android:buttonStyleToggle">@style/ToggleMapnGo</item>
+        <!-- ActionBar -->
+        <item name="actionBarItemBackground">@drawable/selectable_background_mapandgoactionbar</item>
+        <item name="popupMenuStyle">@style/PopupMenu.Mapandgoactionbar</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Mapandgoactionbar</item>
+        <item name="actionBarTabStyle">@style/ActionBarTabStyle.Mapandgoactionbar</item>
+        <item name="actionDropDownStyle">@style/DropDownNav.Mapandgoactionbar</item>
+        <item name="actionBarStyle">@style/ActionBar.Solid.Mapandgoactionbar</item>
+        <item name="actionModeBackground">@drawable/cab_background_top_mapandgoactionbar</item>
+        <item name="actionModeSplitBackground">@drawable/cab_background_bottom_mapandgoactionbar</item>
+        <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Mapandgoactionbar</item>
+
+        <!-- Light.DarkActionBar specific -->
+        <item name="actionBarWidgetTheme">@style/Theme.Mapandgoactionbar.Widget</item>
     </style>
 
     <style name="OsmandLightDarkActionBarTheme" parent="Theme.Sherlock.Light.DarkActionBar">
-
-        <!--
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowBackground">@color/activity_background</item>
-        <item name="android:colorBackground">@color/activity_background</item>
-        <item name="android:colorBackgroundCacheHint">?android:attr/colorBackground</item>
-         <item name="android:textColor">@color/activity_text</item>
-        <item name="android:textColorPrimary">@color/activity_text</item>
-        <item name="android:textColorSecondary">@color/activity_text</item>
-        <item name="android:textColorTertiary">@color/activity_text</item>
-        <item name="android:listViewStyle">@style/OsmandListView</item> 
-        -->
         <item name="reset_image">@drawable/ic_action_delete_light</item>
         <!-- @drawable/a_1_navigation_cancel_light -->
         <item name="expandable_category_color">@color/group_background</item>
-        <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
-        <!-- <item name="android:actionBarStyle">@style/Widget.Styled.ActionBar</item> -->
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.Sherlock">
         <item name="reset_image">@drawable/ic_action_delete_dark</item>
         <!-- @drawable/a_1_navigation_cancel_dark -->
         <item name="expandable_category_color">?android:attr/colorBackground</item>
+        <!-- ActionBar -->
+        <item name="actionBarItemBackground">@drawable/selectable_background_mapandgoactionbar</item>
+        <item name="actionBarTabStyle">@style/ActionBarTabStyle.Mapandgoactionbar</item>
+        <!--
+        <item name="popupMenuStyle">@style/PopupMenu.Mapandgoactionbar</item>
+        <item name="actionDropDownStyle">@style/DropDownNav.Mapandgoactionbar</item>  
+        -->
+        <item name="dropDownListViewStyle">@style/DropDownListView.Mapandgoactionbar</item>
+        <item name="actionBarStyle">@style/ActionBar.Solid.Mapandgoactionbar</item>
+        <item name="actionModeBackground">@drawable/cab_background_top_mapandgoactionbar</item>
+        <item name="actionModeSplitBackground">@drawable/cab_background_bottom_mapandgoactionbar</item>
+        <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Mapandgoactionbar</item>
     </style>
 
     <style name="Widget.Styled.ActionBar" parent="Widget.Sherlock.Light.ActionBar.Solid.Inverse">

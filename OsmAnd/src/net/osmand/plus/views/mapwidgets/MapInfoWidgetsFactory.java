@@ -100,11 +100,11 @@ public class MapInfoWidgetsFactory {
 
 
 	public ImageView createBackToLocation(final MapActivity map){
-		final Drawable backToLoc = map.getResources().getDrawable(R.drawable.back_to_loc);
+		final Drawable backToLoc = map.getResources().getDrawable(R.drawable.back_to_loc_white);
 		final Drawable backToLocWhite = map.getResources().getDrawable(R.drawable.back_to_loc_white);
-		final Drawable backToLocDisabled = map.getResources().getDrawable(R.drawable.la_backtoloc_disabled);
+		final Drawable backToLocDisabled = map.getResources().getDrawable(R.drawable.la_backtoloc_disabled_white);
 		final Drawable backToLocDisabledWhite = map.getResources().getDrawable(R.drawable.la_backtoloc_disabled_white);
-		final Drawable backToLocTracked = map.getResources().getDrawable(R.drawable.back_to_loc_tracked);
+		final Drawable backToLocTracked = map.getResources().getDrawable(R.drawable.back_to_loc_tracked_white);
 		final Drawable backToLocTrackedWhite = map.getResources().getDrawable(R.drawable.back_to_loc_tracked_white);
 		ImageView backToLocation = new ImageViewWidget(map) {
 			Drawable lastDrawable = null;
@@ -145,8 +145,8 @@ public class MapInfoWidgetsFactory {
 	private Drawable lockDisabled;
 	public ImageView createLockInfo(final MapActivity map) {
 		final OsmandMapTileView view = map.getMapView();
-		final Drawable lockEnabledNormal = view.getResources().getDrawable(R.drawable.lock_enabled);
-		final Drawable lockDisabledNormal = view.getResources().getDrawable(R.drawable.lock_disabled);
+		final Drawable lockEnabledNormal = view.getResources().getDrawable(R.drawable.lock_enabled_white);
+		final Drawable lockDisabledNormal = view.getResources().getDrawable(R.drawable.lock_disabled_white);
 		final Drawable lockEnabledWhite = view.getResources().getDrawable(R.drawable.lock_enabled_white);
 		final Drawable lockDisabledWhite = view.getResources().getDrawable(R.drawable.lock_disabled_white);
 		lockDisabled = lockDisabledNormal;
@@ -235,7 +235,7 @@ public class MapInfoWidgetsFactory {
 	
 	public ImageViewWidget createCompassView(final MapActivity map){
 		final OsmandMapTileView view = map.getMapView();
-		final Drawable compass = map.getResources().getDrawable(R.drawable.map_compass);
+		final Drawable compass = map.getResources().getDrawable(R.drawable.map_compass_white);
 		final Drawable compassWhite = map.getResources().getDrawable(R.drawable.map_compass_white);
 		final int mw = (int) compass.getMinimumWidth() ;
 		final int mh = (int) compass.getMinimumHeight() ;
@@ -286,7 +286,7 @@ public class MapInfoWidgetsFactory {
 		private int shadowColor = Color.WHITE;
 		private OsmAndLocationProvider locationProvider;
 		private Paint paintText;
-
+		//TODO: Text na StatusBar? 
 		public TopTextView(OsmandApplication app, MapActivity map, Paint paintText) {
 			super(map);
 			this.paintText = paintText;
@@ -294,7 +294,8 @@ public class MapInfoWidgetsFactory {
 			locationProvider = app.getLocationProvider();
 			this.map = map;
 			getPaint().setTextAlign(Align.CENTER);
-			setTextColor(Color.BLACK);
+			
+			setTextColor(Color.WHITE);
 		}
 
 		@Override

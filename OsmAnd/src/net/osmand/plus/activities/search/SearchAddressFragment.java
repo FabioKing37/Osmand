@@ -92,7 +92,7 @@ public class SearchAddressFragment extends SherlockFragment {
 		} else {
 			com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.get_directions).setShowAsActionFlags(
 					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_light : R.drawable.ic_action_gdirections_dark);
+			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_dark : R.drawable.ic_action_gdirections_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
@@ -104,11 +104,11 @@ public class SearchAddressFragment extends SherlockFragment {
 			if (targets.getPointToNavigate() != null) {
 				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point).setShowAsActionFlags(
 						MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-				menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flage_light : R.drawable.ic_action_flage_dark);
+				menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flage_dark : R.drawable.ic_action_flage_dark);
 			} else {
 				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_destination_point).setShowAsActionFlags(
 						MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-				menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flag_light : R.drawable.ic_action_flag_dark);
+				menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flag_dark : R.drawable.ic_action_flag_dark);
 			}
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
@@ -118,7 +118,7 @@ public class SearchAddressFragment extends SherlockFragment {
 				}
 			});
 			menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_marker_light : R.drawable.ic_action_marker_dark);
+			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_marker_dark : R.drawable.ic_action_marker_dark);
 
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
@@ -129,7 +129,7 @@ public class SearchAddressFragment extends SherlockFragment {
 			});
 			
 			menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.add_to_favourite).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_fav_light : R.drawable.ic_action_fav_dark);
+			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_fav_dark : R.drawable.ic_action_fav_dark);
 
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
@@ -139,7 +139,7 @@ public class SearchAddressFragment extends SherlockFragment {
 				}
 			});
 			menuItem = menu.add(0, ONLINE_SEARCH, 0, R.string.search_online_address).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gnext_light : R.drawable.ic_action_gnext_dark);
+			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gnext_dark : R.drawable.ic_action_gnext_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {

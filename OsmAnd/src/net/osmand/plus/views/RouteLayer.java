@@ -61,7 +61,7 @@ public class RouteLayer extends OsmandMapLayer {
 		paintIcon = new Paint();
 		paintIcon.setFilterBitmap(true);
 		paintIcon.setAntiAlias(true);
-		paintIcon.setColor(Color.BLACK);
+		paintIcon.setColor(Color.WHITE);
 		paintIcon.setStrokeWidth(3);
 
 	}

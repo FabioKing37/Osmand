@@ -8,7 +8,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -24,9 +23,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.OsmandListActivity;
 import net.osmand.plus.activities.search.SearchAddressFragment.AddressInformation;
-
 import org.apache.commons.logging.Log;
-
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
@@ -56,12 +54,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.TextView.OnEditorActionListener;
-
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
 
+@SuppressLint("NewApi")
 public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity {
 
 	private EditText searchText;
@@ -518,7 +516,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			boolean light = ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
 			com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.get_directions)
 					.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_light
+			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_dark
 					: R.drawable.ic_action_gdirections_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
@@ -531,11 +529,11 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			if (targets.getPointToNavigate() != null) {
 				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point)
 						.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-				menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flage_light : R.drawable.ic_action_flage_dark);
+				menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flage_dark : R.drawable.ic_action_flage_dark);
 			} else {
 				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_destination_point)
 						.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-				menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flag_light : R.drawable.ic_action_flag_dark);
+				menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flag_dark : R.drawable.ic_action_flag_dark);
 			}
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
@@ -546,7 +544,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			});
 			menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map).setShowAsActionFlags(
 					MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_marker_light : R.drawable.ic_action_marker_dark);
+			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_marker_dark : R.drawable.ic_action_marker_dark);
 
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
@@ -558,7 +556,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 
 			menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.add_to_favourite).setShowAsActionFlags(
 					MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_fav_light : R.drawable.ic_action_fav_dark);
+			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_fav_dark : R.drawable.ic_action_fav_dark);
 
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
@@ -568,7 +566,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				}
 			});
 		} else {
-			createMenuItem(menu, 1, R.string.default_buttons_ok, R.drawable.ic_action_ok_light,
+			createMenuItem(menu, 1, R.string.default_buttons_ok, R.drawable.ic_action_ok_dark,
 					R.drawable.ic_action_ok_dark, MenuItem.SHOW_AS_ACTION_ALWAYS);
 		}
 		return super.onCreateOptionsMenu(menu);

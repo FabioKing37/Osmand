@@ -386,6 +386,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 
+	//TODO:Long Click no Mapa? 
 	private static View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {
 		final View.OnLongClickListener listener = new View.OnLongClickListener() {
 

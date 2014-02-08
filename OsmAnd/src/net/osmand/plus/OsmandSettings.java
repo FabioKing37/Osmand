@@ -1432,11 +1432,11 @@ public class OsmandSettings {
 	
 	// UI boxes
 	public final CommonPreference<Boolean> TRANSPARENT_MAP_THEME = 
-			new BooleanPreference("transparent_map_theme", true).makeProfile();
+			new BooleanPreference("transparent_map_theme", false).makeProfile();
 	{
 		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.CAR, false);
 		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.BICYCLE, false);
-		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
+		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
 	}
 	
 	public static final int OSMAND_DARK_THEME = 0;
@@ -1468,7 +1468,7 @@ public class OsmandSettings {
 
 	
 	public final CommonPreference<Boolean> SHOW_RULER = 
-			new BooleanPreference("show_ruler", true).makeProfile().cache();
+			new BooleanPreference("show_ruler", false).makeProfile().cache();
 	
 	
 

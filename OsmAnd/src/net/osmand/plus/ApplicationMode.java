@@ -48,8 +48,10 @@ public class ApplicationMode {
 	static {
 		ApplicationMode[] exceptPedestrian = new ApplicationMode[] { DEFAULT, CAR, BICYCLE, BOAT, AIRCRAFT };
 		ApplicationMode[] exceptAirBoat = new ApplicationMode[] { DEFAULT, CAR, BICYCLE};
-		ApplicationMode[] exceptCarBoatAir = new ApplicationMode[] { DEFAULT, BICYCLE, PEDESTRIAN };
+		ApplicationMode[] exceptCarBoatAir = new ApplicationMode[] {BICYCLE, PEDESTRIAN };
 		ApplicationMode[] pedestrian = new ApplicationMode[] { PEDESTRIAN };
+		ApplicationMode[] mapCar = new ApplicationMode[] { DEFAULT, CAR};
+		
 		
 		ApplicationMode[] all = null;
 		ApplicationMode[] none = new ApplicationMode[] {};
@@ -65,15 +67,15 @@ public class ApplicationMode {
 		regWidget("time", all);
 		regWidget("speed", exceptPedestrian);
 		regWidget("max_speed", exceptAirBoat);
-		regWidget("gps_info", exceptCarBoatAir);
-		regWidget("altitude", exceptCarBoatAir);
+		regWidget("gps_info", none);
+		regWidget("altitude", none);
 		
 		// top
 		regWidget("compass", all);
-		regWidget("config", all);
+		regWidget("config", none);
 		regWidget("street_name", exceptAirBoat);
 		regWidget("back_to_location", all);
-		regWidget("monitoring_services", exceptCarBoatAir);
+		regWidget("monitoring_services", none);
 		regWidget("bgService", none);
 		regWidget("layers", none);
 	}

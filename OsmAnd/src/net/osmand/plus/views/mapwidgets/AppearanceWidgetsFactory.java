@@ -49,6 +49,8 @@ public class AppearanceWidgetsFactory {
                 @Override
                 public void run() {
                     view.getSettings().SHOW_RULER.set(!view.getSettings().SHOW_RULER.get());
+                    view.getSettings().SHOW_RULER.set(view.getSettings().SHOW_RULER.get());
+                  
                     view.refreshMap();
                 }
             });

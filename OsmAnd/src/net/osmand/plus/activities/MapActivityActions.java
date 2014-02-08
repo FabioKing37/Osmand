@@ -633,6 +633,14 @@ public class MapActivityActions implements DialogProvider {
 		// TODO: CENTRAR!
 		bld.setTitle("  ");
 		bld.setIcon(R.drawable.logocompleto);
+		bld.setNegativeButton(R.string.close,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                            int which) {
+                        dialog.cancel();
+                    }
+                });
 
 		ListAdapter listAdapter;
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
@@ -666,7 +674,7 @@ public class MapActivityActions implements DialogProvider {
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
 
 		// 1. Where am I
-		optionsMenuHelper
+		/*optionsMenuHelper
 				.item(R.string.where_am_i)
 				.icons(R.drawable.ic_action_gloc_dark,
 						R.drawable.ic_action_gloc_dark)
@@ -683,7 +691,7 @@ public class MapActivityActions implements DialogProvider {
 						}
 					}
 				}).reg();
-
+*/
 		// 2-4. Navigation related (directions, mute, cancel navigation)
 		boolean muteVisible = routingHelper.getFinalLocation() != null
 				&& routingHelper.isFollowingMode();

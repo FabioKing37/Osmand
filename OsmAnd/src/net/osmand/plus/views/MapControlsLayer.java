@@ -97,12 +97,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 		FrameLayout parent = (FrameLayout) view.getParent();
 		showUIHandler = new Handler();
 		
-		initZoomButtons(view, parent);
+		// Botões de Zoom
+		//initZoomButtons(view, parent);
 
 		//Menu Button
 		initBackToMenuButton(view, parent);
 		
-		initRuler(view, parent);
+		//Ruler
+		//initRuler(view, parent);
 		
 		initTransparencyBar(view, parent);
 		
@@ -114,7 +116,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
-		BaseMapLayer mainLayer = view.getMainLayer();
+	/*	BaseMapLayer mainLayer = view.getMainLayer();
 		boolean zoomInEnabled = mainLayer != null && tileBox.getZoom() < mainLayer.getMaximumShownMapZoom();
 		boolean zoomOutEnabled = mainLayer != null && tileBox.getZoom() > mainLayer.getMinimumShownMapZoom();
 		if(zoomInButton.isEnabled() != zoomInEnabled){
@@ -150,7 +152,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			drawZoomLevel(canvas, tileBox, !showZoomLevelButton);
 		} else {
 			drawRuler(canvas, tileBox);
-		}
+		}*/
 	}
 
 
@@ -450,10 +452,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private void initTransparencyBar(final OsmandMapTileView view, FrameLayout parent) {
 		int minimumHeight = view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumHeight();
 		android.widget.FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
-				Gravity.BOTTOM | Gravity.CENTER);
+				Gravity.CENTER | Gravity.CENTER);
 		params.setMargins(0, 0, 0, minimumHeight + 3);
 		transparencyBarLayout = new LinearLayout(view.getContext());
-		transparencyBarLayout.setVisibility(settingsToTransparency != null ? View.VISIBLE : View.GONE);
+		transparencyBarLayout.setVisibility(settingsToTransparency != null ? View.VISIBLE : View.VISIBLE);
 		parent.addView(transparencyBarLayout, params);
 
 		transparencyBar = new SeekBar(view.getContext());

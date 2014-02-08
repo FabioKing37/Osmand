@@ -185,6 +185,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, 15);
 		//MiniMapControl miniMap = ric.createMiniMapControl(routingHelper, view);
 		//mapInfoControls.registerSideWidget(miniMap, R.drawable.widget_next_turn, R.string.map_widget_mini_route, "mini_route", true, none, none, 20);
+		
 		// right stack
 		TextInfoWidget intermediateDist = ric.createIntermediateDistanceControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(intermediateDist, R.drawable.widget_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, 3);
@@ -205,7 +206,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		ImageViewWidget compassView = mic.createCompassView(map);
 		mapInfoControls.registerTopWidget(compassView, R.drawable.widget_compass, R.string.map_widget_compass, "compass", MapWidgetRegistry.LEFT_CONTROL, 5);
 		View config = createConfiguration();
-		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapWidgetRegistry.RIGHT_CONTROL, 10).required(ApplicationMode.DEFAULT);
+		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapWidgetRegistry.RIGHT_CONTROL, 10);
 		 mapInfoControls.registerTopWidget(monitoringServices.createMonitoringWidget(view, map), R.drawable.widget_monitoring, R.string.map_widget_monitoring_services,
 				"monitoring_services", MapWidgetRegistry.LEFT_CONTROL, 12);
 		mapInfoControls.registerTopWidget(mic.createLockInfo(map), R.drawable.widget_lock_screen, R.string.bg_service_screen_lock, "bgService", 
@@ -596,7 +597,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		final OsmandMapTileView view = map.getMapView();
 		
 		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		final Drawable config = view.getResources().getDrawable(R.drawable.map_config);
+		final Drawable config = view.getResources().getDrawable(R.drawable.map_config_white);
 		final Drawable configWhite = view.getResources().getDrawable(R.drawable.map_config_white);
 		ImageViewWidget configuration = new ImageViewWidget(map) {
 			private boolean nm;

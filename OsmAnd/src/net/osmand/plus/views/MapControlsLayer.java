@@ -106,7 +106,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		//Ruler
 		//initRuler(view, parent);
 		
-		initTransparencyBar(view, parent);
+		//initTransparencyBar(view, parent);
 		
 	}
 

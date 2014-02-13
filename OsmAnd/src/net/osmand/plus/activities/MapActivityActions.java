@@ -691,7 +691,7 @@ public class MapActivityActions implements DialogProvider {
 						}
 					}
 				}).reg();
-*/
+		 */
 		// 2-4. Navigation related (directions, mute, cancel navigation)
 		boolean muteVisible = routingHelper.getFinalLocation() != null
 				&& routingHelper.isFollowingMode();

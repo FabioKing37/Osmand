@@ -8,6 +8,7 @@ import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -252,10 +253,12 @@ public class MapWidgetRegistry {
 			if (r.visibleCollapsible != null && r.visibleCollapsible.contains(appMode)) {
 				stack.addCollapsedView((BaseMapWidget) r.m);
 			} else if (r.visibleModes.contains(appMode)) {
+				
 				stack.addStackView((BaseMapWidget) r.m);
 			}
 		}
 	}
+	
 	
 	public void populateStatusBar(ViewGroup statusBar){
 		ApplicationMode appMode = settings.getApplicationMode();

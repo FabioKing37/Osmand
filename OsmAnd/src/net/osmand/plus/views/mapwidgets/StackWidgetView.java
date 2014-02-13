@@ -13,9 +13,12 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class StackWidgetView extends ViewGroup {
 	List<BaseMapWidget> stackViews = new ArrayList<BaseMapWidget>();
@@ -90,7 +93,13 @@ public class StackWidgetView extends ViewGroup {
 		v.setShadowColor(shadowColor);
 		StackWidgetView.this.addView(v, getChildCount());
 	}
-
+	//TODO: Novo
+	public void addStackView2(BaseMapWidget v, ViewGroup.LayoutParams params) {
+		stackViews.add(v);
+		v.setShadowColor(shadowColor);
+		StackWidgetView.this.addView(v, getChildCount(),params);
+	}
+	
 	public void addCollapsedView(BaseMapWidget v) {
 		collapsedViews.add(v);
 		v.setShadowColor(shadowColor);

@@ -78,6 +78,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private StackWidgetView rightStack;
 	private StackWidgetView leftStack;
 	private LinearLayout statusBar;
+	private LinearLayout infoBar;
+	
 	private BaseMapWidget lanesControl;
 	private BaseMapWidget alarmControl;
 	private MapWidgetRegistry mapInfoControls;
@@ -163,6 +165,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void registerAllControls(){
 		statusBar = new LinearLayout(view.getContext());
 		statusBar.setOrientation(LinearLayout.HORIZONTAL);
+		
+		infoBar = new LinearLayout(view.getContext());
+		infoBar.setOrientation(LinearLayout.HORIZONTAL);
+		
 		RouteInfoWidgetsFactory ric = new RouteInfoWidgetsFactory(scaleCoefficient);
 		MapInfoWidgetsFactory mic = new MapInfoWidgetsFactory(scaleCoefficient);
 		OsmandApplication app = view.getApplication();
@@ -170,7 +176,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		lanesControl.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
 		
 		alarmControl = ric.createAlarmInfoControl(app, map);
-		// register right stack
+		// register Left stack
 		
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		NextTurnInfoWidget bigInfoControl = ric.createNextInfoControl(routingHelper, app, view.getSettings(), paintText,
@@ -264,10 +270,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 		topMargin -= topRectPadding.top;
 
 		//RightStack
-		FrameLayout.LayoutParams flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
-				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM);
+		FrameLayout.LayoutParams flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.LEFT | Gravity.BOTTOM);
+		//rightStack.resetResolvedLayoutDirection();
 		flp.rightMargin = STATUS_BAR_MARGIN_X;
-		flp.topMargin = topMargin;
+		//flp.topMargin = topMargin;
+		flp.topMargin = (int) (topMargin  + scaleCoefficient * 8);
 		rightStack.setLayoutParams(flp);
 		
 		//Lanes - Vias
@@ -278,9 +286,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		//Left - Direções
 		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
-				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.LEFT);
+				
+				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.LEFT | Gravity.CENTER_HORIZONTAL);
 		flp.leftMargin = STATUS_BAR_MARGIN_X;
 		flp.topMargin = topMargin;
+		flp.bottomMargin = topMargin;
 		leftStack.setLayoutParams(flp);
 
 		//StatusBAr
@@ -297,6 +307,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		flp.bottomMargin = (int) (85*scaleCoefficient);
 		alarmControl.setLayoutParams(flp);
 
+		//TODO: Ver este addView
 		parent.addView(rightStack);
 		parent.addView(leftStack);
 		parent.addView(statusBar);
@@ -510,7 +521,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 			lanesControl.setBackgroundDrawable(boxFree);
 			rightStack.setTopDrawable(view.getResources().getDrawable(boxTopR));
-			rightStack.setStackDrawable(boxTopStack);
+			rightStack.setStackDrawable(boxTopR);
 
 			leftStack.setTopDrawable(view.getResources().getDrawable(boxTopL));
 			leftStack.setStackDrawable(boxTopStack);

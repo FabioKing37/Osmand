@@ -140,7 +140,7 @@ public class ContextMenuAdapter {
 	
 
 	public ListAdapter createListAdapter(final Activity activity, final int layoutId, final boolean holoLight) {
-		final int padding = (int) (12 * activity.getResources().getDisplayMetrics().density + 0.5f);
+		final int padding = (int) (2 * activity.getResources().getDisplayMetrics().density + 0.5f);
 		ListAdapter listadapter = new ArrayAdapter<String>(activity, layoutId, R.id.title,
 				getItemNames()) {
 			@Override

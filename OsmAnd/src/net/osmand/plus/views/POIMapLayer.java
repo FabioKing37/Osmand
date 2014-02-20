@@ -274,7 +274,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	private void drawShadowText(Canvas cv, String text, float centerX, float centerY) {
 		int c = paintTextIcon.getColor();
 		paintTextIcon.setStyle(Style.STROKE);
-		paintTextIcon.setColor(Color.WHITE);
+		paintTextIcon.setColor(Color.BLACK);
 		paintTextIcon.setStrokeWidth(2);
 		cv.drawText(text, centerX, centerY, paintTextIcon);
 		// reset

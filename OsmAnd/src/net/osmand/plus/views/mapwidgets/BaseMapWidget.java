@@ -15,7 +15,7 @@ public abstract class BaseMapWidget extends View implements UpdateableWidget {
 	int width = 0;
 	int height = 0;
 	Rect padding = new Rect();
-	int shadowColor = Color.WHITE;
+	int shadowColor = Color.BLACK;
 
     private String contentTitle;
 

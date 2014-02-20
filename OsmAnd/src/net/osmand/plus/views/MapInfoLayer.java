@@ -25,6 +25,7 @@ import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.StackWidgetView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.TurnStackWidgetView;
 import net.osmand.plus.views.mapwidgets.UpdateableWidget;
 import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
@@ -76,7 +77,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	
 	// groups
 	private StackWidgetView rightStack;
-	private StackWidgetView leftStack;
+	private StackWidgetView velStack;
+	private TurnStackWidgetView leftStack;
 	private LinearLayout statusBar;
 	private LinearLayout infoBar;
 	
@@ -200,6 +202,22 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextInfoWidget time = ric.createTimeControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(time, R.drawable.widget_time, R.string.map_widget_time, "time",false, 10);
 		TextInfoWidget speed = ric.createSpeedControl(map, paintText, paintSubText);
+		mapInfoControls.registerVelWidget(speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", 15);
+		TextInfoWidget gpsInfo = mic.createGPSInfoControl(map, paintText, paintSubText);
+		mapInfoControls.registerSideWidget(gpsInfo, R.drawable.widget_gps_info, R.string.map_widget_gps_info, "gps_info", false, 17);
+		TextInfoWidget maxspeed = ric.createMaxSpeedControl(map, paintText, paintSubText);
+		mapInfoControls.registerVelWidget(maxspeed, R.drawable.widget_max_speed, R.string.map_widget_max_speed, "max_speed",  18);
+		TextInfoWidget alt = mic.createAltitudeControl(map, paintText, paintSubText);
+		mapInfoControls.registerSideWidget(alt, R.drawable.widget_altitude, R.string.map_widget_altitude, "altitude", false, 20);
+		
+		// InfoBar
+		/*TextInfoWidget intermediateDist2 = ric.createIntermediateDistanceControl(map, paintText, paintSubText);
+		mapInfoControls.registerInfoWidget(intermediateDist2, R.drawable.widget_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", MapWidgetRegistry.LEFT_CONTROL, 3);
+		TextInfoWidget dist2 = ric.createDistanceControl(map, paintText, paintSubText);
+		mapInfoControls.registerInfoWidget(dist2, R.drawable.widget_target, R.string.map_widget_distance, "distance", MapWidgetRegistry.RIGHT_CONTROL, 5);
+		TextInfoWidget time = ric.createTimeControl(map, paintText, paintSubText);
+		mapInfoControls.registerSideWidget(time, R.drawable.widget_time, R.string.map_widget_time, "time",false, 10);
+		TextInfoWidget speed = ric.createSpeedControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", false, 15);
 		TextInfoWidget gpsInfo = mic.createGPSInfoControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(gpsInfo, R.drawable.widget_gps_info, R.string.map_widget_gps_info, "gps_info", false, 17);
@@ -207,7 +225,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.registerSideWidget(maxspeed, R.drawable.widget_max_speed, R.string.map_widget_max_speed, "max_speed", false,  18);
 		TextInfoWidget alt = mic.createAltitudeControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(alt, R.drawable.widget_altitude, R.string.map_widget_altitude, "altitude", false, 20);
-
+*/
 		// Top widgets
 		ImageViewWidget compassView = mic.createCompassView(map);
 		mapInfoControls.registerTopWidget(compassView, R.drawable.widget_compass, R.string.map_widget_compass, "compass", MapWidgetRegistry.LEFT_CONTROL, 5);
@@ -237,31 +255,44 @@ public class MapInfoLayer extends OsmandMapLayer {
 		rightStack.clearAllViews();
 		mapInfoControls.populateStackControl(rightStack, view, false);
 		
+		velStack.clearAllViews();
+		mapInfoControls.populateVelStackControl(velStack, view, true);
+		
 		leftStack.clearAllViews();
-		mapInfoControls.populateStackControl(leftStack, view, true);
+		mapInfoControls.populateTurnStackControl(leftStack, view, true);
 		leftStack.requestLayout();
 		rightStack.requestLayout();
+		velStack.requestLayout();
 		
 		statusBar.removeAllViews();
 		mapInfoControls.populateStatusBar(statusBar);
+		
+		//infoBar.removeAllViews();
+		//mapInfoControls.populateInfoBar(infoBar);
+		
 		updateColorShadowsOfText(null);
 	}
 
 	public void createControls() {
 		// 1. Create view groups and controls
 		statusBar.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_top));
+		//infoBar.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_top));
 		rightStack = new StackWidgetView(view.getContext());
-		leftStack = new StackWidgetView(view.getContext());
+		velStack = new StackWidgetView(view.getContext());
+		leftStack = new TurnStackWidgetView(view.getContext());
 		
 		// 2. Preparations
 		Rect topRectPadding = new Rect();
 		view.getResources().getDrawable(R.drawable.box_top).getPadding(topRectPadding);
 		// for measurement
-		statusBar.addView(backToLocation);		
+		statusBar.addView(backToLocation);	
+		//infoBar.addView();
 		STATUS_BAR_MARGIN_X = (int) (STATUS_BAR_MARGIN_X * scaleCoefficient);
 		statusBar.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
+		//infoBar.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 		Rect statusBarPadding = new Rect();
 		statusBar.getBackground().getPadding(statusBarPadding);
+		//infoBar.getBackground().getPadding(statusBarPadding);
 		// 3. put into frame parent layout controls
 		FrameLayout parent = (FrameLayout) view.getParent();
 		// status bar hides own top part 
@@ -270,29 +301,39 @@ public class MapInfoLayer extends OsmandMapLayer {
 		topMargin -= topRectPadding.top;
 
 		//RightStack
+		
 		FrameLayout.LayoutParams flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
-				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.LEFT | Gravity.BOTTOM);
-		//rightStack.resetResolvedLayoutDirection();
-		flp.rightMargin = STATUS_BAR_MARGIN_X;
-		//flp.topMargin = topMargin;
-		flp.topMargin = (int) (topMargin  + scaleCoefficient * 8);
+				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM | Gravity.LEFT);
+		flp.bottomMargin = STATUS_BAR_MARGIN_X;
+		//flp.leftMargin = (int) (scaleCoefficient * 4);
+		flp.leftMargin = STATUS_BAR_MARGIN_X;
 		rightStack.setLayoutParams(flp);
+		
+		//VelStack
+
+		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM | Gravity.RIGHT);
+		flp.bottomMargin = STATUS_BAR_MARGIN_X;
+		flp.rightMargin = STATUS_BAR_MARGIN_X;
+		velStack.setLayoutParams(flp);
+
 		
 		//Lanes - Vias
 		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
 				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER_HORIZONTAL | Gravity.TOP);
-		flp.topMargin = (int) (topMargin  + scaleCoefficient * 8);
+		flp.topMargin = (int) (topMargin  + scaleCoefficient * 6);
 		lanesControl.setLayoutParams(flp);
 		
 		//Left - Direções
 		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
 				
-				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.LEFT | Gravity.CENTER_HORIZONTAL);
+				android.view.ViewGroup.LayoutParams.MATCH_PARENT, Gravity.LEFT);
 		flp.leftMargin = STATUS_BAR_MARGIN_X;
-		flp.topMargin = topMargin;
-		flp.bottomMargin = topMargin;
+		flp.topMargin = topMargin + STATUS_BAR_MARGIN_X;	
+//		flp.bottomMargin = -topMargin + STATUS_BAR_MARGIN_X;
 		leftStack.setLayoutParams(flp);
 
+		
 		//StatusBAr
 		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
 				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.TOP);
@@ -300,6 +341,16 @@ public class MapInfoLayer extends OsmandMapLayer {
 		flp.rightMargin = STATUS_BAR_MARGIN_X;
 		flp.topMargin = -topRectPadding.top;
 		statusBar.setLayoutParams(flp);
+		
+		//InfoBar
+		/*flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM);
+		flp.leftMargin = STATUS_BAR_MARGIN_X;
+		flp.rightMargin = STATUS_BAR_MARGIN_X;
+		//flp.topMargin = (int) (85*scaleCoefficient);
+		//flp.topMargin = - (2*topRectPadding.top);
+		flp.bottomMargin = 0;
+		infoBar.setLayoutParams(flp);*/
 		
 		flp = new FrameLayout.LayoutParams((int)(78 * scaleCoefficient),
 				(int)(78 * scaleCoefficient), Gravity.RIGHT | Gravity.BOTTOM);
@@ -309,8 +360,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 		//TODO: Ver este addView
 		parent.addView(rightStack);
+		parent.addView(velStack);		
 		parent.addView(leftStack);
 		parent.addView(statusBar);
+		//parent.addView(infoBar);
 		parent.addView(lanesControl);
 		parent.addView(alarmControl);
 		alarmControl.setVisibility(View.GONE);
@@ -486,9 +539,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		if (themeId != calcThemeId) {
 			themeId = calcThemeId;
 			boolean textBold = following;
-			int textColor = nightMode ? 0xffC8C8C8:Color.WHITE ;
-			int textShadowColor = transparent && !nightMode? Color.WHITE : Color.TRANSPARENT ;
+			int textColor = nightMode ? 0xffC8C8C8:Color.GREEN ;
+			int textShadowColor = transparent && !nightMode? Color.RED : Color.YELLOW ;
 			int boxTop;
+			int boxBottom;
 			int boxTopStack;
 			int boxTopR;
 			int boxTopL;
@@ -496,6 +550,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			Drawable boxFree = view.getResources().getDrawable(R.drawable.box_free_simple);
 			
 			if (transparent) {
+				boxBottom = R.drawable.box_top_t;
 				boxTop = R.drawable.box_top_t;
 				boxTopStack = R.drawable.box_top_t_stack;
 				boxTopR = R.drawable.box_top_rt;
@@ -505,6 +560,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 					boxFree = view.getResources().getDrawable(R.drawable.box_night_free_simple);
 				}
 			} else if (nightMode) {
+				boxBottom = R.drawable.box_top_t;
 				boxTop = R.drawable.box_top_n;
 				boxTopStack = R.drawable.box_top_n_stack;
 				boxTopR = R.drawable.box_top_rn;
@@ -513,6 +569,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				boxFree = view.getResources().getDrawable(R.drawable.box_night_free_simple);
 			} else {
 				//Res das boxes
+				boxBottom = R.drawable.box_top_t;
 				boxTop = R.drawable.box_top;
 				boxTopStack = R.drawable.box_top_stack;
 				boxTopR = R.drawable.box_top_r;
@@ -522,22 +579,29 @@ public class MapInfoLayer extends OsmandMapLayer {
 			lanesControl.setBackgroundDrawable(boxFree);
 			rightStack.setTopDrawable(view.getResources().getDrawable(boxTopR));
 			rightStack.setStackDrawable(boxTopR);
+			
+			velStack.setTopDrawable(view.getResources().getDrawable(boxTopR));
+			velStack.setStackDrawable(boxTopR);
 
 			leftStack.setTopDrawable(view.getResources().getDrawable(boxTopL));
 			leftStack.setStackDrawable(boxTopStack);
 
 			leftStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
 			rightStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
+			rightStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
 			statusBar.setBackgroundDrawable(view.getResources().getDrawable(boxTop));
+			//infoBar.setBackgroundDrawable(view.getResources().getDrawable(boxBottom));
 
 			paintText.setColor(textColor);
 			paintSubText.setColor(textColor);
 			paintSmallText.setColor(textColor);
 			paintSmallSubText.setColor(textColor);
 
+	
 			topText.setShadowColor(textShadowColor);
 			leftStack.setShadowColor(textShadowColor);
 			rightStack.setShadowColor(textShadowColor);
+			velStack.setShadowColor(textShadowColor);
 
 			paintText.setFakeBoldText(textBold);
 			paintSubText.setFakeBoldText(textBold);
@@ -545,8 +609,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 			paintSmallSubText.setFakeBoldText(textBold);
 			
 			rightStack.invalidate();
+			velStack.invalidate();
 			leftStack.invalidate();
 			statusBar.invalidate();
+			//infoBar.invalidate();
 		}
 	}
 	
@@ -556,6 +622,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		updateColorShadowsOfText(drawSettings);
 		// update data on draw
 		rightStack.updateInfo(drawSettings);
+		velStack.updateInfo(drawSettings);
 		leftStack.updateInfo(drawSettings);
 		lanesControl.updateInfo(drawSettings);
 		alarmControl.updateInfo(drawSettings);
@@ -565,13 +632,24 @@ public class MapInfoLayer extends OsmandMapLayer {
 				((UpdateableWidget) v).updateInfo(drawSettings);
 			}
 		}
+		/*for (int i = 0; i < infoBar.getChildCount(); i++) {
+			BaseMapWidget v = (BaseMapWidget) infoBar.getChildAt(i);
+			if (v instanceof UpdateableWidget) {
+				((UpdateableWidget) v).updateInfo(drawSettings);
+			}
+		}*/
+		
 	}
 	
 	public StackWidgetView getRightStack() {
 		return rightStack;
 	}
 	
-	public StackWidgetView getLeftStack() {
+	public StackWidgetView getVelStack() {
+		return velStack;
+	}
+	
+	public TurnStackWidgetView getLeftStack() {
 		return leftStack;
 	}
 

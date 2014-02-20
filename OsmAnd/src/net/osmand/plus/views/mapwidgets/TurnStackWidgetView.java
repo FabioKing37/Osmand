@@ -13,14 +13,11 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-public class StackWidgetView extends ViewGroup {
+public class TurnStackWidgetView extends ViewGroup {
 	List<BaseMapWidget> stackViews = new ArrayList<BaseMapWidget>();
 	List<BaseMapWidget> collapsedViews = new ArrayList<BaseMapWidget>();
 	ImageView expandView;
@@ -32,7 +29,7 @@ public class StackWidgetView extends ViewGroup {
 	List<Drawable> cacheStackDrawables = new ArrayList<Drawable>();
 	private int stackDrawable;
 
-	public StackWidgetView(Context context) {
+	public TurnStackWidgetView(Context context) {
 		super(context);
 		final Bitmap arrowDown = BitmapFactory.decodeResource(context.getResources(), R.drawable.arrow_down);
 		final Bitmap arrowUp = BitmapFactory.decodeResource(context.getResources(), R.drawable.arrow_up);
@@ -57,11 +54,11 @@ public class StackWidgetView extends ViewGroup {
 			@Override
 			public void onClick(View v) {
 				isCollapsed = !isCollapsed;
-				StackWidgetView.this.requestLayout();
-				StackWidgetView.this.invalidate();
+				TurnStackWidgetView.this.requestLayout();
+				TurnStackWidgetView.this.invalidate();
 			}
 		});
-		StackWidgetView.this.addView(expandView);
+		TurnStackWidgetView.this.addView(expandView);
 	}
 	
 	public void setExpandImageDrawable(Drawable d) {
@@ -91,13 +88,19 @@ public class StackWidgetView extends ViewGroup {
 	public void addStackView(BaseMapWidget v) {
 		stackViews.add(v);
 		v.setShadowColor(shadowColor);
-		StackWidgetView.this.addView(v, getChildCount());
+		TurnStackWidgetView.this.addView(v, getChildCount());
+	}
+	//TODO: Novo
+	public void addStackView2(BaseMapWidget v, ViewGroup.LayoutParams params) {
+		stackViews.add(v);
+		v.setShadowColor(shadowColor);
+		TurnStackWidgetView.this.addView(v, getChildCount(),params);
 	}
 	
 	public void addCollapsedView(BaseMapWidget v) {
 		collapsedViews.add(v);
 		v.setShadowColor(shadowColor);
-		StackWidgetView.this.addView(v, getChildCount());
+		TurnStackWidgetView.this.addView(v, getChildCount());
 	}
 	
 	public void clearAllViews(){
@@ -202,7 +205,7 @@ public class StackWidgetView extends ViewGroup {
 	}
 
 	// magic constant (should be removed when image will be recropped)
-	private final static int MAGIC_CONSTANT_STACK = 2;
+	private final static int MAGIC_CONSTANT_STACK = 4;
 	private int shadowColor;
 	@Override
 	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
@@ -213,11 +216,10 @@ public class StackWidgetView extends ViewGroup {
 				if (y == 0) {
 					y += c.getPaddingTop();
 				}
-				
+				y -= MAGIC_CONSTANT_STACK;
 				c.layout(0, y, cw, y + c.getMeasuredHeight());
-				//y -= MAGIC_CONSTANT_STACK;
 				y += c.getMeasuredHeight();
-				y -= c.getPaddingBottom() - MAGIC_CONSTANT_STACK;
+				y -= c.getPaddingTop();
 			}
 		}
 

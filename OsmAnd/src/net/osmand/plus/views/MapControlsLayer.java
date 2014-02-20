@@ -54,7 +54,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 	private boolean showZoomLevel = false;
 	private boolean showZoomLevelButton = false;
-	private int shadowColor = Color.WHITE;
+	private int shadowColor = Color.BLACK;
 	
 	
 	private Button zoomInButton;
@@ -294,7 +294,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		backToMenuButton.setContentDescription(ctx.getString(R.string.backToMenu));
 		backToMenuButton.setBackgroundResource(R.drawable.map_btn_menu);
 		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
-					Gravity.CENTER | Gravity.RIGHT);
+					Gravity.BOTTOM | Gravity.CENTER);
 		parent.addView(backToMenuButton, params);
 		backToMenuButton.setEnabled(true);
 		

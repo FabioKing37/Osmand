@@ -50,6 +50,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	
 	private TextView textView;
 	private ImageView closeButton;
+	private ImageView irButton;
 	private OsmandMapTileView view;
 	private int BASE_TEXT_SIZE = 170;
 	private int SHADOW_OF_LEG = 5;
@@ -107,7 +108,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		closeButton.setLayoutParams(lp);
 		closeButton.setImageDrawable(view.getResources().getDrawable(R.drawable.headliner_close));
 		closeButton.setClickable(true);
-		if(latLon != null){
+		
+		//TODO: Botões 
+		irButton = new ImageView(view.getContext());
+		lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		irButton.setLayoutParams(lp);
+		irButton.setImageDrawable(view.getResources().getDrawable(R.drawable.headliner_close));
+		irButton.setClickable(true);
+		if(latLon != null){ 
 			setLocation(latLon, description);
 		}
 		
@@ -132,6 +140,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				textView.draw(canvas);
 				canvas.translate(textView.getWidth() - closeButton.getWidth(), CLOSE_BTN / 2);
 				closeButton.draw(canvas);
+				irButton.draw(canvas);
 				if (c == 0) {
 					// special case relayout after on draw method
 					layoutText();
@@ -202,6 +211,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return true;
 		}
 		LatLon latLon = selectObjectsForContextMenu(tileBox, point);
+		//TODO: Aqui devia levar o nome da Rua
 		String description = getSelectedObjectDescription();
 		setLocation(latLon, description);
 		view.refreshMap();
@@ -262,7 +272,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 	
 	public String getSelectedObjectDescription(){
-		return getSelectedObjectInfo(false);
+		return getSelectedObjectInfo(true);
 	}
 	
 	private String getSelectedObjectInfo(boolean name){

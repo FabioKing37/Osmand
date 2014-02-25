@@ -324,7 +324,6 @@ public class MapInfoWidgetsFactory {
 		private OsmAndLocationProvider locationProvider;
 		private Paint paintText;
 
-		// TODO: Text na StatusBar?
 		public TopTextView(OsmandApplication app, MapActivity map,
 				Paint paintText) {
 			super(map);
@@ -405,17 +404,20 @@ public class MapInfoWidgetsFactory {
 					if (dots) {
 						text += "..";
 					}
-					setTextSize(TypedValue.COMPLEX_UNIT_PX, pp.getTextSize());
 					setEllipsize(TextUtils.TruncateAt.MARQUEE);
+					setTextSize(TypedValue.COMPLEX_UNIT_PX, pp.getTextSize());
+					
 					setContentDescription(text);
 				} else {
-					setTextSize(TypedValue.COMPLEX_UNIT_PX, 7);
 					setEllipsize(TextUtils.TruncateAt.MARQUEE);
+					setTextSize(TypedValue.COMPLEX_UNIT_PX, 7);
+					
 					setContentDescription(getResources().getString(
 							R.string.map_widget_top_text));
 				}
-				setText(text);
 				setEllipsize(TextUtils.TruncateAt.MARQUEE);
+				setText(text);
+				
 				invalidate();
 				return true;
 			}

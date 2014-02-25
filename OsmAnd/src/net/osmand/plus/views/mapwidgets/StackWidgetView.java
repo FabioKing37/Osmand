@@ -213,11 +213,10 @@ public class StackWidgetView extends ViewGroup {
 				if (y == 0) {
 					y += c.getPaddingTop();
 				}
-				
-				c.layout(0, y, cw, y + c.getMeasuredHeight());
-				//y -= MAGIC_CONSTANT_STACK;
+				y -= MAGIC_CONSTANT_STACK;
+				c.layout(0, y, cw, y + c.getMeasuredHeight());					
 				y += c.getMeasuredHeight();
-				y -= c.getPaddingBottom() - MAGIC_CONSTANT_STACK;
+				y -= c.getPaddingTop();
 			}
 		}
 

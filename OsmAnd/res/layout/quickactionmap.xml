@@ -8,23 +8,37 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dip"
-        android:background="@drawable/quickaction_top_frame" />
+        />
 
     <ImageView
         android:id="@+id/arrow_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/quickaction_arrow_up" />
+        android:src="@drawable/box_leg_up" />
 
-    <HorizontalScrollView
+    <LinearLayout
         android:id="@+id/scroll"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/header2"
-        android:background="@drawable/quickaction_slider_background"
+        android:background="@drawable/box_free_simple"
         android:fadingEdgeLength="0dip"
         android:paddingLeft="1dip"
-        android:scrollbars="none" >
+        android:scrollbars="none"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/ListText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dip"
+            android:layout_marginLeft="6dip"
+            android:layout_marginTop="6dip"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/layer_poi"
+            android:textColor="@color/color_white" />
 
         <LinearLayout
             android:id="@+id/tracks"
@@ -44,14 +58,14 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/quickaction_slider_grip_right" />
         </LinearLayout>
-    </HorizontalScrollView>
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/footer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/scroll"
-        android:background="@drawable/quickaction_bottom_frame" />
+      />
 
     <ImageView
         android:id="@+id/arrow_down"
@@ -59,6 +73,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/footer"
         android:layout_marginTop="-1dip"
-        android:src="@drawable/quickaction_arrow_down" />
+        android:src="@drawable/box_leg" />
 
 </RelativeLayout>

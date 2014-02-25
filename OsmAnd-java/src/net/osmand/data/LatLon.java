@@ -40,7 +40,7 @@ public class LatLon {
 
 	@Override
 	public String toString() {
-		return "Lat " + ((float)latitude) + " Lon " + ((float)longitude); //$NON-NLS-1$ //$NON-NLS-2$
+		return "Lat: " + ((float)latitude) + " Lon: " + ((float)longitude); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	public double getLatitude() {

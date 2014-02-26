@@ -1481,7 +1481,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="map_Button">Map</string>
     <string name="settings_Button">Settings</string>
     <string name="favorites_Button">Favorites</string>
-    <string name="search_button">Search</string>
+    <string name="search_button">Go</string>
     <string name="search_activity">Search</string>
     <string name="searchpoi_activity">Choose POI</string>
     <string name="search_POI_level_btn">Find more</string>

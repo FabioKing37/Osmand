@@ -634,13 +634,12 @@ public class MapActivityActions implements DialogProvider {
 		bld.setTitle("  ");
 		bld.setIcon(R.drawable.logocompleto);
 		bld.setNegativeButton(R.string.close,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog,
-                            int which) {
-                        dialog.cancel();
-                    }
-                });
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+					}
+				});
 
 		ListAdapter listAdapter;
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
@@ -674,27 +673,21 @@ public class MapActivityActions implements DialogProvider {
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
 
 		// 1. Where am I
-		/*optionsMenuHelper
-				.item(R.string.where_am_i)
-				.icons(R.drawable.ic_action_gloc_dark,
-						R.drawable.ic_action_gloc_dark)
-				.listen(new OnContextMenuClick() {
-					@Override
-					public void onContextMenuClick(int itemId, int pos,
-							boolean isChecked, DialogInterface dialog) {
-						if (getMyApplication().getInternalAPI()
-								.accessibilityEnabled()) {
-							whereAmIDialog();
-						} else {
-							mapActivity.getMapViewTrackingUtilities()
-									.backToLocationImpl();
-						}
-					}
-				}).reg();
+		/*
+		 * optionsMenuHelper .item(R.string.where_am_i)
+		 * .icons(R.drawable.ic_action_gloc_dark,
+		 * R.drawable.ic_action_gloc_dark) .listen(new OnContextMenuClick() {
+		 * 
+		 * @Override public void onContextMenuClick(int itemId, int pos, boolean
+		 * isChecked, DialogInterface dialog) { if
+		 * (getMyApplication().getInternalAPI() .accessibilityEnabled()) {
+		 * whereAmIDialog(); } else { mapActivity.getMapViewTrackingUtilities()
+		 * .backToLocationImpl(); } } }).reg();
 		 */
 		// 2-4. Navigation related (directions, mute, cancel navigation)
 		boolean muteVisible = routingHelper.getFinalLocation() != null
 				&& routingHelper.isFollowingMode();
+		// Mute
 		if (muteVisible) {
 			boolean mute = routingHelper.getVoiceRouter().isMute();
 			int t = mute ? R.string.menu_mute_on : R.string.menu_mute_off;
@@ -717,6 +710,7 @@ public class MapActivityActions implements DialogProvider {
 						}
 					}).reg();
 		}
+		// Directions
 		if (!routingHelper.isRouteBeingCalculated()
 				|| routingHelper.isRouteCalculated()) {
 			optionsMenuHelper
@@ -742,6 +736,7 @@ public class MapActivityActions implements DialogProvider {
 						}
 					}).reg();
 		}
+		// Clear Destinations
 		if (getTargets().getPointToNavigate() != null) {
 			optionsMenuHelper
 					.item(R.string.target_points)
@@ -755,6 +750,7 @@ public class MapActivityActions implements DialogProvider {
 						}
 					}).reg();
 		}
+		// Cancelar Rota
 		if (mapActivity.getPointToNavigate() != null) {
 			int nav;
 			if (routingHelper.isFollowingMode()) {
@@ -821,6 +817,7 @@ public class MapActivityActions implements DialogProvider {
 
 		// 5-9. Default actions (Layers, Configure Map screen, Settings, Search,
 		// Favorites)
+		// Layer que passou a POI...
 		optionsMenuHelper
 				.item(R.string.menu_layers)
 				.icons(R.drawable.ic_action_layers_dark,
@@ -834,6 +831,21 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).reg();
 
+		//POI filtro
+		
+		optionsMenuHelper
+				.item(R.string.layer_poi)
+				.selected(settings.SHOW_POI_OVER_MAP.get() ? 1 : 0)
+				.icons(R.drawable.ic_action_info_dark,
+						R.drawable.ic_action_info_dark)
+				.listen(new OnContextMenuClick() {
+					@Override
+					public void onContextMenuClick(int itemId, int pos,
+							boolean isChecked, DialogInterface dialog) {
+						mapActivity.getMapLayers().openPOISelectionDialog(mapView);
+					}
+				}).reg();
+		// Configurar Tela
 		optionsMenuHelper
 				.item(R.string.layer_map_appearance)
 				.icons(R.drawable.ic_action_settings_dark,
@@ -846,7 +858,7 @@ public class MapActivityActions implements DialogProvider {
 								.openViewConfigureDialog();
 					}
 				}).reg();
-
+		// Settings
 		optionsMenuHelper
 				.item(R.string.settings_Button)
 				.icons(R.drawable.ic_action_settings2_dark,
@@ -860,19 +872,17 @@ public class MapActivityActions implements DialogProvider {
 						mapActivity.startActivity(intentSettings);
 					}
 				}).reg();
-
-		optionsMenuHelper
-				.item(R.string.show_point_options)
-				.icons(R.drawable.ic_action_marker_dark,
-						R.drawable.ic_action_marker_dark)
-				.listen(new OnContextMenuClick() {
-					@Override
-					public void onContextMenuClick(int itemId, int pos,
-							boolean isChecked, DialogInterface dialog) {
-						contextMenuPoint(mapView.getLatitude(),
-								mapView.getLongitude());
-					}
-				}).reg();
+		// Usar Localização - abre o menu de LongPress com a posição atual
+		/*
+		 * optionsMenuHelper .item(R.string.show_point_options)
+		 * .icons(R.drawable.ic_action_marker_dark,
+		 * R.drawable.ic_action_marker_dark) .listen(new OnContextMenuClick() {
+		 * 
+		 * @Override public void onContextMenuClick(int itemId, int pos, boolean
+		 * isChecked, DialogInterface dialog) {
+		 * contextMenuPoint(mapView.getLatitude(), mapView.getLongitude()); }
+		 * }).reg();
+		 */
 		// ////////// Others
 		// Sem estado de GPS, acedia a outras apps
 		/*
@@ -897,6 +907,7 @@ public class MapActivityActions implements DialogProvider {
 		 * tactivity.getDialogToShowTips(false, true); dlg.show(); } }).reg();
 		 */
 		final OsmAndLocationProvider loc = app.getLocationProvider();
+		// INICIAR ANIMAÇÂO - DEBUG
 		if (app.getTargetPointsHelper().getPointToNavigate() != null
 				|| loc.getLocationSimulation().isRouteAnimating()) {
 

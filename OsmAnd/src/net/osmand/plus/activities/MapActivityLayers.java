@@ -270,7 +270,7 @@ public class MapActivityLayers {
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
 		// String appMode = " [" + settings.getApplicationMode().toHumanString(view.getApplication()) +"] ";
 		adapter.item(R.string.layer_poi).selected(settings.SHOW_POI_OVER_MAP.get() ? 1 : 0)
-				.icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).reg();
+				.icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_dark).reg();
 		adapter.item(R.string.layer_poi_label).selected(settings.SHOW_POI_LABEL.get() ? 1 : 0) 
 				.icons(R.drawable.ic_action_text_dark, R.drawable.ic_action_text_light).reg();
 		adapter.item(R.string.layer_favorites).selected(settings.SHOW_FAVORITES.get() ? 1 : 0) 
@@ -362,6 +362,19 @@ public class MapActivityLayers {
 			}
 		});
 		dlg.show();
+	}
+	
+	public void openPOISelectionDialog(final OsmandMapTileView mapView){
+		final OsmandSettings settings = getApplication().getSettings();		
+		
+		//OsmandPlugin.registerLayerContextMenu(mapView, adapter, activity);
+			settings.SHOW_POI_OVER_MAP.set(true);
+			selectPOIFilterLayer(mapView);	
+			updateLayers(mapView);
+			mapView.refreshMap();
+		
+		
+		
 	}
 	
 	public void showGPXFileLayer(final OsmandMapTileView mapView){
@@ -558,13 +571,13 @@ public class MapActivityLayers {
 			userDefined.add(f);
 		}
 		final AmenityType[] categories = AmenityType.getCategories();
-		for(AmenityType t : categories){
+		/*for(AmenityType t : categories){
 			Item it = adapter.item(OsmAndFormatter.toPublicString(t, activity.getMyApplication()));
 			if(RenderingIcons.containsBigIcon(t.toString().toLowerCase())) {
 				it.icon(RenderingIcons.getBigIconResourceId(t.toString().toLowerCase()));
 			}
 			it.reg();
-		}
+		}*/
 		Builder builder = new AlertDialog.Builder(activity);
 		ListAdapter listAdapter ;
 		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){

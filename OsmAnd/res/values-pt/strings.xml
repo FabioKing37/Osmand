@@ -351,7 +351,7 @@
   <string name="map_Button">Mapa</string>
   <string name="settings_Button">Configuração</string>
   <string name="favorites_Button">Favoritos</string>
-  <string name="search_button">Pesquisar</string>
+  <string name="search_button">Ir</string>
   <string name="search_activity">Pesquisar</string>
   <string name="searchpoi_activity">Escolher POI</string>
   <string name="search_POI_level_btn">Encontrar mais</string>

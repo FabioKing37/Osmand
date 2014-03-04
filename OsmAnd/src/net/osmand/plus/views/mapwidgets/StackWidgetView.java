@@ -202,7 +202,7 @@ public class StackWidgetView extends ViewGroup {
 	}
 
 	// magic constant (should be removed when image will be recropped)
-	private final static int MAGIC_CONSTANT_STACK = 2;
+	private final static int MAGIC_CONSTANT_STACK = 1;
 	private int shadowColor;
 	@Override
 	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
@@ -212,6 +212,7 @@ public class StackWidgetView extends ViewGroup {
 			if (c.getVisibility() != View.GONE) {
 				if (y == 0) {
 					y += c.getPaddingTop();
+					
 				}
 				y -= MAGIC_CONSTANT_STACK;
 				c.layout(0, y, cw, y + c.getMeasuredHeight());					

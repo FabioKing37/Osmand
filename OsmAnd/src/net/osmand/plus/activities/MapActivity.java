@@ -77,7 +77,7 @@ public class MapActivity extends AccessibleActivity  {
 	private static MapViewTrackingUtilities mapViewTrackingUtilities;
 	
     /** Called when the activity is first created. */
-	private OsmandMapTileView mapView;
+	OsmandMapTileView mapView;
 	
 	private MapActivityActions mapActions;
 	private MapActivityLayers mapLayers;

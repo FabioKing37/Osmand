@@ -212,7 +212,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 		LatLon latLon = selectObjectsForContextMenu(tileBox, point);
 		//TODO: Aqui devia levar o nome da Rua
-		String description = getSelectedObjectDescription();
+		String description = getSelectedObjectName();
 		setLocation(latLon, description);
 		view.refreshMap();
 		return true;
@@ -272,7 +272,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 	
 	public String getSelectedObjectDescription(){
-		return getSelectedObjectInfo(true);
+		return getSelectedObjectInfo(false);
 	}
 	
 	private String getSelectedObjectInfo(boolean name){

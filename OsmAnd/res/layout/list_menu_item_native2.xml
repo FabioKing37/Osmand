@@ -1,0 +1,101 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ab_bottom_solid_mapandgoactionbar" >
+
+    <ImageView
+        android:id="@+id/imageViewAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_action_gabout_dark" />
+
+    <TextView
+        android:id="@+id/textViewAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@+id/imageViewAddress"
+        android:text="@string/address"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#FFFFFFFF" />
+
+    <View
+        android:id="@+id/separator1"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/imageViewAddress"
+        android:background="#ffffff" />
+
+    <TextView
+        android:id="@+id/details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/separator1"
+        android:background="@drawable/box_dialog_text"
+        android:gravity="center"
+        android:text="@string/point_on_map"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#FFFFFFFF" />
+
+    <View
+        android:id="@+id/separator2"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/details"
+        android:background="#ffffff" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/separator2"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/buttonGo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/mapngo_btn_dialog_holo_light"
+            android:drawableTop="@drawable/ic_action_gdirections_dark"
+            android:text="@string/go"
+            android:textColor="#FFFFFFFF"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/buttonPOI"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/mapngo_btn_dialog_holo_light"
+            android:drawableTop="@drawable/ic_action_gmarker_dark"
+            android:ellipsize="middle"
+            android:text="@string/poi_filter_closest_poi"
+            android:textColor="#FFFFFFFF"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/buttonFav"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/mapngo_btn_dialog_holo_light"
+            android:drawableTop="@drawable/ic_action_gfav_dark"
+            android:ellipsize="marquee"
+            android:minWidth="100dp"
+            android:text="@string/favorite"
+            android:textColor="#FFFFFFFF"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+</RelativeLayout>

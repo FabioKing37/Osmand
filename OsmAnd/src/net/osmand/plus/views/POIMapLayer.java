@@ -98,7 +98,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			for (int i = 0; i < MAXIMUM_SHOW_AMENITIES && i < am.size(); i++) {
 				Amenity n = am.get(i);
 				if (i > 0) {
-					res.append("\n\n");
+					res.append("\n");
 				}
 				buildPoiInformation(res, n);
 			}
@@ -131,9 +131,11 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		paintTextIcon.setAntiAlias(true);
 		
 		point = new Paint();
-		point.setColor(Color.GRAY);
+		
+		point.setColor(view.getApplication().getResources().getColor(R.color.mapngo_color));
 		point.setAntiAlias(true);
 		point.setStyle(Style.STROKE);
+		point.setStrokeWidth(3);
 		resourceManager = view.getApplication().getResourceManager();
 	}
 	

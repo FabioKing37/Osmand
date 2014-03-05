@@ -44,7 +44,7 @@
 	<color name="nav_arrow_imminent">#2EFF00</color>
 
 	<color name="nav_point">#FA5050</color> 
-	<color name="poi_background">#A0FF8000</color>
+	<color name="poi_background">#ddFFFFFF</color><!-- ddFFFFFF A00094FF -->
 
 	<color name="transport_stop">#960000FF</color>
 	<color name="transport_int">#9632C832</color>

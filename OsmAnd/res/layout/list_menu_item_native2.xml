@@ -41,6 +41,8 @@
         android:layout_below="@id/separator1"
         android:background="@drawable/box_dialog_text"
         android:gravity="center"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
         android:text="@string/point_on_map"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#FFFFFFFF" />

@@ -506,7 +506,7 @@ public class MapActivityActions implements DialogProvider {
 				intent.putExtra(SearchActivity.SEARCH_LAT, latitude);
 				intent.putExtra(SearchActivity.SEARCH_LON, longitude);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
+				builder.dismiss();
 				mapActivity.startActivity(intent);
 			}
 		});
@@ -541,6 +541,7 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onClick(View v) {
 				addFavouritePoint(latitude, longitude);
+				
 			}
 		});
 

@@ -8,7 +8,7 @@
          2. Every apostrophe (quote) is preceded by a backslash (see others).
          If you are making/correcting English translations make sure:
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
-    PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
+    PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
     <string name="amenity_type_seamark">Seamark</string>
     <string name="app_modes_choose_descr">Choose use profiles visible in application</string>
@@ -364,15 +364,19 @@
     <string name="btn_add_tag">Add Tag</string>
     <string name="btn_advanced_mode">Advanced Mode&#8230;</string>
     <string name="poi_filter_parking">Parking</string>
+    <string name="poi_filter_health_wellness">Health and Wellness</string>
     <string name="poi_filter_emergency">Emergency</string>
+    <string name="poi_filter_services">Services</string>
     <string name="poi_filter_public_transport">Public Transport</string>
     <string name="poi_filter_entertainment">Entertainment</string>
     <string name="poi_filter_accomodation">Accommodation</string>
-    <string name="poi_filter_restaurants">Restaurants</string>
-    <string name="poi_filter_sightseeing">Sightseeing</string>
+    <string name="poi_filter_restaurants">Restaurants and Nightlife</string>
+    <string name="poi_filter_sightseeing">Culture</string>
+    <string name="poi_filter_sports">Sports</string>
+    <string name="poi_filter_schools">Schools</string>
     <string name="poi_filter_car_aid">Car aid</string>
-    <string name="poi_filter_food_shop">Food shop</string>
-    <string name="poi_filter_for_tourists">For tourists</string>
+    <string name="poi_filter_food_shop">Shopping</string>
+    <string name="poi_filter_for_tourists">Visit</string>
     <string name="poi_filter_fuel">Fuel</string>
     <string name="show_warnings_title">Show alarms&#8230;</string>
     <string name="show_warnings_descr">Configure traffic warnings (speed limits, forced stops, speed bumps), speed camera warnings, and lane information</string>
@@ -1185,7 +1189,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="km_h">km/h</string>
     <string name="m">m</string>
     <string name="old_map_index_is_not_supported">Deprecated map data format \'\'{0}\'\' is not supported</string>
-    <string name="poi_filter_closest_poi">Closest POI</string>
+    <string name="poi_filter_closest_poi">Nearby</string>
     <string name="poi_filter_custom_filter">Custom filter</string>
     <string name="poi_filter_namefinder">Online NameFinder</string>
     <string name="reading_cached_tiles">Reading cached tiles&#8230;</string>
@@ -1254,7 +1258,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="vector_data">Offline vector maps</string>
     <string name="transport_context_menu">Search transportation at stop</string>
     <string name="point_on_map">Location:\n Lat %1$.5f\n Lon %2$.5f</string>
-    <string name="point_on_map_poi">\n Name: %1$S \n %2$s \n</string>
+    <string name="point_on_map_poi">\n %1$s \n</string>
     <string name="osb_bug_name">Bug</string>
     <string name="poi_context_menu_modify">Modify POI</string>
     <string name="poi_context_menu_delete">Delete POI</string>
@@ -1400,7 +1404,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="follow">Start navigation</string>
     <string name="mark_final_location_first">Please select destination first</string>
     <string name="get_directions">Directions</string>
-    <string name="go">Route</string>
+    <string name="go">Go</string>
     <string name="show_gps_status">Show GPS Status</string>
     <string name="opening_hours">Opening hours</string>
     <string name="opening_changeset">Opening changeset&#8230;</string>

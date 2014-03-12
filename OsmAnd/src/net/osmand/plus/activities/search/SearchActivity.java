@@ -90,9 +90,9 @@ public class SearchActivity extends SherlockFragmentActivity implements
 				tabHost, false);
 
 		// TextView tabName = (TextView) r.findViewById(R.id.TabNames);
-		ImageView tabImage = (ImageView) r.findViewById(R.id.TabImage);
-		CharSequence b = getText(stringId);
-		//if (b != null)
+			ImageView tabImage = (ImageView) r.findViewById(R.id.TabImage);
+			CharSequence b = getText(stringId);
+		// if (b != null)
 		// tabName.setText(b);
 		tabImage.setImageResource(imageId);
 		tabImage.setBackgroundResource(R.drawable.mapngo_tab_indicator_holo);
@@ -117,7 +117,7 @@ public class SearchActivity extends SherlockFragmentActivity implements
 		final TextView tabinfo = (TextView) findViewById(R.id.textViewADesc);
 
 		TabWidget tabs = (TabWidget) findViewById(android.R.id.tabs);
-		tabs.setBackgroundResource(R.drawable.tab_icon_background);
+		tabs.setBackgroundResource(R.drawable.mapngo_tab_indicator_holo);
 
 		TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
 		tabHost.setup();

@@ -61,6 +61,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -469,7 +470,7 @@ public class MapActivityActions implements DialogProvider {
 		} else {
 			builder.setContentView(R.layout.list_menu_item_native2);
 		}
-		Amenity lhs = (Amenity) selectedObj;
+
 		String name = mapActivity.getMapLayers().getContextMenuLayer()
 				.getSelectedObjectName();
 		String desc = mapActivity.getMapLayers().getContextMenuLayer()
@@ -478,25 +479,38 @@ public class MapActivityActions implements DialogProvider {
 
 		// adding text dynamically
 		if (selectedObj == null) {
-			TextView txtTop = (TextView) builder.findViewById(R.id.textViewAddress);
+			TextView txtTop = (TextView) builder
+					.findViewById(R.id.textViewAddress);
 			txtTop.setText(R.string.address);
-			
+
 			TextView txt = (TextView) builder.findViewById(R.id.details);
 			txt.setText(mapActivity.mapView.getContext().getString(
 					R.string.point_on_map, latitude, longitude));
 		} else {
-			
-			TextView txtTop = (TextView) builder.findViewById(R.id.textViewAddress);
-			txtTop.setText(R.string.poi);
+
+			TextView txtTop = (TextView) builder
+					.findViewById(R.id.textViewAddress);
+			txtTop.setText(name);
 			// String a = ((Amenity) selectedObj).getDescription();
 			TextView txt = (TextView) builder.findViewById(R.id.details);
 			txt.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-			//txt.setGravity(0x01);
+			// txt.setGravity(0x01);
 			txt.setText(mapActivity.mapView.getContext().getString(
-					R.string.point_on_map_poi, name, desc));
+					R.string.point_on_map_poi, desc));
 		}
 
 		// adding button click event
+		ImageButton closeButton = (ImageButton) builder
+				.findViewById(R.id.imageButtonClose);
+		closeButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				builder.dismiss();
+
+			}
+		});
+
 		Button poiButton = (Button) builder.findViewById(R.id.buttonPOI);
 		poiButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -541,7 +555,7 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onClick(View v) {
 				addFavouritePoint(latitude, longitude);
-				
+
 			}
 		});
 

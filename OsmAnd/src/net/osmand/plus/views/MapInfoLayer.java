@@ -539,7 +539,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		if (themeId != calcThemeId) {
 			themeId = calcThemeId;
 			boolean textBold = following;
-			int textColor = nightMode ? 0xffC8C8C8:Color.WHITE ;
+			int textColor = nightMode ? Color.WHITE:Color.WHITE ;
 			int textShadowColor = transparent && !nightMode? Color.BLACK : Color.DKGRAY ;
 			int boxTop;
 			int boxBottom;
@@ -561,12 +561,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 				}
 			} else if (nightMode) {
 				boxBottom = R.drawable.box_top_t;
-				boxTop = R.drawable.box_top_n;
-				boxTopStack = R.drawable.box_top_n_stack;
-				boxTopR = R.drawable.box_top_rn;
-				boxTopL = R.drawable.box_top_ln;
-				expand = R.drawable.box_expand_t;
-				boxFree = view.getResources().getDrawable(R.drawable.box_night_free_simple);
+				boxTop = R.drawable.box_top;
+				boxTopStack = R.drawable.box_top_stack;
+				boxTopR = R.drawable.box_top_r;
+				boxTopL = R.drawable.box_top_l;
+				expand = R.drawable.box_expand;
+				boxFree = view.getResources().getDrawable(R.drawable.box_free_simple);
 			} else {
 				//Res das boxes
 				boxBottom = R.drawable.box_top_t;

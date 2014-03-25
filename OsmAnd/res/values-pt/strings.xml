@@ -103,7 +103,7 @@
     <string name="error_reading_gpx">Erro na leitura de dados GPX</string>
     <string name="vector_data">Mapas vetoriais offline</string>
     <string name="transport_context_menu">Procurar transporte na parada</string>
-    <string name="point_on_map">Localização:\n Lat %1$.5f\n Long %2$.5f</string>
+    <string name="point_on_map">Localização:\n \tLatitude: %1$.5f\n \tLongitude %2$.5f</string>
     <string name="point_on_map_poi">\n %1$s \n</string>
     <string name="osb_bug_name">Bug</string>
     <string name="poi_context_menu_modify">Modificar POI</string>
@@ -113,7 +113,7 @@
     <string name="rotate_map_none_opt">Não girar</string>
     <string name="rotate_map_to_bearing_descr">Define como o mapa deve ser girado</string>
     <string name="rotate_map_to_bearing">Rotação do mapa</string>
-    <string name="show_route">Mostrar rota</string>
+    <string name="show_route">Detalhes</string>
     <string name="fav_imported_sucessfully">Importação dos Favoritos bem sucedida</string>
     <string name="fav_file_to_load_not_found">O arquivo GPX contendo os favoritos não foi encontrado em {0}</string>
     <string name="fav_saved_sucessfully">Favoritos gravados com sucesso em {0}</string>
@@ -132,7 +132,7 @@
     <string name="layer_favorites">Favoritos</string>
     <string name="layer_osm_bugs">Bugs OSM</string>
     <string name="layer_transport">Paradas de transportes</string>
-    <string name="layer_poi">POI(Ponto de Interesse)…</string>
+    <string name="layer_poi">Pontos de Interesse...</string>
     <string name="layer_map">Fonte dos mapas…</string>
     <string name="menu_layers">Definir exibição</string>
     <string name="context_menu_item_search_poi">Encontre um Ponto de Interesse</string>
@@ -250,11 +250,11 @@
     <string name="fav_points_edited">O favorito foi modificado</string>
     <string name="fav_points_not_exist">Não existe nenhum favorito</string>
     <string name="update_existing">Modificar</string>
-    <string name="only_show">Mostrar apenas</string>
+    <string name="only_show">Mostrar</string>
     <string name="follow">Siga</string>
     <string name="recalculate_route_to_your_location">Modo de transporte:</string>
     <string name="mark_final_location_first">Por favor, primeiro selecione um destino</string>
-    <string name="get_directions">Navegação</string>
+    <string name="get_directions">Rota</string>
     <string name="gps_status_app_not_found">A aplicação de gestão de GPS não está instalada. Procurar no Market?</string>
     <string name="show_gps_status">Exibir estado do GPS</string>
     <string name="opening_hours">Horas de abertura</string>
@@ -447,7 +447,7 @@
     <string name="left_side_navigation">Conduzir do lado esquerdo</string>
     <string name="left_side_navigation_descr">Selecione para países com tráfego à esquerda</string>
     <string name="download_link_and_local_description">Clique aqui para obter ou actualizar dados offline.\nClique em qualquer item existente para ver mais detalhes, pressione e segure para desactivar ou apagar. Dados actuais no dispositivo (%1$s livre):</string>
-    <string name="unknown_from_location">Precisa definir um Ponto de partida</string>
+    <string name="unknown_from_location">Ponto de partida desconhecido</string>
     <string name="modify_transparency">Modificar a transparência (0 - transparente, 255 - opaco)</string>
     <string name="confirm_interrupt_download">Quer interromper o download de arquivos?</string>
     <string name="basemap_was_selected_to_download">O Mapa-Base é necessário para o funcionamento adequado da aplicação e foi seleccionado para download.</string>
@@ -916,6 +916,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="bg_service_sleep_mode_off">Desligar
  modo oculto</string>
     <string name="go">Go</string>
+    <string name="start_navigation">Iniciar Navigação</string>
     <string name="bg_service_sleep_mode_on">Parar\n modo oculto</string>
     <string name="show_warnings_title">Mostrar alarmes…</string>
     <string name="show_warnings_descr">Mostrar os limites de velocidade, câmeras de velocidade, redutores de velocidade, e outros avisos</string>
@@ -1170,13 +1171,13 @@ Quer seguir uma trilha GPX ?</string>
     <string name="context_menu_item_directions_to">Direções Para</string>
     <string name="context_menu_item_directions_from">Direções a partir De</string>
     <string name="route_descr_map_location">Mapa: </string>
-    <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
+    <string name="route_descr_lat_lon">Latitude: %1$.3f\n Longitude: %2$.3f</string>
     <string name="route_to">Para:</string>
     <string name="route_via">Via:</string>
     <string name="route_from">A partir:</string>
     <string name="local_index_gpx_timemoving">\nTempo em movimento: %1$d:%2$02d:%3$02d</string>
     <string name="local_index_gpx_timespan">\nTempo decorrido: %1$d:%2$02d:%3$02d</string>
-    <string name="destination_point">Destino %1$s</string>
+    <string name="destination_point">Destino:  %1$s</string>
     <string name="context_menu_item_destination_point">Defina como destino</string>
     <string name="please_select_address">Selecione cidade ou rua primeiro</string>
     <string name="tip_recent_changes_1_4_t">Mudanças na versão 1.4:

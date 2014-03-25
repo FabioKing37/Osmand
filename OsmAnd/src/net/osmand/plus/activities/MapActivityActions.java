@@ -415,8 +415,10 @@ public class MapActivityActions implements DialogProvider {
 
 	}
 
+	// TODO: ROTA
 	public void contextMenuPoint(final double latitude, final double longitude,
-			final ContextMenuAdapter iadapter, Object selectedObj) {
+			final ContextMenuAdapter iadapter, Object selectedObj,
+			String selectedObjName) {
 		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter(
 				mapActivity) : iadapter;
 
@@ -465,20 +467,25 @@ public class MapActivityActions implements DialogProvider {
 		// null));
 
 		// TODO: If dialog with problems changed here the dialog
+
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
 			builder.setContentView(R.layout.list_menu_item_native2);
 		} else {
 			builder.setContentView(R.layout.list_menu_item_native2);
 		}
+		String name = selectedObjName;
+		if (selectedObjName == null || selectedObjName.isEmpty()) {
+			name = mapActivity.getMapLayers().getContextMenuLayer()
+					.getSelectedObjectName();
+		}
 
-		String name = mapActivity.getMapLayers().getContextMenuLayer()
-				.getSelectedObjectName();
 		String desc = mapActivity.getMapLayers().getContextMenuLayer()
 				.getSelectedObjectDescription();
 		// if (selectedObj instanceof Amenity)
 
 		// adding text dynamically
 		if (selectedObj == null) {
+			// IF ADDRESS
 			TextView txtTop = (TextView) builder
 					.findViewById(R.id.textViewAddress);
 			txtTop.setText(R.string.address);
@@ -487,10 +494,14 @@ public class MapActivityActions implements DialogProvider {
 			txt.setText(mapActivity.mapView.getContext().getString(
 					R.string.point_on_map, latitude, longitude));
 		} else {
-
+			// IF POI
 			TextView txtTop = (TextView) builder
 					.findViewById(R.id.textViewAddress);
-			txtTop.setText(name);
+			if (name != null && !name.isEmpty())
+				txtTop.setText(name);
+			else {
+				txtTop.setText(R.string.poi);
+			}
 			// String a = ((Amenity) selectedObj).getDescription();
 			TextView txt = (TextView) builder.findViewById(R.id.details);
 			txt.setEllipsize(TextUtils.TruncateAt.MARQUEE);
@@ -538,8 +549,9 @@ public class MapActivityActions implements DialogProvider {
 							.getContextMenuLayer().getSelectedObjectName();
 					builder.dismiss();
 					new NavigateAction(mapActivity).getDirections(loc, name,
-							DirectionDialogStyle.create().gpxRouteEnabled()
+							null, DirectionDialogStyle.create()
 									.routeToMapPoint());
+					// .gpxRouteEnabled()
 				} else {
 					String name = mapActivity.getMapLayers()
 							.getContextMenuLayer().getSelectedObjectName();
@@ -621,7 +633,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void contextMenuPoint(final double latitude, final double longitude) {
-		contextMenuPoint(latitude, longitude, null, null);
+		contextMenuPoint(latitude, longitude, null, null, null);
 	}
 
 	private Dialog createReloadTitleDialog(final Bundle args) {
@@ -717,7 +729,7 @@ public class MapActivityActions implements DialogProvider {
 	public AlertDialog openOptionsMenuAsList() {
 		final ContextMenuAdapter cm = createOptionsMenu();
 		final Builder bld = new AlertDialog.Builder(mapActivity);
-		// TODO: CENTRAR!
+		// TODO: NOVO DIALOG
 		bld.setTitle("  ");
 		bld.setIcon(R.drawable.logocompleto);
 		bld.setNegativeButton(R.string.close,
@@ -753,7 +765,7 @@ public class MapActivityActions implements DialogProvider {
 
 	}
 
-	// Menu de Contexto Principal
+	// TODO: Menu de Contexto Principal
 	private ContextMenuAdapter createOptionsMenu() {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		final OsmandApplication app = mapActivity.getMyApplication();
@@ -797,11 +809,13 @@ public class MapActivityActions implements DialogProvider {
 						}
 					}).reg();
 		}
-		// Directions
-		if (!routingHelper.isRouteBeingCalculated()
+
+		// ROUTE DIALOG
+		if (routingHelper.getFinalLocation() != null
+				|| !routingHelper.isRouteBeingCalculated()
 				|| routingHelper.isRouteCalculated()) {
 			optionsMenuHelper
-					.item(routingHelper.isRouteCalculated() ? R.string.show_route
+					.item(routingHelper.isRouteCalculated() ? R.string.get_directions
 							: R.string.get_directions)
 					.icons(R.drawable.ic_action_gdirections_dark,
 							R.drawable.ic_action_gdirections_dark)
@@ -810,56 +824,59 @@ public class MapActivityActions implements DialogProvider {
 						public void onContextMenuClick(int itemId, int pos,
 								boolean isChecked, DialogInterface dialog) {
 							if (routingHelper.isRouteCalculated()) {
-								aboutRoute();
-							} else {
-								Location loc = new Location("map");
-								loc.setLatitude(mapView.getLatitude());
-								loc.setLongitude(mapView.getLongitude());
 
+								// Destino Atual
+								Location loc = new Location("map");
+								loc.setLatitude(routingHelper
+										.getFinalLocation().getLatitude());
+								loc.setLongitude(routingHelper
+										.getFinalLocation().getLongitude());
+
+								String name = mapActivity.getMapLayers()
+										.getContextMenuLayer()
+										.getSelectedObjectName();
+								String routeInfo = routingHelper
+										.getGeneralRouteInformation();
 								new NavigateAction(mapActivity).getDirections(
-										loc, null, DirectionDialogStyle
-												.create().gpxRouteEnabled());
+										loc, name, routeInfo,
+										DirectionDialogStyle.create()
+												.routeToMapPoint());
+
+								// aboutRoute();
 							}
 						}
 					}).reg();
 		}
-		// Clear Destinations
-		if (getTargets().getPointToNavigate() != null) {
-			optionsMenuHelper
-					.item(R.string.target_points)
-					.icons(R.drawable.ic_action_flage_dark,
-							R.drawable.ic_action_flage_dark)
-					.listen(new OnContextMenuClick() {
-						@Override
-						public void onContextMenuClick(int itemId, int pos,
-								boolean isChecked, DialogInterface dialog) {
-							openIntermediatePointsDialog();
-						}
-					}).reg();
-		}
-		// Cancelar Rota
-		if (mapActivity.getPointToNavigate() != null) {
-			int nav;
-			if (routingHelper.isFollowingMode()) {
-				nav = R.string.cancel_navigation;
-			} else if (routingHelper.isRouteCalculated()
-					|| routingHelper.isRouteBeingCalculated()) {
-				nav = R.string.cancel_route;
-			} else {
-				nav = R.string.clear_destination;
-			}
-			optionsMenuHelper
-					.item(nav)
-					.icons(R.drawable.ic_action_remove_dark,
-							R.drawable.ic_action_remove_dark)
-					.listen(new OnContextMenuClick() {
-						@Override
-						public void onContextMenuClick(int itemId, int pos,
-								boolean isChecked, DialogInterface dialog) {
-							stopNavigationActionConfirm(mapView);
-						}
-					}).reg();
-		}
+
+		// Directions or ShowRoute
+		/*
+		 * if (!routingHelper.isRouteBeingCalculated() ||
+		 * routingHelper.isRouteCalculated()) { optionsMenuHelper
+		 * .item(routingHelper.isRouteCalculated() ? R.string.show_route :
+		 * R.string.get_directions)
+		 * .icons(R.drawable.ic_action_gdirections_dark,
+		 * R.drawable.ic_action_gdirections_dark) .listen(new
+		 * OnContextMenuClick() {
+		 * 
+		 * @Override public void onContextMenuClick(int itemId, int pos, boolean
+		 * isChecked, DialogInterface dialog) { if
+		 * (routingHelper.isRouteCalculated()) { aboutRoute(); } else { Location
+		 * loc = new Location("map"); loc.setLatitude(mapView.getLatitude());
+		 * loc.setLongitude(mapView.getLongitude());
+		 * 
+		 * new NavigateAction(mapActivity).getDirections( loc, null,
+		 * DirectionDialogStyle .create().gpxRouteEnabled()); } } }).reg(); }
+		 */
+		// WayPoints
+		/*
+		 * if (getTargets().getPointToNavigate() != null) { optionsMenuHelper
+		 * .item(R.string.target_points) .icons(R.drawable.ic_action_flage_dark,
+		 * R.drawable.ic_action_flage_dark) .listen(new OnContextMenuClick() {
+		 * 
+		 * @Override public void onContextMenuClick(int itemId, int pos, boolean
+		 * isChecked, DialogInterface dialog) { openIntermediatePointsDialog();
+		 * } }).reg(); }
+		 */
 
 		// Pesquisa
 		optionsMenuHelper
@@ -1091,6 +1108,57 @@ public class MapActivityActions implements DialogProvider {
 							settings.APPLICATION_MODE
 									.set(settings.DEFAULT_APPLICATION_MODE
 											.get());
+							getTargets().clearPointToNavigate(true);
+							mapView.refreshMap();
+						}
+					});
+		} else {
+			// Clear the destination point
+			builder.setTitle(getString(R.string.cancel_navigation));
+			builder.setMessage(getString(R.string.clear_dest_confirm));
+			builder.setPositiveButton(R.string.default_buttons_yes,
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							getTargets().clearPointToNavigate(true);
+							mapView.refreshMap();
+						}
+					});
+		}
+
+		builder.setNegativeButton(R.string.default_buttons_no, null);
+		builder.show();
+	}
+
+	public void stopNavigationActionConfirmMapnGo(
+			final OsmandMapTileView mapView) {
+		Builder builder = new AlertDialog.Builder(mapActivity);
+
+		if (routingHelper.isRouteCalculated()
+				|| routingHelper.isFollowingMode()
+				|| routingHelper.isRouteBeingCalculated()) {
+			// Stop the navigation
+			builder.setTitle(getString(R.string.cancel_route));
+			builder.setMessage(getString(R.string.stop_routing_confirm));
+			builder.setPositiveButton(R.string.default_buttons_yes,
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							if (getMyApplication().getLocationProvider()
+									.getLocationSimulation().isRouteAnimating()) {
+								getMyApplication().getLocationProvider()
+										.getLocationSimulation()
+										.startStopRouteAnimation(mapActivity);
+							}
+							routingHelper.setFinalAndCurrentLocation(null,
+									new ArrayList<LatLon>(),
+									getLastKnownLocation(),
+									routingHelper.getCurrentGPXRoute());
+							settings.APPLICATION_MODE
+									.set(settings.DEFAULT_APPLICATION_MODE
+											.get());
+							getTargets().clearPointToNavigate(true);
+							mapView.refreshMap();
 						}
 					});
 		} else {

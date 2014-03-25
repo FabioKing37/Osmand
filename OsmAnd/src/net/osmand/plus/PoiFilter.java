@@ -51,6 +51,20 @@ public class PoiFilter {
 		}
 	}
 	
+	// constructor for Costum filters
+	public PoiFilter(AmenityType type, ClientContext application , AmenityType type2){
+		this.application = application;
+		isStandardFilter = true;
+		filterId = USER_PREFIX + type;
+		name = type == null ? application.getString(R.string.poi_filter_closest_poi) : OsmAndFormatter.toPublicString(type, 
+				application); //$NON-NLS-1$
+		if(type == null){
+			initSearchAll();
+		} else {
+			acceptedTypes.put(type, null);
+		}
+	}
+	
 	// constructor for user defined filters
 	public PoiFilter(String name, String filterId, Map<AmenityType, LinkedHashSet<String>> acceptedTypes, ClientContext app){
 		application = app;
@@ -84,6 +98,13 @@ public class PoiFilter {
 	}
 	
 	private void initSearchAll(){
+		for(AmenityType t : AmenityType.getCategories()){
+			acceptedTypes.put(t, null);
+		}
+		distanceToSearchValues = new double[] {0.5, 1, 2, 5, 10, 20, 50, 100};
+	}
+	
+	private void initSearchAllUserDifined(){
 		for(AmenityType t : AmenityType.getCategories()){
 			acceptedTypes.put(t, null);
 		}

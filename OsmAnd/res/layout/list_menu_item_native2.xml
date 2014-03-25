@@ -68,25 +68,25 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/buttonGo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/mapngo_btn_dialog_holo_light"
-            android:drawableTop="@drawable/ic_action_gdirections_dark"
-            android:text="@string/go"
-            android:textColor="#FFFFFFFF"
-            android:textSize="15sp" />
-
-        <Button
             android:id="@+id/buttonPOI"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/mapngo_btn_dialog_holo_light"
             android:drawableTop="@drawable/ic_action_gmarker_dark"
-            android:ellipsize="middle"
             android:text="@string/poi_filter_closest_poi"
+            android:textColor="#FFFFFFFF"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/buttonGo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/mapngo_btn_dialog_holo_light"
+            android:drawableTop="@drawable/ic_action_gdirections_dark"
+            android:ellipsize="middle"
+            android:text="@string/go"
             android:textColor="#FFFFFFFF"
             android:textSize="15sp" />
 

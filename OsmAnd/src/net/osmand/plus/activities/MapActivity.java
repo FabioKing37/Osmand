@@ -311,7 +311,7 @@ public class MapActivity extends AccessibleActivity  {
 			Location loc = new Location("map");
 			loc.setLatitude(mapView.getLatitude());
 			loc.setLongitude(mapView.getLongitude());
-			new NavigateAction(this).getDirections(loc, null, DirectionDialogStyle.create());
+			new NavigateAction(this).getDirections(loc, null,null, DirectionDialogStyle.create());
 		}
 		if(mapLabelToShow != null && latLonToShow != null){
 			mapLayers.getContextMenuLayer().setSelectedObject(toShow);
@@ -502,6 +502,7 @@ public class MapActivity extends AccessibleActivity  {
 		}
 		routingHelper.setFollowingMode(true);
 		routingHelper.setFinalAndCurrentLocation(finalLocation, intermediatePoints, currentLocation, gpxRoute);
+		//Voice Dialog
 		app.showDialogInitializingCommandPlayer(MapActivity.this);
 	}
 

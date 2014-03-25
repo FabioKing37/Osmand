@@ -52,6 +52,7 @@ public class NativeOsmandLibrary extends NativeLibrary {
 							isNativeSupported = true;
 						} catch(Error e) {
 							log.error("Failed to load new native library", e); //$NON-NLS-1$
+							//isNativeSupported = true;
 						}
 						if(!isNativeSupported) {
 							loadOldCore(libCpuSuffix);
@@ -82,7 +83,8 @@ public class NativeOsmandLibrary extends NativeLibrary {
 //		System.loadLibrary("Qt5Xml" + libCpuSuffix);
 //		System.loadLibrary("OsmAndCore" + libCpuSuffix);
 //		System.loadLibrary("OsmAndCoreUtils" + libCpuSuffix);
-		System.loadLibrary("OsmAndJNI" + libCpuSuffix);
+		//System.loadLibrary("OsmAndJNI" + libCpuSuffix);
+		System.loadLibrary("osmand" + libCpuSuffix);
 	}
 	
 	public static boolean isSupported()

@@ -654,14 +654,14 @@ public class RoutingHelper {
 			String nm = n.directionInfo.getStreetName();
 			String rf = n.directionInfo.getRef();
 			String dn = n.directionInfo.getDestinationName();
-			return "\u2566 " + formatStreetName(nm, rf, dn);
+			return formatStreetName(nm, rf, dn);
 		}
 		RouteSegmentResult rs = getCurrentSegmentResult();
 		if(rs != null) {
 			String nm = rs.getObject().getName();
 			String rf = rs.getObject().getRef();
 			String dn = rs.getObject().getDestinationName();
-			return "\u21E7 " + formatStreetName(nm, rf, dn);
+			return formatStreetName(nm, rf, dn);
 		}
 		return null;
 	}

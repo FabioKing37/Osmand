@@ -28,7 +28,7 @@ public class PoiFiltersHelper {
 	private static final String UDF_SPORTS = "sports";
 	private static final String UDF_SHOP = "shop";
 	private static final String UDF_CULTURE = "culture";
-	private static final String UDF_SCHOOLS = "schools";
+	private static final String UDF_SCHOOLS = "education";
 	private static final String UDF_HEALTH_WELLNESS = "health_wellness";
 	private static final String UDF_SERVICES = "services";
 
@@ -36,10 +36,8 @@ public class PoiFiltersHelper {
 	private static final String UDF_FOOD_SHOP = "food_shop";
 	private static final String UDF_FUEL = "fuel";
 	private static final String UDF_SIGHTSEEING = "sightseeing";
-
 	private static final String UDF_PUBLIC_TRANSPORT = "public_transport";
 	private static final String UDF_ENTERTAINMENT = "entertainment";
-
 	private static final String UDF_PARKING = "parking";
 
 	private static final String[] DEL = new String[] {};
@@ -59,7 +57,9 @@ public class PoiFiltersHelper {
 			List<PoiFilter>... collections) {
 		for (List<PoiFilter> c : collections) {
 			for (PoiFilter f : c) {
+				String teste = f.getFilterId();
 				if (f.getFilterId().equals(filterId)) {
+					String teste2 = "ENTROU!";
 					return f;
 				}
 			}
@@ -75,8 +75,18 @@ public class PoiFiltersHelper {
 		if (filterId.equals(NameFinderPoiFilter.FILTER_ID)) {
 			return getNameFinderPOIFilter();
 		}
-		return findPoiFilter(filterId, getUserDefinedPoiFilters(),
-				getTopStandardFilters(), getOsmDefinedPoiFilters());
+		return findPoiFilter(filterId, getUserDefinedPoiFilters(),getTopStandardFilters(), getOsmDefinedPoiFilters());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public PoiFilter getFilterMapAndGoById(String filterId) {
+		if (filterId == null) {
+			return null;
+		}
+		if (filterId.equals(NameFinderPoiFilter.FILTER_ID)) {
+			return getNameFinderPOIFilter();
+		}
+		return findPoiFilter(filterId, getUserDefinedPoiFilters());
 	}
 
 	private void putAll(Map<AmenityType, LinkedHashSet<String>> types,
@@ -148,31 +158,28 @@ public class PoiFiltersHelper {
 				UDF_SERVICES), application));
 		// #########################################################
 
-		filters.add(new PoiFilter(application
-				.getString(R.string.poi_filter_car_aid), PoiFilter.USER_PREFIX
-				+ UDF_CAR_AID, configureDefaultUserDefinedFilter(null,
-				UDF_CAR_AID), application));
-		filters.add(new PoiFilter(application
-				.getString(R.string.poi_filter_fuel), PoiFilter.USER_PREFIX
-				+ UDF_FUEL, configureDefaultUserDefinedFilter(null, UDF_FUEL),
-				application));
-		filters.add(new PoiFilter(application
-				.getString(R.string.poi_filter_parking), PoiFilter.USER_PREFIX
-				+ UDF_PARKING, configureDefaultUserDefinedFilter(null,
-				UDF_PARKING), application));
-		filters.add(new PoiFilter(application
-				.getString(R.string.poi_filter_public_transport),
-				PoiFilter.USER_PREFIX + UDF_PUBLIC_TRANSPORT,
-				configureDefaultUserDefinedFilter(null, UDF_PUBLIC_TRANSPORT),
-				application));
-
-		filters.add(new PoiFilter(application
-				.getString(R.string.poi_filter_sightseeing),
-				PoiFilter.USER_PREFIX + UDF_SIGHTSEEING,
-				configureDefaultUserDefinedFilter(null, UDF_SIGHTSEEING),
-				application));
-		// UDF_EMERGENCY = "emergency";
-		// UDF_ENTERTAINMENT = "entertainment";
+		/*
+		 * filters.add(new PoiFilter(application
+		 * .getString(R.string.poi_filter_car_aid), PoiFilter.USER_PREFIX +
+		 * UDF_CAR_AID, configureDefaultUserDefinedFilter(null, UDF_CAR_AID),
+		 * application)); filters.add(new PoiFilter(application
+		 * .getString(R.string.poi_filter_fuel), PoiFilter.USER_PREFIX +
+		 * UDF_FUEL, configureDefaultUserDefinedFilter(null, UDF_FUEL),
+		 * application)); filters.add(new PoiFilter(application
+		 * .getString(R.string.poi_filter_parking), PoiFilter.USER_PREFIX +
+		 * UDF_PARKING, configureDefaultUserDefinedFilter(null, UDF_PARKING),
+		 * application)); filters.add(new PoiFilter(application
+		 * .getString(R.string.poi_filter_public_transport),
+		 * PoiFilter.USER_PREFIX + UDF_PUBLIC_TRANSPORT,
+		 * configureDefaultUserDefinedFilter(null, UDF_PUBLIC_TRANSPORT),
+		 * application));
+		 * 
+		 * filters.add(new PoiFilter(application
+		 * .getString(R.string.poi_filter_sightseeing), PoiFilter.USER_PREFIX +
+		 * UDF_SIGHTSEEING, configureDefaultUserDefinedFilter(null,
+		 * UDF_SIGHTSEEING), application)); // UDF_EMERGENCY = "emergency"; //
+		 * UDF_ENTERTAINMENT = "entertainment";
+		 */
 		return filters;
 	}
 
@@ -223,7 +230,7 @@ public class PoiFiltersHelper {
 					"miniature golf", "sports centre", "stadium", "pitch",
 					"track");
 			// SCHOOLS
-		} else if (UDF_SPORTS.equals(key)) {
+		} else if (UDF_SCHOOLS.equals(key)) {
 			putAll(types, AmenityType.EDUCATION);
 
 			// HEALTH_WELLNESS
@@ -245,62 +252,79 @@ public class PoiFiltersHelper {
 			putValues(types, AmenityType.EMERGENCY, "fire station");
 			putValues(types, AmenityType.SHOP, "bicycle", "car", "car repair",
 					"travel agency");
+			// Parking
 			putValues(types, AmenityType.TRANSPORTATION, "parking",
 					"bicycle_parking");
 			putValues(types, AmenityType.TOURISM, "information");
-			putValues(types, AmenityType.TRANSPORTATION, "fuel");
+			// Public Transports
+			putValues(types, AmenityType.SEAMARK, "harbor");
+			putValues(types, AmenityType.TRANSPORTATION, "fuel", "aerodrome",
+					"airport", "car rental", "ferry terminal", "helipad",
+					"subway", "taxi");
+			putValues(
+					types,
+					AmenityType.TRANSPORTATION,
+					"public_transport_stop_position",
+					"public_transport_platform",
+					"public_transport_station", // railway
+					"railway_platform",
+					"railway_station",
+					"tram_stop",
+					"subway_entrance",
+					"railway_buffer_stop", // bus, cars, bicycle
+					"bus_stop", "platform", "ferry_terminal", "taxi",
+					"bicycle_rental",
+					"bus_station",
+					"car_rental",
+					"car_sharing", // aero
+					"airport", "aerodrome",
+					"terminal",
+					"gate", // aerial ways ( hide ways) //
+					"aerialway_cable_car",
+					"aerialway_gondola", //
+					"aerialway_chair_lift", "aerialway_mixed_lift",
+					"aerialway_drag_lift", "aerialway_goods",
+					"aerialway_station");
 
 			// putValues(types, AmenityType.ADMINISTRATIVE,
 			// "city","country","");
 
-		} else if (UDF_FUEL.equals(key)) {
-			putValues(types, AmenityType.TRANSPORTATION, "fuel");
-		} else if (UDF_PARKING.equals(key)) {
-			putValues(types, AmenityType.TRANSPORTATION, "parking",
-					"bicycle_parking");
-		} else if (UDF_ENTERTAINMENT.equals(key)) {
-			putAll(types, AmenityType.ENTERTAINMENT);
-		} else if (UDF_CAR_AID.equals(key)) {
-			putValues(types, AmenityType.TRANSPORTATION, "fuel", "car_wash",
-					"car_repair", "car", "car_sharing");
-			putValues(types, AmenityType.SHOP, "fuel", "car_wash",
-					"car_repair", "car", "car_parts");
-		} else if (UDF_PUBLIC_TRANSPORT.equals(key)) {
-			putValues(types,
-					AmenityType.TRANSPORTATION,
-					"public_transport_stop_position",
-					"public_transport_platform",
-					"public_transport_station",
-					// railway
-					"railway_platform", "railway_station", "halt", "tram_stop",
-					"subway_entrance",
-					"railway_buffer_stop",
-					// bus, cars, bicycle
-					"bus_stop", "platform", "ferry_terminal", "taxi",
-					"bicycle_rental", "bus_station", "car_rental",
-					"car_sharing",
-					// aero
-					"airport", "aerodrome", "terminal", "gate",
-					// aerial ways ( hide ways)
-					// "aerialway_cable_car", "aerialway_gondola",
-					// "aerialway_chair_lift", "aerialway_mixed_lift",
-					// "aerialway_drag_lift", "aerialway_goods",
-					"aerialway_station"
-			// ways (hide ways)
-			// "rail", "tram", "light_rail", "subway", "railway_narrow_gauge",
-			// "railway_monorail", "railway_funicular"
-			);
-		} else if (UDF_RESTAURANTS.equals(key)) {
-			putValues(types, AmenityType.SUSTENANCE, "restaurant", "cafe",
-					"food_court", "fast_food", "pub", "bar");
-			putValues(types, AmenityType.ENTERTAINMENT, "brothel", "nightclub",
-					"stripclub");
-			putValues(types, AmenityType.SHOP, "alcohol", "beverages");
-			putValues(types, AmenityType.LEISURE, "dance");
-
-		} else if (UDF_ENTERTAINMENT.equals(key)) {
-			putAll(types, AmenityType.ENTERTAINMENT);
 		}
+		/*
+		 * else if (UDF_FUEL.equals(key)) { putValues(types,
+		 * AmenityType.TRANSPORTATION, "fuel"); } else if
+		 * (UDF_PARKING.equals(key)) { putValues(types,
+		 * AmenityType.TRANSPORTATION, "parking", "bicycle_parking"); } else if
+		 * (UDF_ENTERTAINMENT.equals(key)) { putAll(types,
+		 * AmenityType.ENTERTAINMENT); } else if (UDF_CAR_AID.equals(key)) {
+		 * putValues(types, AmenityType.TRANSPORTATION, "fuel", "car_wash",
+		 * "car_repair", "car", "car_sharing"); putValues(types,
+		 * AmenityType.SHOP, "fuel", "car_wash", "car_repair", "car",
+		 * "car_parts"); } else if (UDF_PUBLIC_TRANSPORT.equals(key)) {
+		 * putValues( types, AmenityType.TRANSPORTATION,
+		 * "public_transport_stop_position", "public_transport_platform",
+		 * "public_transport_station", // railway "railway_platform",
+		 * "railway_station", "halt", "tram_stop", "subway_entrance",
+		 * "railway_buffer_stop", // bus, cars, bicycle "bus_stop", "platform",
+		 * "ferry_terminal", "taxi", "bicycle_rental", "bus_station",
+		 * "car_rental", "car_sharing", // aero "airport", "aerodrome",
+		 * "terminal", "gate", // aerial ways ( hide ways) //
+		 * "aerialway_cable_car", "aerialway_gondola", //
+		 * "aerialway_chair_lift", "aerialway_mixed_lift",
+		 * "aerialway_drag_lift", "aerialway_goods", "aerialway_station" // ways
+		 * (hide ways) // , "tram", "light_rail", "subway",
+		 * "railway_narrow_gauge", // "railway_monorail", "railway_funicular");
+		 * } else if (UDF_RESTAURANTS.equals(key)) { putValues(types,
+		 * AmenityType.SUSTENANCE, "restaurant", "cafe", "food_court",
+		 * "fast_food", "pub", "bar"); putValues(types,
+		 * AmenityType.ENTERTAINMENT, "brothel", "nightclub", "stripclub");
+		 * putValues(types, AmenityType.SHOP, "alcohol", "beverages");
+		 * putValues(types, AmenityType.LEISURE, "dance");
+		 * 
+		 * } else if (UDF_ENTERTAINMENT.equals(key)) { putAll(types,
+		 * AmenityType.ENTERTAINMENT); }
+		 */
+
 		return types;
 	}
 
@@ -312,6 +336,7 @@ public class PoiFiltersHelper {
 					.getReadableDatabase());
 			sortListOfFiltersByName(userDefined);
 			cacheUserDefinedFilters.addAll(userDefined);
+			//cacheUserDefinedFilters.add(new PoiFilter(null, application, null));
 			helper.close();
 		}
 		return Collections.unmodifiableList(cacheUserDefinedFilters);
@@ -347,6 +372,10 @@ public class PoiFiltersHelper {
 
 	public static String getOsmDefinedFilterId(AmenityType t) {
 		return PoiFilter.STD_PREFIX + t;
+	}
+
+	public static String getMapnGoDefinedFilterId(AmenityType t) {
+		return PoiFilter.USER_PREFIX + t;
 	}
 
 	public void updateFilters(boolean onlyAddFilters) {

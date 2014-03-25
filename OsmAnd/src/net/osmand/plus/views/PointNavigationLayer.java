@@ -171,7 +171,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 					tp.location = latLon;
 					tp.intermediate = !target;
 					if (target) {
-						tp.name = view.getContext().getString(R.string.destination_point, "")  + " : " + names.get(i);
+						//tp.name = view.getContext().getString(R.string.destination_point, "") + names.get(i);
+						tp.name = view.getContext().getString(R.string.intermediate_point) + "-" + names.get(i)  ;
 					} else {
 						tp.name = (i + 1) + ". " + view.getContext().getString(R.string.intermediate_point, "")  + " : " + names.get(i);
 					}

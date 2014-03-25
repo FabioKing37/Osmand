@@ -109,7 +109,7 @@
     <string name="context_menu_item_directions_to">Directions To</string>
     <string name="context_menu_item_directions_from">Directions From</string>
     <string name="route_descr_map_location">Map: </string>
-    <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
+    <string name="route_descr_lat_lon">Latitude: %1$.3f \n Longitude: %2$.3f</string>
     <string name="route_descr_current_location">Current position</string>
     <string name="route_descr_destination"></string>
     <string name="route_to">To:</string>
@@ -120,7 +120,7 @@
     <string name="app_mode_default">Browse map</string>
     <string name="settings_preset">Default profile</string>
     <string name="settings_preset_descr">Map view and navigation settings are remembered per use profile. Set your default profile here.</string>
-    <string name="destination_point">Destination %1$s</string>
+    <string name="destination_point">Destination : %1$s</string>
     <string name="context_menu_item_destination_point">Set as destination</string>
     <string name="please_select_address">Select city or street first</string>
     <string name="tip_recent_changes_1_4_t">Changes in 1.4:
@@ -169,7 +169,7 @@
     <string name="available_downloads_left">Available %1$d files to download</string>
     <string name="install_paid">Full version</string>
     <string name="cancel_route">Dismiss route</string>
-    <string name="cancel_navigation">Stop navigation</string>
+    <string name="cancel_navigation">Stop</string>
     <string name="clear_destination">Clear destination</string>
     <string name="download_using_mobile_internet">Currently WiFi is not connected. Do you want to continue downloading with current internet connection?</string>
     <string name="street_name">Street</string>
@@ -1257,7 +1257,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="error_reading_gpx">Error reading GPX data</string>
     <string name="vector_data">Offline vector maps</string>
     <string name="transport_context_menu">Search transportation at stop</string>
-    <string name="point_on_map">Location:\n Lat %1$.5f\n Lon %2$.5f</string>
+    <string name="point_on_map">Location:\n \tLatitude: %1$.5f\n \tLongitude: %2$.5f</string>
     <string name="point_on_map_poi">\n %1$s \n</string>
     <string name="osb_bug_name">Bug</string>
     <string name="poi_context_menu_modify">Modify POI</string>
@@ -1267,7 +1267,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="rotate_map_none_opt">Don\'t rotate (north is up)</string>
     <string name="rotate_map_to_bearing_descr">Select map screen alignment</string>
     <string name="rotate_map_to_bearing">Map orientation</string>
-    <string name="show_route">Route details</string>
+    <string name="show_route">Details</string>
     <string name="fav_imported_sucessfully">Favorites successfully imported</string>
     <string name="fav_file_to_load_not_found">GPX file containing favorites is not found at {0}</string>
     <string name="fav_saved_sucessfully">Favorites successfully saved to {0}</string>
@@ -1400,11 +1400,12 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="fav_points_edited">Favorite point was edited</string>
     <string name="fav_points_not_exist">No favorite points exist</string>
     <string name="update_existing">Replace</string>
-    <string name="only_show">Display route</string>
+    <string name="only_show">Preview</string>
     <string name="follow">Start navigation</string>
     <string name="mark_final_location_first">Please select destination first</string>
-    <string name="get_directions">Directions</string>
+    <string name="get_directions">Route</string>
     <string name="go">Go</string>
+    <string name="start_navigation">Start Navigation</string>
     <string name="show_gps_status">Show GPS Status</string>
     <string name="opening_hours">Opening hours</string>
     <string name="opening_changeset">Opening changeset&#8230;</string>

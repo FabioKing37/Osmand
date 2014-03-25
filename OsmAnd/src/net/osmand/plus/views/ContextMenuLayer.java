@@ -24,6 +24,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -89,29 +90,29 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		BASE_TEXT_SIZE = (int) (BASE_TEXT_SIZE * scaleCoefficient);
 		SHADOW_OF_LEG = (int) (SHADOW_OF_LEG * scaleCoefficient);
 		CLOSE_BTN = (int) (CLOSE_BTN * scaleCoefficient);
-
+		
 		boxLeg = view.getResources().getDrawable(R.drawable.box_leg);
 		boxLeg.setBounds(0, 0, boxLeg.getMinimumWidth(),
 				boxLeg.getMinimumHeight());
 
 		closeButton = new ImageView(view.getContext());
 		LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT,
-				LayoutParams.WRAP_CONTENT, Gravity.TOP | Gravity.RIGHT);
+				BASE_TEXT_SIZE, Gravity.TOP | Gravity.RIGHT);
 		closeButton.setLayoutParams(lp);
 		closeButton.setImageDrawable(view.getResources().getDrawable(
 				R.drawable.headliner_close));
 		closeButton.setClickable(true);
 
 		textView = new TextView(view.getContext());
-		lp = new LayoutParams(BASE_TEXT_SIZE, LayoutParams.WRAP_CONTENT,
-				Gravity.BOTTOM | Gravity.CENTER);
+		lp = new LayoutParams(LayoutParams.WRAP_CONTENT,
+				LayoutParams.WRAP_CONTENT + CLOSE_BTN, Gravity.CENTER);
 		textView.setLayoutParams(lp);
 		textView.setTextSize(15);
 		textView.setTextColor(Color.argb(255, 255, 255, 255));
 		// textView.setMinLines(1);
 		textView.setMaxLines(15);
-		// textView.setGravity(Gravity.CENTER_HORIZONTAL);
-		// textView.setGravity(Gravity.CENTER_VERTICAL);
+		textView.setGravity(Gravity.CENTER_HORIZONTAL);
+		textView.setGravity(Gravity.CENTER_VERTICAL);
 
 		textView.setClickable(true);
 
@@ -119,8 +120,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				R.drawable.box_free));
 		textPadding = new Rect();
 
-		//textView.getBackground().getPadding(textPadding);
-		textView.setPadding(0, CLOSE_BTN + 25, CLOSE_BTN+5, 0);
+		textView.setPadding(CLOSE_BTN, CLOSE_BTN + 10, CLOSE_BTN, CLOSE_BTN);
+		// textView.getBackground().getPadding(textPadding);
 
 		// TODO: Botões
 		/*
@@ -361,7 +362,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter(activity);
 		if (selectedObjects.size() > 1) {
 			Builder builder = new AlertDialog.Builder(view.getContext());
-			String[] d = new String[selectedObjects.size()];
+			final String[] d = new String[selectedObjects.size()];
 			final List<Object> s = new ArrayList<Object>();
 			int i = 0;
 			Iterator<Entry<Object, IContextMenuProvider>> it = selectedObjects
@@ -375,12 +376,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					Object selectedObj = s.get(which);
+					String selectedObjName = d[which];
 					for (OsmandMapLayer layer : view.getLayers()) {
 						layer.populateObjectContextMenu(selectedObj,
 								menuAdapter);
 					}
 					activity.getMapActions().contextMenuPoint(l.getLatitude(),
-							l.getLongitude(), menuAdapter, selectedObj);
+							l.getLongitude(), menuAdapter, selectedObj, selectedObjName);
 				}
 			});
 			builder.show();
@@ -390,7 +392,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				layer.populateObjectContextMenu(selectedObj, menuAdapter);
 			}
 			activity.getMapActions().contextMenuPoint(l.getLatitude(),
-					l.getLongitude(), menuAdapter, selectedObj);
+					l.getLongitude(), menuAdapter, selectedObj, null);
 		}
 	}
 

@@ -333,7 +333,7 @@ public class MapInfoWidgetsFactory {
 			this.map = map;
 			getPaint().setTextAlign(Align.CENTER);
 			setEllipsize(TextUtils.TruncateAt.MARQUEE);
-			//marqueeRepeatLimit(MARQUEEFOREVER);
+			// marqueeRepeatLimit(MARQUEEFOREVER);
 			setTextColor(Color.WHITE);
 		}
 
@@ -366,8 +366,7 @@ public class MapInfoWidgetsFactory {
 							&& di < routingHelper.getRouteDirections().size()) {
 						RouteDirectionInfo next = routingHelper
 								.getRouteDirections().get(di);
-						text = "\u2566 "
-								+ RoutingHelper.formatStreetName(
+						text = RoutingHelper.formatStreetName(
 										next.getStreetName(), next.getRef(),
 										next.getDestinationName());
 					}
@@ -406,18 +405,18 @@ public class MapInfoWidgetsFactory {
 					}
 					setEllipsize(TextUtils.TruncateAt.MARQUEE);
 					setTextSize(TypedValue.COMPLEX_UNIT_PX, pp.getTextSize());
-					
+
 					setContentDescription(text);
 				} else {
 					setEllipsize(TextUtils.TruncateAt.MARQUEE);
 					setTextSize(TypedValue.COMPLEX_UNIT_PX, 7);
-					
+
 					setContentDescription(getResources().getString(
 							R.string.map_widget_top_text));
 				}
 				setEllipsize(TextUtils.TruncateAt.MARQUEE);
 				setText(text);
-				
+
 				invalidate();
 				return true;
 			}

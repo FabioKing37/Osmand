@@ -34,6 +34,7 @@ import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.opengl.Visibility;
 import android.os.Build;
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -164,6 +165,7 @@ public class NavigateAction {
 		// null);
 
 		// Fill Elements
+
 		TextView destination = (TextView) builderDialog
 				.findViewById(R.id.destination);
 
@@ -177,20 +179,22 @@ public class NavigateAction {
 		}
 
 		if (mapView != null) {
-			/*
-			 * String destinationText = mapActivity
-			 * .getString(R.string.route_descr_destination) + " " +
-			 * getRoutePointDescription(targets.getPointToNavigate(),
-			 * targets.getPointNavigateDescription());
-			 */
 
-			String oname = name != null ? name : getRoutePointDescription(
-					mapView.getLatitude(), mapView.getLongitude());
-			String mapLocation = mapActivity
-					.getString(R.string.route_descr_map_location) + " " + oname;
+			String destinationText = mapActivity
+					.getString(R.string.route_descr_destination)
+					+ " "
+					+ getRoutePointDescription(targets.getPointToNavigate(),
+							targets.getPointNavigateDescription());
+
+			// String oname = name != null ? name :
+			// getRoutePointDescription(mapView.getLatitude(),
+			// mapView.getLongitude());
+			// String mapLocation =
+			// mapActivity.getString(R.string.route_descr_map_location) + " " +
+			// oname;
 
 			destination.setText(mapActivity.getMapView().getContext()
-					.getString(R.string.destination_point, oname));
+					.getString(R.string.destination_point, destinationText));
 		}
 
 		// Preencher os detalhes se já ouver rota calculadoa
@@ -351,6 +355,7 @@ public class NavigateAction {
 					 * { nav = R.string.cancel_route; } else { nav =
 					 * R.string.clear_destination; }
 					 */
+					
 					mapActivity.getMapActions().stopNavigationActionConfirm(
 							mapActivity.getMapView());
 					stopRouteButton.setVisibility(View.GONE);

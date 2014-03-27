@@ -234,6 +234,7 @@
     <string name="max_level_download_tile">Nível de zoom máx</string>
     <string name="max_level_download_tile_descr">Escolher um nível máximo de zoom para download</string>
     <string name="route_general_information">Distância total = %1$s tempo de viagem, = %2$dh %3$dm.</string>
+    <string name="route_general_information_poi"><B>Distância total</B> = %1$s \n <U>Tempo de viagem</U> = %2$dh %3$dm</string>
     <string name="router_service_descr">Escolha o sistema de navegação</string>
     <string name="router_service">Serviço de navegação</string>
     <string name="sd_dir_not_accessible">Diretório do cartão SD inacessível</string>
@@ -1125,7 +1126,7 @@ Quer seguir uma trilha GPX ?</string>
     <string name="available_downloads_left">Disponível %1$d arquivos para download</string>
     <string name="install_paid">Versão completa</string>
     <string name="cancel_route">Descartar rota</string>
-    <string name="cancel_navigation">Parar navegação</string>
+    <string name="cancel_navigation">Parar</string>
     <string name="tip_recent_changes_1_1_4_t">"Mudanças em 1.1.4: ↵
       \n→* Interface do usuário redesenhada ↵
          \n→* Correções de erros "</string>

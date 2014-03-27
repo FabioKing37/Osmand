@@ -28,7 +28,7 @@ import android.widget.TextView;
 public class FailSafeFuntions {
 	private static boolean quitRouteRestoreDialog = false;
 	private static Log log = PlatformUtil.getLog(FailSafeFuntions.class);
-	
+
 	public static void restoreRoutingMode(final MapActivity ma) {
 		final OsmandApplication app = ma.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
@@ -48,24 +48,33 @@ public class FailSafeFuntions {
 				public void run() {
 					Builder builder = new AccessibleAlertBuilder(ma);
 					final TextView tv = new TextView(ma);
-					tv.setText(ma.getString(R.string.continue_follow_previous_route_auto, delay + ""));
+					tv.setText(ma.getString(
+							R.string.continue_follow_previous_route_auto, delay
+									+ ""));
 					tv.setPadding(7, 5, 7, 5);
 					builder.setView(tv);
-					builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							quitRouteRestoreDialog = true;
-							restoreRoutingModeInner();
+					builder.setPositiveButton(R.string.default_buttons_yes,
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									quitRouteRestoreDialog = true;
+									restoreRoutingModeInner();
 
-						}
-					});
-					builder.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							quitRouteRestoreDialog = true;
-							notRestoreRoutingMode(ma, app);
-						}
-					});
+								}
+							});
+					builder.setNegativeButton(R.string.default_buttons_no,
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									quitRouteRestoreDialog = true;
+									ma.getMapActions().stopNavigationAction(
+											ma.getMapView());
+
+									notRestoreRoutingMode(ma, app);
+								}
+							});
 					final AlertDialog dlg = builder.show();
 					dlg.setOnDismissListener(new OnDismissListener() {
 						@Override
@@ -82,19 +91,23 @@ public class FailSafeFuntions {
 					delayDisplay = new Runnable() {
 						@Override
 						public void run() {
-							if(!quitRouteRestoreDialog) {
-								delay --;
-								tv.setText(ma.getString(R.string.continue_follow_previous_route_auto, delay + ""));
-								if(delay <= 0) {
+							if (!quitRouteRestoreDialog) {
+								delay--;
+								tv.setText(ma
+										.getString(
+												R.string.continue_follow_previous_route_auto,
+												delay + ""));
+								if (delay <= 0) {
 									try {
-										if (dlg.isShowing() && !quitRouteRestoreDialog) {
+										if (dlg.isShowing()
+												&& !quitRouteRestoreDialog) {
 											dlg.dismiss();
 										}
 										quitRouteRestoreDialog = true;
 										restoreRoutingModeInner();
-									} catch(Exception e) {
+									} catch (Exception e) {
 										// swalow view not attached exception
-										log.error(e.getMessage()+"", e);
+										log.error(e.getMessage() + "", e);
 									}
 								} else {
 									uiHandler.postDelayed(delayDisplay, 1000);
@@ -111,7 +124,8 @@ public class FailSafeFuntions {
 						protected GPXFile doInBackground(String... params) {
 							if (gpxPath != null) {
 								// Reverse also should be stored ?
-								GPXFile f = GPXUtilities.loadGPXFile(app, new File(gpxPath), false);
+								GPXFile f = GPXUtilities.loadGPXFile(app,
+										new File(gpxPath), false);
 								if (f.warning != null) {
 									return null;
 								}
@@ -123,14 +137,21 @@ public class FailSafeFuntions {
 
 						@Override
 						protected void onPostExecute(GPXFile result) {
-							final GPXRouteParams gpxRoute = result == null ? null : new GPXRouteParams(result, false,
-									settings.SPEAK_GPX_WPT.get(), settings);
-							LatLon endPoint = pointToNavigate != null ? pointToNavigate : gpxRoute.getLastPoint();
-							net.osmand.Location startPoint = gpxRoute == null ? null : gpxRoute.getStartPointForRoute();
+							final GPXRouteParams gpxRoute = result == null ? null
+									: new GPXRouteParams(result, false,
+											settings.SPEAK_GPX_WPT.get(),
+											settings);
+							LatLon endPoint = pointToNavigate != null ? pointToNavigate
+									: gpxRoute.getLastPoint();
+							net.osmand.Location startPoint = gpxRoute == null ? null
+									: gpxRoute.getStartPointForRoute();
 							if (endPoint == null) {
 								notRestoreRoutingMode(ma, app);
 							} else {
-								ma.followRoute(settings.getApplicationMode(), endPoint, targetPoints.getIntermediatePoints(), startPoint, gpxRoute);
+								ma.followRoute(settings.getApplicationMode(),
+										endPoint,
+										targetPoints.getIntermediatePoints(),
+										startPoint, gpxRoute);
 							}
 						}
 					};
@@ -142,8 +163,9 @@ public class FailSafeFuntions {
 		}
 
 	}
-	
-	private static void notRestoreRoutingMode(MapActivity ma, OsmandApplication app){
+
+	private static void notRestoreRoutingMode(MapActivity ma,
+			OsmandApplication app) {
 		ma.updateApplicationModeSettings();
 		app.getRoutingHelper().clearCurrentRoute(null, new ArrayList<LatLon>());
 		ma.refreshMap();

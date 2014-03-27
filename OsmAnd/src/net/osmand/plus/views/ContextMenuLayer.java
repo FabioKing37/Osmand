@@ -104,13 +104,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		closeButton.setClickable(true);
 
 		textView = new TextView(view.getContext());
-		lp = new LayoutParams(LayoutParams.WRAP_CONTENT,
+		lp = new LayoutParams(BASE_TEXT_SIZE,
 				LayoutParams.WRAP_CONTENT + CLOSE_BTN, Gravity.CENTER);
 		textView.setLayoutParams(lp);
 		textView.setTextSize(15);
 		textView.setTextColor(Color.argb(255, 255, 255, 255));
 		// textView.setMinLines(1);
 		textView.setMaxLines(15);
+		textView.setMaxWidth(1);
+		textView.setSingleLine(false);
 		textView.setGravity(Gravity.CENTER_HORIZONTAL);
 		textView.setGravity(Gravity.CENTER_VERTICAL);
 
@@ -120,8 +122,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				R.drawable.box_free));
 		textPadding = new Rect();
 
-		textView.setPadding(CLOSE_BTN, CLOSE_BTN + 10, CLOSE_BTN, CLOSE_BTN);
-		// textView.getBackground().getPadding(textPadding);
+		//textView.setPadding(CLOSE_BTN, CLOSE_BTN + 10, CLOSE_BTN, CLOSE_BTN);
+		textView.getBackground().getPadding(textPadding);
 
 		// TODO: Botões
 		/*
@@ -147,7 +149,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					latLon.getLongitude());
 
 			int tx = x - boxLeg.getMinimumWidth() / 2;
-			int ty = y - boxLeg.getMinimumHeight() + SHADOW_OF_LEG;
+			int ty = y - boxLeg.getMinimumHeight() + SHADOW_OF_LEG + 3;
 			canvas.translate(tx, ty);
 			boxLeg.draw(canvas);
 			canvas.translate(-tx, -ty);
@@ -160,7 +162,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 				textView.draw(canvas);
 				canvas.translate(textView.getWidth() - closeButton.getWidth(),
-						CLOSE_BTN / 2);
+						CLOSE_BTN/2);
 				closeButton.draw(canvas);
 				// irButton.draw(canvas);
 				if (c == 0) {
@@ -363,26 +365,30 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (selectedObjects.size() > 1) {
 			Builder builder = new AlertDialog.Builder(view.getContext());
 			final String[] d = new String[selectedObjects.size()];
+			final String[] n = new String[selectedObjects.size()];
 			final List<Object> s = new ArrayList<Object>();
 			int i = 0;
 			Iterator<Entry<Object, IContextMenuProvider>> it = selectedObjects
 					.entrySet().iterator();
 			while (it.hasNext()) {
 				Entry<Object, IContextMenuProvider> e = it.next();
-				d[i++] = e.getValue().getObjectDescription(e.getKey());
+				d[i] = e.getValue().getObjectDescription(e.getKey());
+				n[i] = e.getValue().getObjectName(e.getKey());
+				i++;
 				s.add(e.getKey());
 			}
-			builder.setItems(d, new OnClickListener() {
+			builder.setItems(n, new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					Object selectedObj = s.get(which);
-					String selectedObjName = d[which];
+					String selectedObjDesc = d[which];
+					String selectedObjName = n[which];
 					for (OsmandMapLayer layer : view.getLayers()) {
 						layer.populateObjectContextMenu(selectedObj,
 								menuAdapter);
 					}
 					activity.getMapActions().contextMenuPoint(l.getLatitude(),
-							l.getLongitude(), menuAdapter, selectedObj, selectedObjName);
+							l.getLongitude(), menuAdapter, selectedObj, selectedObjDesc, selectedObjName);
 				}
 			});
 			builder.show();
@@ -392,9 +398,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				layer.populateObjectContextMenu(selectedObj, menuAdapter);
 			}
 			activity.getMapActions().contextMenuPoint(l.getLatitude(),
-					l.getLongitude(), menuAdapter, selectedObj, null);
+					l.getLongitude(), menuAdapter, selectedObj, null, null);
 		}
 	}
+	
+	
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {

@@ -14,10 +14,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.NavigateAction;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.AppearanceWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.BaseMapWidget;
 import net.osmand.plus.views.mapwidgets.ImageViewWidget;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
+
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
@@ -71,6 +73,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	// layout pseudo-constants
 	private int STATUS_BAR_MARGIN_X = -4;
 	
+	private ImageView backToLocationMeasures;
 	private ImageView backToLocation;
 	private TopTextView topText;
 	private View progressBar;
@@ -229,14 +232,18 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// Top widgets
 		ImageViewWidget compassView = mic.createCompassView(map);
 		mapInfoControls.registerTopWidget(compassView, R.drawable.widget_compass, R.string.map_widget_compass, "compass", MapWidgetRegistry.LEFT_CONTROL, 5);
+		
 		View config = createConfiguration();
 		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapWidgetRegistry.RIGHT_CONTROL, 10);
-		 mapInfoControls.registerTopWidget(monitoringServices.createMonitoringWidget(view, map), R.drawable.widget_monitoring, R.string.map_widget_monitoring_services,
+		mapInfoControls.registerTopWidget(monitoringServices.createMonitoringWidget(view, map), R.drawable.widget_monitoring, R.string.map_widget_monitoring_services,
 				"monitoring_services", MapWidgetRegistry.LEFT_CONTROL, 12);
 		mapInfoControls.registerTopWidget(mic.createLockInfo(map), R.drawable.widget_lock_screen, R.string.bg_service_screen_lock, "bgService", 
 				MapWidgetRegistry.LEFT_CONTROL,  15);
-		backToLocation = mic.createBackToLocation(map);
-		mapInfoControls.registerTopWidget(backToLocation, R.drawable.widget_backtolocation, R.string.map_widget_back_to_loc, "back_to_location", MapWidgetRegistry.RIGHT_CONTROL, 5);
+		//View whereIam = mic.createBackToLocationWithProgress(map,getProgressBar());
+		View backToLocation1 = createBackToLocationWithProgress(map);
+		backToLocationMeasures = mic.createBackToLocation(map);
+
+		mapInfoControls.registerTopWidget(backToLocation1, R.drawable.widget_backtolocation, R.string.map_widget_back_to_loc, "back_to_location", MapWidgetRegistry.RIGHT_CONTROL, 5);
 		
 		View globus = createLayer();
 		mapInfoControls.registerTopWidget(globus, R.drawable.widget_layer, R.string.menu_layers, "layers", MapWidgetRegistry.RIGHT_CONTROL, 15);
@@ -285,7 +292,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		Rect topRectPadding = new Rect();
 		view.getResources().getDrawable(R.drawable.box_top).getPadding(topRectPadding);
 		// for measurement
-		statusBar.addView(backToLocation);	
+		statusBar.addView(backToLocationMeasures);	
 		//infoBar.addView();
 		STATUS_BAR_MARGIN_X = (int) (STATUS_BAR_MARGIN_X * scaleCoefficient);
 		statusBar.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
@@ -680,6 +687,73 @@ public class MapInfoLayer extends OsmandMapLayer {
 		public boolean updateInfo(DrawSettings drawSettings) {
 			return config.updateInfo(drawSettings);
 		}
+	}
+	
+	private View createBackToLocationWithProgress(final MapActivity map) {
+		final OsmandMapTileView view = map.getMapView();
+
+		final Drawable backToLoc = map.getResources().getDrawable(
+				R.drawable.back_to_loc_white);
+		final Drawable backToLocWhite = map.getResources().getDrawable(
+				R.drawable.back_to_loc_white);
+		final Drawable backToLocDisabled = map.getResources().getDrawable(
+				R.drawable.la_backtoloc_disabled_white);
+		final Drawable backToLocDisabledWhite = map.getResources().getDrawable(
+				R.drawable.la_backtoloc_disabled_white);
+		final Drawable backToLocTracked = map.getResources().getDrawable(
+				R.drawable.back_to_loc_tracked_white);
+		final Drawable backToLocTrackedWhite = map.getResources().getDrawable(
+				R.drawable.back_to_loc_tracked_white);
+
+		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+
+		ImageViewWidget whereIam = new ImageViewWidget(map) {
+			Drawable lastDrawable = null;
+
+			@Override
+			public boolean updateInfo(DrawSettings drawSettings) {
+				boolean nightMode = drawSettings == null ? false : drawSettings
+						.isNightMode();
+				boolean enabled = map.getMyApplication().getLocationProvider()
+						.getLastKnownLocation() != null;
+				boolean tracked = map.getMapViewTrackingUtilities()
+						.isMapLinkedToLocation();
+				Drawable d;
+				if (!enabled) {
+					d = nightMode ? backToLocDisabledWhite : backToLocDisabled;
+				} else if (tracked) {
+					d = nightMode ? backToLocTrackedWhite : backToLocTracked;
+				} else {
+					d = nightMode ? backToLocWhite : backToLoc;
+				}
+				if (d != lastDrawable) {
+					lastDrawable = d;
+					setImageDrawable(d);
+				}
+				return true;
+			}
+		};
+		//whereIam.setPadding((int) (5 * scaleCoefficient), 0,(int) (5 * scaleCoefficient), 0);
+		whereIam.setBackgroundDrawable(map.getResources().getDrawable(
+				R.drawable.back_to_loc));
+
+		FrameLayout fl = new ConfigLayout(view.getContext(), whereIam);
+		fl.addView(whereIam, fparams);
+		fparams = new FrameLayout.LayoutParams(view.getResources()
+				.getDrawable(R.drawable.back_to_loc).getMinimumWidth(), view
+				.getResources().getDrawable(R.drawable.back_to_loc)
+				.getMinimumHeight());
+		progressBar = new View(view.getContext());
+		fl.addView(progressBar, fparams);
+
+		fl.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				map.getMapViewTrackingUtilities().backToLocationImpl();
+			}
+		});
+		return fl;
 	}
 	
 	private View createConfiguration(){

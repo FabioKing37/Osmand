@@ -14,6 +14,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.ShadowText;
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -151,10 +152,94 @@ public class MapInfoWidgetsFactory {
 		backToLocation.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				map.getMapViewTrackingUtilities().backToLocationImpl();
+				//map.getMapViewTrackingUtilities().backToLocationImpl();
 			}
 		});
 		return backToLocation;
+	}
+
+	public View createBackToLocationWithProgress(final MapActivity map,
+			View progress) {
+		final OsmandMapTileView view = map.getMapView();
+
+		final Drawable backToLoc = map.getResources().getDrawable(
+				R.drawable.back_to_loc_white);
+		final Drawable backToLocWhite = map.getResources().getDrawable(
+				R.drawable.back_to_loc_white);
+		final Drawable backToLocDisabled = map.getResources().getDrawable(
+				R.drawable.la_backtoloc_disabled_white);
+		final Drawable backToLocDisabledWhite = map.getResources().getDrawable(
+				R.drawable.la_backtoloc_disabled_white);
+		final Drawable backToLocTracked = map.getResources().getDrawable(
+				R.drawable.back_to_loc_tracked_white);
+		final Drawable backToLocTrackedWhite = map.getResources().getDrawable(
+				R.drawable.back_to_loc_tracked_white);
+
+		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+
+		ImageViewWidget backToLocation = new ImageViewWidget(map) {
+			Drawable lastDrawable = null;
+
+			@Override
+			public boolean updateInfo(DrawSettings drawSettings) {
+				boolean nightMode = drawSettings == null ? false : drawSettings
+						.isNightMode();
+				boolean enabled = map.getMyApplication().getLocationProvider()
+						.getLastKnownLocation() != null;
+				boolean tracked = map.getMapViewTrackingUtilities()
+						.isMapLinkedToLocation();
+				Drawable d;
+				if (!enabled) {
+					d = nightMode ? backToLocDisabledWhite : backToLocDisabled;
+				} else if (tracked) {
+					d = nightMode ? backToLocTrackedWhite : backToLocTracked;
+				} else {
+					d = nightMode ? backToLocWhite : backToLoc;
+				}
+				if (d != lastDrawable) {
+					lastDrawable = d;
+					setImageDrawable(d);
+				}
+				return true;
+			}
+		};
+		backToLocation.setPadding((int) (5 * scaleCoefficient), 0,
+				(int) (5 * scaleCoefficient), 0);
+		backToLocation.setImageDrawable(map.getResources().getDrawable(
+				R.drawable.back_to_loc));
+
+		FrameLayout fl = new ConfigLayout(view.getContext(), backToLocation);
+		fl.addView(backToLocation, fparams);
+		fparams = new FrameLayout.LayoutParams(view.getResources()
+				.getDrawable(R.drawable.back_to_loc).getMinimumWidth(), view
+				.getResources().getDrawable(R.drawable.back_to_loc)
+				.getMinimumHeight());
+		progress = new View(view.getContext());
+		fl.addView(progress, fparams);
+
+		backToLocation.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				map.getMapViewTrackingUtilities().backToLocationImpl();
+			}
+		});
+		return fl;
+	}
+
+	private static class ConfigLayout extends FrameLayout implements
+			UpdateableWidget {
+		private ImageViewWidget config;
+
+		private ConfigLayout(Context c, ImageViewWidget config) {
+			super(c);
+			this.config = config;
+		}
+
+		@Override
+		public boolean updateInfo(DrawSettings drawSettings) {
+			return config.updateInfo(drawSettings);
+		}
 	}
 
 	private static boolean isScreenLocked = false;
@@ -367,8 +452,8 @@ public class MapInfoWidgetsFactory {
 						RouteDirectionInfo next = routingHelper
 								.getRouteDirections().get(di);
 						text = RoutingHelper.formatStreetName(
-										next.getStreetName(), next.getRef(),
-										next.getDestinationName());
+								next.getStreetName(), next.getRef(),
+								next.getDestinationName());
 					}
 				}
 			} else if (map.getMapViewTrackingUtilities()

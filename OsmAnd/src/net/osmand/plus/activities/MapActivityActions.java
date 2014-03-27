@@ -48,14 +48,17 @@ import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -80,6 +83,8 @@ public class MapActivityActions implements DialogProvider {
 	private static final int DIALOG_RELOAD_TITLE = 103;
 
 	private static final int DIALOG_SAVE_DIRECTIONS = 106;
+	private static final int DIALOG_POI = 107;
+	private static final int DIALOG_ROUTE = 108;
 	// make static
 	private static Bundle dialogBundle = new Bundle();
 
@@ -418,7 +423,7 @@ public class MapActivityActions implements DialogProvider {
 	// TODO: ROTA
 	public void contextMenuPoint(final double latitude, final double longitude,
 			final ContextMenuAdapter iadapter, Object selectedObj,
-			String selectedObjName) {
+			String selectedObjDesc, final String selectedObjName) {
 		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter(
 				mapActivity) : iadapter;
 
@@ -455,8 +460,10 @@ public class MapActivityActions implements DialogProvider {
 
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude,
 				adapter, selectedObj);
+		// mapActivity.showDialog(DIALOG_POI);
 		final Dialog builder = new Dialog(mapActivity);
 		builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		// builder.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 		// final Builder builder = new AlertDialog.Builder(mapActivity);
 		// Inflate and set the layout for the dialog
 		// ListAdapter listAdapter;
@@ -478,9 +485,12 @@ public class MapActivityActions implements DialogProvider {
 			name = mapActivity.getMapLayers().getContextMenuLayer()
 					.getSelectedObjectName();
 		}
+		String desc = selectedObjDesc;
+		if (selectedObjDesc == null || selectedObjDesc.isEmpty()) {
+			desc = mapActivity.getMapLayers().getContextMenuLayer()
+					.getSelectedObjectDescription();
+		}
 
-		String desc = mapActivity.getMapLayers().getContextMenuLayer()
-				.getSelectedObjectDescription();
 		// if (selectedObj instanceof Amenity)
 
 		// adding text dynamically
@@ -503,7 +513,9 @@ public class MapActivityActions implements DialogProvider {
 				txtTop.setText(R.string.poi);
 			}
 			// String a = ((Amenity) selectedObj).getDescription();
+
 			TextView txt = (TextView) builder.findViewById(R.id.details);
+			txt.setMovementMethod(new ScrollingMovementMethod());
 			txt.setEllipsize(TextUtils.TruncateAt.MARQUEE);
 			// txt.setGravity(0x01);
 			txt.setText(mapActivity.mapView.getContext().getString(
@@ -521,6 +533,8 @@ public class MapActivityActions implements DialogProvider {
 
 			}
 		});
+
+		builder.show();
 
 		Button poiButton = (Button) builder.findViewById(R.id.buttonPOI);
 		poiButton.setOnClickListener(new OnClickListener() {
@@ -545,16 +559,18 @@ public class MapActivityActions implements DialogProvider {
 					Location loc = new Location("map");
 					loc.setLatitude(latitude);
 					loc.setLongitude(longitude);
-					String name = mapActivity.getMapLayers()
-							.getContextMenuLayer().getSelectedObjectName();
+					// String name =
+					// mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
+					String name = selectedObjName;
 					builder.dismiss();
 					new NavigateAction(mapActivity).getDirections(loc, name,
 							null, DirectionDialogStyle.create()
 									.routeToMapPoint());
 					// .gpxRouteEnabled()
 				} else {
-					String name = mapActivity.getMapLayers()
-							.getContextMenuLayer().getSelectedObjectName();
+					// String name =
+					// mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
+					String name = selectedObjName;
 					targets.navigateToPoint(new LatLon(latitude, longitude),
 							true, -1, name);
 					builder.dismiss();
@@ -629,11 +645,11 @@ public class MapActivityActions implements DialogProvider {
 		 * addFavouritePoint(latitude, longitude); } } });
 		 */
 		// builder.create().show();
-		builder.show();
+
 	}
 
 	public void contextMenuPoint(final double latitude, final double longitude) {
-		contextMenuPoint(latitude, longitude, null, null, null);
+		contextMenuPoint(latitude, longitude, null, null, null, null);
 	}
 
 	private Dialog createReloadTitleDialog(final Bundle args) {
@@ -699,6 +715,11 @@ public class MapActivityActions implements DialogProvider {
 			return createReloadTitleDialog(args);
 		case DIALOG_SAVE_DIRECTIONS:
 			return createSaveDirections(mapActivity);
+			/*
+			 * case DIALOG_POI: return createPoiDialog(mapActivity); case
+			 * DIALOG_POI: return createPoiDialog(mapActivity);
+			 */
+
 		}
 		return OsmAndDialogs.createDialog(id, mapActivity, args);
 	}
@@ -760,6 +781,8 @@ public class MapActivityActions implements DialogProvider {
 				}
 			}
 		});
+		// Button close = bld.create().getButton(AlertDialog.BUTTON_NEGATIVE);
+		// close.setBackgroundResource(R.drawable.map_btn_menu_o);
 
 		return bld.show();
 
@@ -811,9 +834,9 @@ public class MapActivityActions implements DialogProvider {
 		}
 
 		// ROUTE DIALOG
-		if (routingHelper.getFinalLocation() != null
-				|| !routingHelper.isRouteBeingCalculated()
-				|| routingHelper.isRouteCalculated()) {
+		boolean routeCalculated = routingHelper.getFinalLocation() != null
+				&& routingHelper.isRouteCalculated();
+		if (routeCalculated) {
 			optionsMenuHelper
 					.item(routingHelper.isRouteCalculated() ? R.string.get_directions
 							: R.string.get_directions)
@@ -836,7 +859,7 @@ public class MapActivityActions implements DialogProvider {
 										.getContextMenuLayer()
 										.getSelectedObjectName();
 								String routeInfo = routingHelper
-										.getGeneralRouteInformation();
+										.getGeneralRouteInformationForDialog();
 								new NavigateAction(mapActivity).getDirections(
 										loc, name, routeInfo,
 										DirectionDialogStyle.create()

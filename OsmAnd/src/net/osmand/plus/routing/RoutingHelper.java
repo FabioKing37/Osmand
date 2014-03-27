@@ -544,6 +544,14 @@ public class RoutingHelper {
 				hours, minutes);
 	}
 	
+	public String getGeneralRouteInformationForDialog(){
+		int dist = getLeftDistance();
+		int hours = getLeftTime() / (60 * 60);
+		int minutes = (getLeftTime() / 60) % 60;
+		return app.getString(R.string.route_general_information_poi, OsmAndFormatter.getFormattedDistance(dist, app),
+				hours, minutes);
+	}
+	
 	public Location getLocationFromRouteDirection(RouteDirectionInfo i){
 		return route.getLocationFromRouteDirection(i);
 	}

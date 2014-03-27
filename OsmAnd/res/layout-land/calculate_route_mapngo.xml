@@ -59,6 +59,7 @@
         android:id="@+id/ScrollView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/LinearLayoutButtons"
         android:layout_below="@id/separator3"
         android:fillViewport="true"
         android:scrollbars="vertical" >
@@ -147,15 +148,14 @@
         android:id="@+id/separator2"
         android:layout_width="match_parent"
         android:layout_height="1dip"
-        android:layout_below="@id/ScrollView"
+        android:layout_above="@id/LinearLayoutButtons"
         android:background="#ffffff" />
 
     <LinearLayout
         android:id="@+id/LinearLayoutButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="false"
-        android:layout_below="@+id/separator2"
+       android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:orientation="horizontal" >

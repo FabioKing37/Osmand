@@ -157,6 +157,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 		TargetPointsHelper tg = map.getMyApplication().getTargetPointsHelper();
 		List<LatLon> intermediatePoints = tg.getIntermediatePointsWithTarget();
 		List<String> names = tg.getIntermediatePointNamesWithTarget();
+		List<String> names1 = tg.getIntermediatePointNames();
+		String names2 = tg.getPointNavigateDescription();
 		int r = getRadiusPoi(tileBox);
 		for (int i = 0; i < intermediatePoints.size(); i++) {
 			LatLon latLon = intermediatePoints.get(i);
@@ -171,8 +173,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 					tp.location = latLon;
 					tp.intermediate = !target;
 					if (target) {
-						//tp.name = view.getContext().getString(R.string.destination_point, "") + names.get(i);
-						tp.name = view.getContext().getString(R.string.intermediate_point) + "-" + names.get(i)  ;
+						tp.name = view.getContext().getString(R.string.destination_point, names.get(i));
+						//tp.name = view.getContext().getString(R.string.intermediate_point) + "-" + names.get(i)  ;
 					} else {
 						tp.name = (i + 1) + ". " + view.getContext().getString(R.string.intermediate_point, "")  + " : " + names.get(i);
 					}

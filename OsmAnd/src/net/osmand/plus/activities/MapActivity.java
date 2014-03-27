@@ -203,7 +203,7 @@ public class MapActivity extends AccessibleActivity  {
 		params.topMargin = (int) (60 * dm.density);
 		final ProgressBar pb = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
 		pb.setIndeterminate(false);
-		pb.setMax(100);
+		pb.setMax(200);
 		pb.setLayoutParams(params);
 		pb.setVisibility(View.GONE);
 		

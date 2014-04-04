@@ -104,8 +104,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		closeButton.setClickable(true);
 
 		textView = new TextView(view.getContext());
-		lp = new LayoutParams(BASE_TEXT_SIZE,
-				LayoutParams.WRAP_CONTENT + CLOSE_BTN, Gravity.CENTER);
+		lp = new LayoutParams( LayoutParams.WRAP_CONTENT,
+				LayoutParams.WRAP_CONTENT + BASE_TEXT_SIZE, Gravity.BOTTOM);
 		textView.setLayoutParams(lp);
 		textView.setTextSize(15);
 		textView.setTextColor(Color.argb(255, 255, 255, 255));
@@ -122,8 +122,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				R.drawable.box_free));
 		textPadding = new Rect();
 
-		//textView.setPadding(CLOSE_BTN, CLOSE_BTN + 10, CLOSE_BTN, CLOSE_BTN);
+		
 		textView.getBackground().getPadding(textPadding);
+		textView.setPadding(CLOSE_BTN, 0, 0, 0);
 
 		// TODO: Botões
 		/*
@@ -164,14 +165,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				canvas.translate(textView.getWidth() - closeButton.getWidth(),
 						CLOSE_BTN/2);
 				closeButton.draw(canvas);
-				// irButton.draw(canvas);
+				//irButton.draw(canvas);
 				if (c == 0) {
 					// special case relayout after on draw method
 					layoutText();
 					view.refreshMap();
 				} else if (c == 1) {
 					// make 2 line description
-					String des = textView.getText() + "\n ";
+					String des = "" + textView.getText();
 					textView.setText(des);
 					layoutText();
 					view.refreshMap();
@@ -203,7 +204,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 						R.string.point_on_map, latLon.getLatitude(),
 						latLon.getLongitude());
 			}
-			textView.setText(description);
+			//String[] a = description.split("!");
+			
+			String first = String.valueOf(description.charAt(0));
+			if(first.equals("\n"))
+				textView.setText(description);
+			else
+				textView.setText("\n" + description);
+
+			//textView.setText("\n" + description);
 		} else {
 			textView.setText(""); //$NON-NLS-1$
 		}

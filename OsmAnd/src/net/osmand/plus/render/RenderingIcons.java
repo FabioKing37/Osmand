@@ -24,6 +24,7 @@ public class RenderingIcons {
 	private static Map<String, Integer> smallIcons = new LinkedHashMap<String, Integer>();
 	private static Map<String, Integer> bigIcons = new LinkedHashMap<String, Integer>();
 	private static Map<String, Bitmap> iconsBmp = new LinkedHashMap<String, Bitmap>();
+	
 //	private static DisplayMetrics dm;
 	
 	public static boolean containsIcon(String s){

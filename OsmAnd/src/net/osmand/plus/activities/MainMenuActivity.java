@@ -25,6 +25,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -40,6 +41,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.view.animation.TranslateAnimation;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainMenuActivity extends Activity {
@@ -56,7 +58,12 @@ public class MainMenuActivity extends Activity {
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
 
 	private ProgressDialog startProgressDialog;
+	// Progress no Splash
+	private ProgressDialog progressDialog;
+	private ProgressBar progressBar;
 	private Activity mainMenu = this;
+	private boolean firstTime = false;
+	private boolean exit = false;
 
 	public void checkPreviousRunsForExceptions(boolean firstTime) {
 		long size = getPreferences(MODE_WORLD_READABLE).getLong(
@@ -211,144 +218,23 @@ public class MainMenuActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
-		boolean exit = false;
-		if (getIntent() != null) {
-			Intent intent = getIntent();
-			if (intent.getExtras() != null
-					&& intent.getExtras().containsKey(APP_EXIT_KEY)) {
-				exit = true;
-			}
-		}
 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.menu);
 
-		onCreateMainMenu(getWindow(), this);
-
+		// setContentView(R.layout.menu);
+		setContentView(R.layout.splash);
 		Window window = getWindow();
-		final Activity activity = this;
+		final Activity activity = mainMenu;
 
-		View showMap = window.findViewById(R.id.MapButton);
-		showMap.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				final Intent mapIndent = new Intent(activity, OsmandIntents
-						.getMapActivity());
-				activity.startActivityForResult(mapIndent, 0);
-			}
-		});
-		View settingsButton = window.findViewById(R.id.SettingsButton);
-		settingsButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				final Intent settings = new Intent(activity, OsmandIntents
-						.getSettingsActivity());
-				activity.startActivity(settings);
-			}
-		});
-
-		View favouritesButton = window.findViewById(R.id.FavoritesButton);
-		favouritesButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				final Intent favorites = new Intent(activity, OsmandIntents
-						.getFavoritesActivity());
-				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				activity.startActivity(favorites);
-			}
-		});
-
-		final View closeButton = window.findViewById(R.id.CloseButton);
-		closeButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				getMyApplication().closeApplication(activity);
-			}
-		});
-		View searchButton = window.findViewById(R.id.SearchButton);
-		searchButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				final Intent search = new Intent(activity, OsmandIntents
-						.getSearchActivity());
-				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				activity.startActivity(search);
-			}
-		});
-
+		/**
+		 * Showing splashscreen while making calls to process necessary data
+		 * before launching the app Will use AsyncTask to make http call
+		 */
 		if (exit) {
 			getMyApplication().closeApplication(activity);
-			return;
 		}
-		OsmandApplication app = getMyApplication();
-		// restore follow route mode
-		if (app.getSettings().FOLLOW_THE_ROUTE.get()
-				&& !app.getRoutingHelper().isRouteCalculated()) {
-			final Intent mapIndent = new Intent(this,
-					OsmandIntents.getMapActivity());
-			startActivityForResult(mapIndent, 0);
-			return;
-		}
-		startProgressDialog = new ProgressDialog(this);
-		getMyApplication().checkApplicationIsBeingInitialized(
-				mainMenu, startProgressDialog);
-	
-		SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);
-		boolean firstTime = false;
-		if (!pref.contains(FIRST_TIME_APP_RUN)) {
-			firstTime = true;
-			pref.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
-			pref.edit()
-					.putString(VERSION_INSTALLED, Version.getFullVersion(app))
-					.commit();
+		new PrefetchData().execute();
 
-			applicationInstalledFirstTime();
-		} else {
-			int i = pref.getInt(TIPS_SHOW, 0);
-			if (i < 7) {
-				pref.edit().putInt(TIPS_SHOW, ++i).commit();
-			}
-			boolean appVersionChanged = false;
-			if (!Version.getFullVersion(app).equals(
-					pref.getString(VERSION_INSTALLED, ""))) {
-				pref.edit()
-						.putString(VERSION_INSTALLED,
-								Version.getFullVersion(app)).commit();
-				appVersionChanged = true;
-			}
-
-			if (i == 1 || i == 5 || appVersionChanged) {
-				TipsAndTricksActivity tipsActivity = new TipsAndTricksActivity(
-						this);
-				Dialog dlg = tipsActivity.getDialogToShowTips(
-						!appVersionChanged, false);
-				dlg.show();
-			} else {
-				if (startProgressDialog.isShowing()) {
-					startProgressDialog
-							.setOnDismissListener(new DialogInterface.OnDismissListener() {
-								@Override
-								public void onDismiss(DialogInterface dialog) {
-									checkVectorIndexesDownloaded();
-								}
-							});
-				} else {
-					checkVectorIndexesDownloaded();
-				}
-			}
-		}
-
-		// Passa logo para o mapa
-		/*final Intent StartMapIndent = new Intent(activity,
-				OsmandIntents.getMapActivity());
-		activity.startActivityForResult(StartMapIndent, 0);*/
-
-		checkPreviousRunsForExceptions(firstTime);
 	}
 
 	private void applicationInstalledFirstTime() {
@@ -567,6 +453,144 @@ public class MainMenuActivity extends Activity {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Async Task to load data
+	 */
+	// TODO: Splash Class
+	private class PrefetchData extends AsyncTask<Void, Integer, Void> {
+
+		// Spinner
+		// TextView
+		ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBarSplash);
+
+		// ProgressDialog startProgressDialog = new
+		// ProgressDialog(MainMenuActivity.this);
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+
+			/*
+			 * // Create a new progress dialog progressDialog = new
+			 * ProgressDialog(MainMenuActivity.this);
+			 * progressBar.setMessage("Downloading Music :) ");
+			 * progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			 * progressBar.setIndeterminate(true); progressBar.show(); // Set
+			 * the progress dialog to display a horizontal progress bar
+			 * progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			 * // Set the dialog title to 'Loading...'
+			 * progressDialog.setTitle("Loading..."); // Set the dialog message
+			 * to 'Loading application View, please // wait...' progressDialog
+			 * .setMessage("Loading application View, please wait..."); // This
+			 * dialog can't be canceled by pressing the back key
+			 * progressDialog.setCancelable(false); // This dialog isn't
+			 * indeterminate progressDialog.setIndeterminate(false); // The
+			 * maximum number of items is 100 progressDialog.setMax(100); // Set
+			 * the current progress to zero progressDialog.setProgress(0); //
+			 * Display the progress dialog progressDialog.show();
+			 */
+
+			progressBar.setVisibility(View.VISIBLE);
+
+		}
+
+		@Override
+		protected Void doInBackground(Void... arg0) {
+
+			// Process the data in background
+			// onCreateMainMenu(getWindow(), mainMenu);
+
+			try {
+				// Get the current thread's token
+				if (getIntent() != null) {
+					Intent intent = getIntent();
+					if (intent.getExtras() != null
+							&& intent.getExtras().containsKey(APP_EXIT_KEY)) {
+						exit = true;
+					}
+				}
+
+				OsmandApplication app = getMyApplication();
+				SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);
+				// IF first time
+				if (!pref.contains(FIRST_TIME_APP_RUN)) {
+					firstTime = true;
+					pref.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
+					pref.edit()
+							.putString(VERSION_INSTALLED,
+									Version.getFullVersion(app)).commit();
+
+					// Mete dialogs a dizer que se tiver instalado uma versão
+					// antiga
+					// passa a info, senão pede para sacar mapas
+					// NAO VAI SER USADO!
+
+					// applicationInstalledFirstTime();
+				}
+
+				// restore follow route mode
+				if (app.getSettings().FOLLOW_THE_ROUTE.get()
+						&& !app.getRoutingHelper().isRouteCalculated()) {
+					final Intent mapIndent = new Intent(mainMenu,
+							OsmandIntents.getMapActivity());
+					mapIndent.putExtra("FIRSTTIME", firstTime);
+					startActivityForResult(mapIndent, 0);
+					return null;
+				}
+
+				getMyApplication().checkApplicationIsBeingInitialized(mainMenu,
+						startProgressDialog);
+				synchronized (this) {
+
+					// Initialize an integer (that will act as a counter) to
+					// zero
+					int counter = 0;
+					// While the counter is smaller than four
+					while (counter <= 4) {
+						// Wait 850 milliseconds
+						this.wait(850);
+						// Increment the counter
+						counter++;
+						// Set the current progress.
+						// This value is going to be passed to the
+						// onProgressUpdate() method.
+						// publishProgress(counter * 25);
+					}
+				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			// close the progress dialog
+			// progressDialog.dismiss();
+			// initialize the View
+			// setContentView(R.layout.main);
+
+			final Intent mapIndent = new Intent(mainMenu,
+					OsmandIntents.getMapActivity());
+			mapIndent.putExtra("FIRSTTIME", firstTime);
+
+			mainMenu.startActivityForResult(mapIndent, 0);
+			progressBar.setVisibility(View.GONE);
+			// close this activity
+			finish();
+		}
+
+		// Update the progress
+		@Override
+		protected void onProgressUpdate(Integer... values) {
+			// set the current progress of the progress dialog
+			progressBar.setProgress(values[0]);
+		}
+
 	}
 
 }

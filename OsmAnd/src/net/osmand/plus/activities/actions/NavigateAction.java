@@ -186,15 +186,14 @@ public class NavigateAction {
 					+ getRoutePointDescription(targets.getPointToNavigate(),
 							targets.getPointNavigateDescription());
 
-			// String oname = name != null ? name :
-			// getRoutePointDescription(mapView.getLatitude(),
-			// mapView.getLongitude());
-			// String mapLocation =
-			// mapActivity.getString(R.string.route_descr_map_location) + " " +
-			// oname;
-
+			String oname = name != null ? name : getRoutePointDescription(
+					mapView.getLatitude(), mapView.getLongitude());
+			String mapLocation = mapActivity
+					.getString(R.string.route_descr_map_location) + " " + oname;
+			//mapActivity.getMapActions().KEY_DESTNAME = oname;
+			String destRota = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
 			destination.setText(mapActivity.getMapView().getContext()
-					.getString(R.string.destination_point, destinationText));
+					.getString(R.string.destination_point, oname));
 		}
 
 		// Preencher os detalhes se já ouver rota calculadoa
@@ -355,7 +354,7 @@ public class NavigateAction {
 					 * { nav = R.string.cancel_route; } else { nav =
 					 * R.string.clear_destination; }
 					 */
-					
+
 					mapActivity.getMapActions().stopNavigationActionConfirm(
 							mapActivity.getMapView());
 					stopRouteButton.setVisibility(View.GONE);

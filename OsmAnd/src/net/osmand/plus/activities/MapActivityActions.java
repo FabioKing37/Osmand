@@ -76,6 +76,7 @@ public class MapActivityActions implements DialogProvider {
 	public static final String KEY_NAME = "name";
 	public static final String KEY_FAVORITE = "favorite";
 	public static final String KEY_ZOOM = "zoom";
+	public String KEY_DESTNAME = "Destino";
 
 	private static final int DIALOG_ADD_FAVORITE = 100;
 	private static final int DIALOG_REPLACE_FAVORITE = 101;
@@ -484,6 +485,7 @@ public class MapActivityActions implements DialogProvider {
 		if (selectedObjName == null || selectedObjName.isEmpty()) {
 			name = mapActivity.getMapLayers().getContextMenuLayer()
 					.getSelectedObjectName();
+
 		}
 		String desc = selectedObjDesc;
 		if (selectedObjDesc == null || selectedObjDesc.isEmpty()) {
@@ -561,19 +563,31 @@ public class MapActivityActions implements DialogProvider {
 					loc.setLongitude(longitude);
 					// String name =
 					// mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
+					// String name = selectedObjName;
 					String name = selectedObjName;
+					//IF COORD
+					if (selectedObjName == null || selectedObjName.isEmpty()) {						
+						name = mapActivity.getMapLayers().getContextMenuLayer()
+								.getSelectedObjectName();
+					}
+					KEY_DESTNAME = name;
 					builder.dismiss();
 					new NavigateAction(mapActivity).getDirections(loc, name,
 							null, DirectionDialogStyle.create()
 									.routeToMapPoint());
 					// .gpxRouteEnabled()
 				} else {
-					// String name =
-					// mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
 					String name = selectedObjName;
+					if (selectedObjName == null || selectedObjName.isEmpty()) {
+						name = mapActivity.getMapLayers().getContextMenuLayer()
+								.getSelectedObjectName();
+					}
+					KEY_DESTNAME = name;
+					builder.dismiss();
+					mapActivity.getApp().getRoutingHelper().setFollowingMode(true);
 					targets.navigateToPoint(new LatLon(latitude, longitude),
 							true, -1, name);
-					builder.dismiss();
+					
 				}
 			}
 		});
@@ -835,7 +849,7 @@ public class MapActivityActions implements DialogProvider {
 
 		// ROUTE DIALOG
 		boolean routeCalculated = routingHelper.getFinalLocation() != null
-				&& routingHelper.isRouteCalculated();
+				|| routingHelper.isRouteCalculated();
 		if (routeCalculated) {
 			optionsMenuHelper
 					.item(routingHelper.isRouteCalculated() ? R.string.get_directions
@@ -855,9 +869,13 @@ public class MapActivityActions implements DialogProvider {
 								loc.setLongitude(routingHelper
 										.getFinalLocation().getLongitude());
 
-								String name = mapActivity.getMapLayers()
-										.getContextMenuLayer()
-										.getSelectedObjectName();
+								String name = KEY_DESTNAME;
+								if (!(name != null)) {
+									name = mapActivity.getMapLayers()
+											.getContextMenuLayer()
+											.getSelectedObjectName();
+								}
+
 								String routeInfo = routingHelper
 										.getGeneralRouteInformationForDialog();
 								new NavigateAction(mapActivity).getDirections(
@@ -1066,15 +1084,15 @@ public class MapActivityActions implements DialogProvider {
 							boolean isChecked, DialogInterface dialog) {
 						// 1. Work for almost all cases when user open apps from
 						// main menu
-						Intent newIntent = new Intent(mapActivity,
+						/*Intent newIntent = new Intent(mapActivity,
 								OsmandIntents.getMainMenuActivity());
 						newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						newIntent.putExtra(MainMenuActivity.APP_EXIT_KEY,
 								MainMenuActivity.APP_EXIT_CODE);
-						mapActivity.startActivity(newIntent);
+						mapActivity.startActivity(newIntent);*/
 						// In future when map will be main screen this should
 						// change
-						// app.closeApplication(mapActivity);
+					 app.closeApplication(mapActivity);
 					}
 				}).reg();
 		return optionsMenuHelper;

@@ -103,7 +103,7 @@
     <string name="error_reading_gpx">Erro na leitura de dados GPX</string>
     <string name="vector_data">Mapas vetoriais offline</string>
     <string name="transport_context_menu">Procurar transporte na parada</string>
-    <string name="point_on_map">Localização:\n \tLatitude: %1$.5f\n \tLongitude %2$.5f</string>
+    <string name="point_on_map">\tLocalização:\n \tLatitude: %1$.5f\n \tLongitude %2$.5f</string>
     <string name="point_on_map_poi">\n %1$s \n</string>
     <string name="osb_bug_name">Bug</string>
     <string name="poi_context_menu_modify">Modificar POI</string>
@@ -1125,7 +1125,7 @@ Quer seguir uma trilha GPX ?</string>
     <string name="files_limit">Restando %1$d arquivos</string>
     <string name="available_downloads_left">Disponível %1$d arquivos para download</string>
     <string name="install_paid">Versão completa</string>
-    <string name="cancel_route">Descartar rota</string>
+    <string name="cancel_route">Cancelar rota</string>
     <string name="cancel_navigation">Parar</string>
     <string name="tip_recent_changes_1_1_4_t">"Mudanças em 1.1.4: ↵
       \n→* Interface do usuário redesenhada ↵

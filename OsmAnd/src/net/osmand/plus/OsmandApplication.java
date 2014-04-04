@@ -311,10 +311,10 @@ public class OsmandApplication extends Application implements ClientContext {
 					error.show();
 				}
 
-				progressDialog.setTitle(getString(R.string.loading_data));
+			/*	progressDialog.setTitle(getString(R.string.loading_data));
 				progressDialog.setMessage(getString(R.string.reading_indexes));
 				activity.showDialog(PROGRESS_DIALOG);
-				startDialog.setDialog(progressDialog);
+				startDialog.setDialog(progressDialog);*/
 				
 				
 			} else if (startingWarnings != null) {

@@ -63,7 +63,7 @@
     <string name="index_settings_descr">Obter ou atualizar dados para uso offline</string>
     <string name="index_settings">Dados offline</string>
     <string name="osmand_service">Serviço de segundo plano</string>
-    <string name="osmand_service_descr">Executar o serviço de segundo plano para usar OsmAnd enquanto a tela está desligada</string>
+    <string name="osmand_service_descr">Executar o serviço de segundo plano para usar MapnGo enquanto a tela está desligada</string>
     <string name="fast_route_mode">Caminho mais rápido</string>
     <string name="fast_route_mode_descr">Ative para calcular a rota mais rápida ou desative para calcular a rota mais curta </string>
     <string name="tiles_to_download_estimated_size">Zoom {0}: baixar {1} imagens ({2} MB )</string>
@@ -142,7 +142,7 @@
     <string name="background_service_wait_int">Tempo de espera</string>
     <string name="service_stop_background_service">Desligar serviço de segundo plano de navegação</string>
     <string name="where_am_i">Onde estou?</string>
-    <string name="process_navigation_service">Serviço de navegação OsmAnd</string>
+    <string name="process_navigation_service">Serviço de navegação MapnGo</string>
     <string name="network_provider">Rede</string>
     <string name="gps_provider">GPS</string>
     <string name="int_seconds">segundos</string>
@@ -181,7 +181,7 @@
     <string name="route_head">Vá</string>
     <string name="first_time_continue">Continuar</string>
     <string name="first_time_download">Download de regiões</string>
-    <string name="first_time_msg">Obrigado por escolher OsmAnd. Para utilizar todos os recursos do aplicativo, você necessita de alguns dados regionais, que você pode baixar \'Configurações\'-&gt;	…\'Dados\' ou preparar você mesmo. Depois, Você poderá procurar por um endereço, um Ponto de Interesse (POI), ou um meio de transporte público.</string>
+    <string name="first_time_msg">Obrigado por escolher MapnGo. Para utilizar todos os recursos do aplicativo, você necessita de alguns dados regionais, que você pode baixar \'Configurações\'-&gt;	…\'Dados\' ou preparar você mesmo. Depois, Você poderá procurar por um endereço, um Ponto de Interesse (POI), ou um meio de transporte público.</string>
     <string name="search_poi_location">Procurando um sinal…</string>
     <string name="search_near_map">Procure perto do último local conhecido</string>
     <string name="search_nearby">Busca nas proximidades</string>
@@ -207,7 +207,7 @@
     <string name="default_buttons_ok">OK</string>
     <string name="show_transport_over_map_description">Ver as paradas de transportes públicos no mapa</string>
     <string name="show_transport_over_map">Mostrar paradas de transportes</string>
-    <string name="hello">Aplicação de navegação OsmAnd</string>
+    <string name="hello">Aplicação de navegação MapnGo</string>
     <string name="update_poi_success">Atualização com sucesso dos POI ({0} foram carregados)</string>
     <string name="update_poi_error_local">Erro ao atualizar o índice local</string>
     <string name="update_poi_error_loading">Erro ao carregar dados do servidor</string>
@@ -262,15 +262,15 @@
     <string name="opening_changeset">Abrindo conjunto de mudanças…</string>
     <string name="closing_changeset">Fechando conjunto de mudanças…</string>
     <string name="commiting_node">Enviando nó…</string>
-    <string name="loading_poi_obj">Carregando Ponto de Interesse…</string>
+    <string name="loading_poi_obj">A carregar Ponto de Interesse…</string>
     <string name="auth_failed">Falha na autorização</string>
     <string name="failed_op">Falha</string>
     <string name="converting_names">Convertendo nomes em inglês…</string>
-    <string name="loading_streets_buildings">Carregando ruas/prédios…</string>
-    <string name="loading_postcodes">Carregando códigos postais…</string>
-    <string name="loading_streets">Carregando ruas…</string>
-    <string name="loading_cities">Carregando cidades…</string>
-    <string name="loading">Carregando…</string>
+    <string name="loading_streets_buildings">A carregar ruas/prédios…</string>
+    <string name="loading_postcodes">A carregar códigos postais…</string>
+    <string name="loading_streets">A carregar ruas…</string>
+    <string name="loading_cities">A carregar cidades…</string>
+    <string name="loading">A carregar…</string>
     <string name="poi">POI</string>
     <string name="error_occurred_saving_gpx">Erro ao gravar GPX</string>
     <string name="error_calculating_route">Erro de calculando a rota</string>
@@ -279,9 +279,9 @@
     <string name="new_route_calculated_dist">Nova rota calculada, distância</string>
     <string name="arrived_at_destination">Você alcançou o seu destino</string>
     <string name="invalid_locations">Locais inválidos!</string>
-    <string name="go_back_to_osmand">Voltar ao mapa do OsmAnd</string>
+    <string name="go_back_to_osmand">Voltar ao mapa do MapnGo</string>
     <string name="close">Fechar</string>
-    <string name="loading_data">Carregando dados…</string>
+    <string name="loading_data">A carregar dados…</string>
     <string name="reading_indexes">Lendo dados locais…</string>
     <string name="previous_run_crashed">Uma execução anterior da aplicação foi interrompida inesperadamente. O arquivo de log encontra-se em {0}. Por favor, informe o problema e inclua o arquivo de log.</string>
     <string name="saving_gpx_tracks">Salvando trilhas GPX no cartão SD…</string>
@@ -444,7 +444,7 @@
     <string name="transport_search_desc">Transport search</string>
     <string name="favourites_search_desc">Pesquisar favoritos</string>
     <string name="history_search_desc">Histórico de Pesquisas</string>
-    <string name="offline_navigation_not_available">Navegação OsmAnd offline está temporariamente indisponível.</string>
+    <string name="offline_navigation_not_available">Navegação MapnGo offline está temporariamente indisponível.</string>
     <string name="left_side_navigation">Conduzir do lado esquerdo</string>
     <string name="left_side_navigation_descr">Selecione para países com tráfego à esquerda</string>
     <string name="download_link_and_local_description">Clique aqui para obter ou actualizar dados offline.\nClique em qualquer item existente para ver mais detalhes, pressione e segure para desactivar ou apagar. Dados actuais no dispositivo (%1$s livre):</string>
@@ -461,7 +461,7 @@
     <string name="online_map_settings_descr">Configurar fontes de mosaicos ou de mapas on-line</string>
     <string name="map_settings">- Map Settings</string>
     <string name="map_settings_descr">Configure a exibição do mapa</string>
-    <string name="osmand_rastermaps_plugin_description">This plugin facilitates using a variety of online or cached tile maps as base map or as overlay / underlay maps. These maps can also be prepared offline and copied to the OsmAnd folder.</string>
+    <string name="osmand_rastermaps_plugin_description">This plugin facilitates using a variety of online or cached tile maps as base map or as overlay / underlay maps. These maps can also be prepared offline and copied to the MapnGo folder.</string>
     <string name="osmand_background_plugin_description">This plugin allows tracking or navigation in sleep (screen off) mode by periodically waking up the GPS device.</string>
     <string name="osmand_accessibility_description">This plugin configures special accessibility features.</string>
     <string name="extra_settings">Configurações avançadas</string>
@@ -469,7 +469,7 @@
     <string name="osmand_extra_settings_description">This plugin provides advanced map configuration and some device-specific settings.</string>
     <string name="osmand_development_plugin_description">This plugin enables development and debugging features like animated navigation or rendering performance display.</string>
     <string name="plugins_screen">Plugin Manager</string>
-    <string name="select_plugin_to_activate">Toque num Plugin para o activar ou desactivar. (Pode ser necessária reiniciar o OsmAnd)</string>
+    <string name="select_plugin_to_activate">Toque num Plugin para o activar ou desactivar. (Pode ser necessária reiniciar o MapnGo)</string>
     <string name="prefs_plugins_descr">Plugins activam as configurações avançadas e funcionalidades adicionais</string>
     <string name="prefs_plugins">Plugin Manager</string>
     <string name="tip_recent_changes_0_8_0_t">Alterações na 0.8.0: 
@@ -486,7 +486,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="osm_editing_plugin_description">This plugin facilitates OSM feedback like collecting / modifying OSM POI objects, opening / commenting OSM bugs, and contributing recorded GPX files (requires OSM credentials).</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Mapas vectoriais são visualizados mais rápido. Podem não funcionar bem em alguns dispositivos.</string>
     <string name="play_commands_of_currently_selected_voice">Tocar comandos de voz actualmente seleccionada</string>
-    <string name="debugging_and_development">Desenvolvimento OsmAnd</string>
+    <string name="debugging_and_development">Desenvolvimento MapnGo</string>
     <string name="native_rendering">Renderização nativa</string>
     <string name="test_voice_prompts">Testar comandos de voz</string>
     <string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Offline data), or switch to online maps.</string>
@@ -610,7 +610,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="binary_map_download_success">Download bem sucedido.\n\t\n\tAtive para usar: \'Configurações\' -&gt; \'Configuração do Mapa\' -&gt; \'Mapas Offline\'.</string>
     <string name="tip_day_night_mode">Modo Dia/Noite</string>
     <string name="tip_osm_improve">Melhorar dados OSM</string>
-    <string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and navigation- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks! \n\tFor this you need to first provide your OSM login information in \'Settings\' -&gt; \'General settings\' -&gt; \'OSM Editing\'. \n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it. \n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem. \n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button. \n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
+    <string name="tip_osm_improve_t">\tMapnGo uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and navigation- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks! \n\tFor this you need to first provide your OSM login information in \'Settings\' -&gt; \'General settings\' -&gt; \'OSM Editing\'. \n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it. \n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem. \n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button. \n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
     <string name="download_files_not_enough_space">Espaço livre insuficiente, precisa de %1$s MB (só tem: %2$s disponíveis).</string>
     <string name="download_files_question_space">Agora tem {2} MB de espaço livre! Quer fazer o download de {0} arquivo(s) ({1} MB)?</string>
     <string name="tip_select_destination_point">Escolha o destino</string>
@@ -663,7 +663,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="search_position_map_view">Última vista do mapa</string>
     <string name="select_search_position">Search near :</string>
     <string name="context_menu_item_search">Pesquisar aqui perto</string>
-    <string name="tip_recent_changes_0_6_7_t">"Recent changes for 0.6.7 : \n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd) \n\t- Favorite points and groups (categorize, delete, manage favorites) \n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.) \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts) \n\t- Function to save route as GPX track for offline use \n\t- Improve GPX monitoring (filter some inaccurate position and save accuracy/elevation/speed) \n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/) \n\t- Improve vector rendering \n\t- Improvement of TTS engine (announce exact distance, enable miles) \n\t- Bug fixes "</string>
+    <string name="tip_recent_changes_0_6_7_t">"Recent changes for 0.6.7 : \n\t- Offline data manager (download, delete, activate / deactivate offline data directly in MapnGo) \n\t- Favorite points and groups (categorize, delete, manage favorites) \n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.) \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts) \n\t- Function to save route as GPX track for offline use \n\t- Improve GPX monitoring (filter some inaccurate position and save accuracy/elevation/speed) \n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/) \n\t- Improve vector rendering \n\t- Improvement of TTS engine (announce exact distance, enable miles) \n\t- Bug fixes "</string>
     <string name="save_route_dialog_title">Guardar a rota como trilha GPX</string>
     <string name="route_successfully_saved_at">Rota guardada como \'%1$s\'.</string>
     <string name="filename_input">O nome do arquivo : </string>
@@ -750,7 +750,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="internet_not_available">Precisa de ligação à Internet para essa operação</string>
     <string name="install_more">Instalar mais…</string>
     <string name="tip_update_index">Atualização de mapas offline</string>
-    <string name="tip_update_index_t">Up-to -date dados de mapa é essencial para a visão do mapa off-line, para POI / endereço de pesquisa , e para a navegação offline. OsmAnd fornece um gerenciador de dados para baixar os mapas off-line ( e alguns outros arquivos de dados) , e para verificar se há atualizações disponíveis. 
+    <string name="tip_update_index_t">Up-to -date dados de mapa é essencial para a visão do mapa off-line, para POI / endereço de pesquisa , e para a navegação offline.  fornece um gerenciador de dados para baixar os mapas off-line ( e alguns outros arquivos de dados) , e para verificar se há atualizações disponíveis. 
 		\n\n download de mapas ir a \'Configurações \' → \' Data Management \' \' → Download de dados off-line \' . 
 		\n\nDepois a lista região global está recuperado da internet, clique em qualquer entrada para baixar ou atualizar um arquivo . Por favor, note que o seletor de tipo de arquivo na parte superior da tela para selecionar o tipo de download que você quer ( mapas regulares , sobreposições hillshade , etc.) 
 		\n\nVocê pode filtrar a lista região digitando algumas letras , ou você pode selecionar a opção "Configurações \' → \' Filtro baixado \'para ver as atualizações somente para os dados já no seu dispositivo. 
@@ -782,7 +782,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="tip_map_context_menu">Map Context Menu</string>
     <string name="tip_map_context_menu_t">\tThe map context menu is available by pressing and holding on the map or by pressing the trackball button. \n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or press and hold on it to hide the box again.) \n\tThe map context menu contains all actions referring to a point (location).</string>
     <string name="tip_initial">Dicas e Truques</string>
-    <string name="tip_initial_t">"\tOsmAnd é um aplicativo de navegação com muitos recursos.
+    <string name="tip_initial_t">"\tMapnGo é um aplicativo de navegação com muitos recursos.
 \n\tComo uma introdução básica, algumas dicas de uso e truques estão acessíveis na tela principal (veja o ícone \'?\'). "</string>
     <string name="next_button">Próximo</string>
     <string name="previous_button">Anterior</string>
@@ -803,19 +803,19 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="add_waypoint_dialog_added">Ponto de trilha \'\'{0}\'\' foi adicionado com sucesso</string>
     <string name="add_waypoint_dialog_title">Acrescentar ponto à trilha GPX gravada</string>
     <string name="context_menu_item_add_waypoint">Acrescentar ponto GPX</string>
-    <string name="use_osmand_routing_service">OsmAnd navigação &gt;20km</string>
-    <string name="use_osmand_routing_service_descr">Navegação OsmAnd offline aplica-se apenas a rotas &gt; 20 km (experimental)</string>
+    <string name="use_osmand_routing_service">MapnGo navigação &gt;20km</string>
+    <string name="use_osmand_routing_service_descr">Navegação MapnGo offline aplica-se apenas a rotas &gt; 20 km (experimental)</string>
     <string name="osmand_routing_experimental">Navegação offline OamAnd é ainda uma função experimental e não funciona em distâncias superiores a cerca de 20 km.\n\nO Serviço Navegação está temporariamente mudado para CloudMade online.</string>
     <string name="specified_dir_doesnt_exist">Não foi possível encontrar diretório especificado.</string>
     <string name="application_dir">Local de Armazenamento</string>
-    <string name="application_dir_change_warning">Alterar o diretório de armazenamento não irá mover os dados para a nova pasta ou apagar os dados atuais. Isto deve ser realizado separadamente e fora do OsmAnd. Continuar mesmo assim?</string>
-    <string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by new the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
+    <string name="application_dir_change_warning">Alterar o diretório de armazenamento não irá mover os dados para a nova pasta ou apagar os dados atuais. Isto deve ser realizado separadamente e fora do MapnGo. Continuar mesmo assim?</string>
+    <string name="osmand_net_previously_installed">A previous MapnGo version is installed. All offline data will be supported by new the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
     <string name="build_installed">Build {0} instalado com sucesso ({1}).</string>
     <string name="downloading_build">Downloading build…</string>
-    <string name="install_selected_build">Você deseja instalar OsmAnd - {0} de {1} {2} MB ?</string>
-    <string name="loading_builds_failed">A busca da lista de OsmAnd builds falhou</string>
-    <string name="loading_builds">Carregando OsmAnd builds…</string>
-    <string name="select_build_to_install">Select one of the OsmAnd builds to install</string>
+    <string name="install_selected_build">Você deseja instalar MapnGo - {0} de {1} {2} MB ?</string>
+    <string name="loading_builds_failed">A busca da lista de MapnGo builds falhou</string>
+    <string name="loading_builds">A carregar MapnGo builds…</string>
+    <string name="select_build_to_install">Select one of the MapnGo builds to install</string>
     <string name="contribution_activity">Special activity for contribution version</string>
     <string name="navigate_point_format_D">DDD.DD</string>
     <string name="navigate_point_format_DM">DDD MM.MM</string>
@@ -925,8 +925,8 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="tip_recent_changes_0_8_3_t">Alterações em 0.8.3:\n\t* Pontos de rota intermédios\n\t* Melhoria na orientação de rota\n\t* Adicionada opção que permite evitar auto-estradas ao planear a rota\n\t* Adicionado mais um tipo de via para bicicletas no mapa (Cycleway=track)\n\t* Correções de erros</string>
     <string name="snap_to_road_descr">Encaixe posição de estradas durante a navegação</string>
     <string name="snap_to_road">Ajustar à estrada</string>
-    <string name="osmand_short_description_80_chars">OsmAnd é uma aplicação de navegação de código aberto para mapas offline e online</string>
-    <string name="osmand_plus_short_description_80_chars">OsmAnd é uma aplicação de navegação de código aberto para mapas offline e online</string>
+    <string name="osmand_short_description_80_chars">MapnGo é uma aplicação de navegação de código aberto para mapas offline e online</string>
+    <string name="osmand_plus_short_description_80_chars">MapnGo é uma aplicação de navegação de código aberto para mapas offline e online</string>
     <string name="filterpoi_activity">Criar filtro de POI</string>
     <string name="select_navigation_mode">Selecione o modo de transporte</string>
     <string name="day_night_info_description">Nascer do sol: %1$s
@@ -1216,7 +1216,7 @@ Clique no widget de medição para ver mais ações.</string>
 		\n\tUma melhor aproximação para esses sistmas locais é a referêncai EGM96. OsmAnd agora tamb[em suporta a exibição automática de altitudes no sistema EGM96.
 		\n\tPara obtê-lo, façao o download do arquivo WW15MGH.DAC via Gerenciamento de Dados (original em http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).</string>
     <string name="monitoring_control_start">GPX</string>
-    <string name="osmand_play_title_30_chars">Mapas OsmAnd &amp; Navegação</string>
+    <string name="osmand_play_title_30_chars">Mapas MapnGo &amp; Navegação</string>
     <string name="osmand_extended_description_4000_chars">OsmAnd (OSM Automated Navigation Directions) is a map and navigation application with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data. All map data can be stored on your device\'s memory card for offline use. Via your device\'s GPS, OsmAnd offers routing, with optical and voice guidance, for car, bike, and pedestrian. All the main functionalities work both online and offline (no internet needed).
 
 Algumas das principais funcionalidades:
@@ -1289,8 +1289,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmand_plus_play_title_30_chars">Mapas OsmAnd+ &amp; Navegação</string>
     <string name="tip_map_switch_t_v2">\tO caminho dos mapas e camadas mostradas são mudados via \'Menu\' -&gt; \'Definir vista\' em vista de mapa.
 \n\tem \'Caminho dos maps…\' você pode escolhe usar os mapas vetoriais offline pré-carregados, predefined (online) tile sources (ative o plugin \'Online and tile maps\' para isso), ou mapas criados manualmente usando, por exemplo OsmAndMapCreator em um PC.
-→→\n\tOsmAnd também suporta fontes customizadas.</string>
-    <string name="tip_app_mode_t_v2">\tOsmAnd suporta diferentes (personalizáveis) perfis de aplicação para diferentes ussos.
+→→\n\tMapnGo também suporta fontes customizadas.</string>
+    <string name="tip_app_mode_t_v2">\tMapnGo suporta diferentes (personalizáveis) perfis de aplicação para diferentes ussos.
 \n\tVocê pode mudar os perfis via botão perfil no canto inferior esquerdo da tela do mapa (ícone do carro, bicicleta ou pedestre) ou quando criando uma rota.</string>
     <string name="downloading_file_new">Fazendo o download…</string>
     <string name="osb_author_dialog_password">Password do OSM (opcional)</string>
@@ -1439,7 +1439,7 @@ Cobertura do mapa aproximado e qualidade: ↵
 Lista dos países apoiado (basicamente todo o mundo !) : ↵
 Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbuda, Argentina , Armênia , Aruba, Austrália, Áustria, Azerbaijão , Bahamas , Bahrein, Bangladesh , Barbados, Belarus , Bélgica , Belize, Benin , Bermudas , Butão, Bolívia, Bonaire, Bósnia e Herzegovina , Botswana, Brasil , Ilhas Virgens Britânicas , Brunei, Bulgária , Burkina Faso , Burundi, Camboja , Camarões , Canadá , Cabo Verde, República Centro Africano , Chade, Chile , China, Colombia , Comoros , Congo , Costa Rica , Costa do Marfim , Croácia , Cuba, Curaçao, Chipre, República Checa , Dinamarca , Djibuti, Dominica, República Dominicana, Equador , Egito, El Salvador, Guiné Equatorial , Eritréia, Estônia , Etiópia , Fiji, Finlândia, França, Guiana Francesa, Polinésia , Gabão, Gâmbia, Geórgia , Alemanha , Gana, Gibraltar , Grécia, Greenland , Grenada , Guadalupe , Guam , Guatemala, Guernsey , Guiné , Guiné-Bissau , Guiana , Haiti, Vaticano , Honduras , Hong Kong, Hungria, Islândia, Índia , Indonésia , Irã, Iraque , Irlanda, Ilha de Man , Israel, Itália , Jamaica, Japão , Jersey , Jordânia, Cazaquistão , Quênia , Kiribati , Coréia do Norte e Coréia do Sul , Kuwait, Quirguistão , Laos, Letônia , Líbano , Lesoto, Libéria , Líbia, Liechtenstein , Lituânia, Luxemburgo , Macau, Macedónia , Madagáscar, Malawi , Malásia, Maldivas , Mali, Malta , Martinica, Mauritânia, Maurícias , Mayotte , México, Micronésia, Moldávia , Mônaco , Mongólia , Montenegro, Montserrat, Marrocos, Moçambique , Myanmar, Namíbia , Nauru , Nepal, Holanda , Antilhas Holandesas , Nova Caledônia , Nova Zelândia, Nicarágua , Níger, Nigéria , Noruega , Omã, Paquistão , Palau, Território da Palestina , Panamá , Papua Nova Guiné, Paraguai , Peru, Filipinas, Polônia , Portugal , Porto Rico , Qatar, Romênia, Rússia, Ruanda, Saint Barthelemy , Santa Helena , São Cristóvão e Nevis , Santa Lúcia, Saint Martin, Saint Pierre e Miquelon , São Vicente e Granadinas, Samoa , San Marino , Arábia Saudita, Senegal , Sérvia , Seychelles, Serra Leoa, Cingapura , Eslováquia, Eslovênia , Somália, África do Sul, Geórgia do Sul , Sudão do Sul, Espanha , Sri Lanka , Sudão, Suriname , Suazilândia , Suécia, Suíça , Síria, Taiwan , Tajiquistão, Tanzânia, Tailândia , Timor -Leste , Togo, Tokelau , Tonga , Trinidad e Tobago , Tunísia, Turquia , Turcomenistão, Tuvalu , Uganda, Ucrânia , Emirados Árabes Unidos , Reino Unido (UK) , Estados Unidos da América (EUA), Uruguai , Uzbequistão , Vanuatu , Venezuela, Vietnam , Wallis e Futuna , Saara Ocidental , Yemen , Zâmbia, Zimbabwe. ↵
 →</string>
-    <string name="tip_map_styles_t">OsmAnd suporta exibindo os mapas offline vetor em diferentes estilos de mapas às suas necessidades para: ↵
+    <string name="tip_map_styles_t">MapnGo suporta exibindo os mapas offline vetor em diferentes estilos de mapas às suas necessidades para: ↵
 → → \ n \ NOTHER que o \ "default \" estilo mapa equilibrado, você pode, em \'Menu \' → \'Configurar tela \' → \'Map Style \' escolha por exemplo ↵
 → → \ n \ t * O \'Touring vista \' estilo, que contém as informações mais detalhadas feasable para viagens e turismo, incluindo a optimização dos motoristas profissionais (maior contraste, estradas distintas), as opções para caminhadas Alpine (escala SAC), ciclovias, apoio símbolo caminhadas, etc ↵
 → → \ n \ t * \'estradas de alto contraste \' mostra estradas em cores muito acentuadas para situações de iluminação ambiente brilhantes ↵
@@ -1455,7 +1455,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="gps_status_eclipsim">Status GPS</string>
     <string name="default_and">e</string>
     <string name="default_or">ou</string>
-    <string name="route_is_too_long">A rota é, possivelmente, demasiado longa para ser calculado pelo router offline OsmAnd. ↵
+    <string name="route_is_too_long">A rota é, possivelmente, demasiado longa para ser calculado pelo router offline MapnGo. ↵
       → Em média, o encaminhamento off-line é possível apenas entre os pontos de até 200 km de distância. Por favor, adicione um ou mais pontos intermédios ao calcular a rota.↵</string>
     <string name="osmodroid_refresh">Actualizar canais</string>
 

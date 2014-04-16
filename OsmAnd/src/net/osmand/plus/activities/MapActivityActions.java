@@ -10,6 +10,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.AndroidUtils;
@@ -38,6 +40,7 @@ import net.osmand.plus.activities.actions.NavigateAction;
 import net.osmand.plus.activities.actions.NavigateAction.DirectionDialogStyle;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.activities.search.SearchPOIActivity;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
@@ -542,13 +545,34 @@ public class MapActivityActions implements DialogProvider {
 		poiButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				
 				Intent intent = new Intent(mapActivity, OsmandIntents
 						.getSearchActivity());
-				intent.putExtra(SearchActivity.SEARCH_LAT, latitude);
-				intent.putExtra(SearchActivity.SEARCH_LON, longitude);
+				Intent intent2 = new Intent(mapActivity, SearchPOIActivity.class);
+				intent2.putExtra(SearchActivity.SEARCH_LAT, latitude);
+				intent2.putExtra(SearchActivity.SEARCH_LON, longitude);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				builder.dismiss();
-				mapActivity.startActivity(intent);
+				
+			/*	LatLon loc = null;
+				boolean searchAround = false;
+				SherlockFragmentActivity parent = getSherlockActivity();
+				if (loc == null && parent instanceof SearchActivity) {
+					loc = ((SearchActivity) parent).getSearchPoint();
+					searchAround = ((SearchActivity) parent)
+							.isSearchAroundCurrentLocation();
+				}
+				if (loc == null && !searchAround) {
+					loc = mapActivity.getApp().getSettings().getLastKnownMapLocation();
+				}
+				if (loc != null && !searchAround) {
+					intent2.putExtra(SearchActivity.SEARCH_LAT,
+							loc.getLatitude());
+					intent2.putExtra(SearchActivity.SEARCH_LON,
+							loc.getLongitude());
+				}
+				*/
+				mapActivity.startActivity(intent2);
 			}
 		});
 
@@ -565,8 +589,8 @@ public class MapActivityActions implements DialogProvider {
 					// mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
 					// String name = selectedObjName;
 					String name = selectedObjName;
-					//IF COORD
-					if (selectedObjName == null || selectedObjName.isEmpty()) {						
+					// IF COORD
+					if (selectedObjName == null || selectedObjName.isEmpty()) {
 						name = mapActivity.getMapLayers().getContextMenuLayer()
 								.getSelectedObjectName();
 					}
@@ -584,10 +608,11 @@ public class MapActivityActions implements DialogProvider {
 					}
 					KEY_DESTNAME = name;
 					builder.dismiss();
-					mapActivity.getApp().getRoutingHelper().setFollowingMode(true);
+					mapActivity.getApp().getRoutingHelper()
+							.setFollowingMode(true);
 					targets.navigateToPoint(new LatLon(latitude, longitude),
 							true, -1, name);
-					
+
 				}
 			}
 		});
@@ -821,31 +846,7 @@ public class MapActivityActions implements DialogProvider {
 		 * .backToLocationImpl(); } } }).reg();
 		 */
 		// 2-4. Navigation related (directions, mute, cancel navigation)
-		boolean muteVisible = routingHelper.getFinalLocation() != null
-				&& routingHelper.isFollowingMode();
-		// Mute
-		if (muteVisible) {
-			boolean mute = routingHelper.getVoiceRouter().isMute();
-			int t = mute ? R.string.menu_mute_on : R.string.menu_mute_off;
-			int icon;
-			int iconLight;
-			if (mute) {
-				icon = R.drawable.a_10_device_access_volume_muted_dark;
-				iconLight = R.drawable.a_10_device_access_volume_muted_dark;
-			} else {
-				icon = R.drawable.a_10_device_access_volume_on_dark;
-				iconLight = R.drawable.a_10_device_access_volume_on_dark;
-			}
-			optionsMenuHelper.item(t).icons(icon, iconLight)
-					.listen(new OnContextMenuClick() {
-						@Override
-						public void onContextMenuClick(int itemId, int pos,
-								boolean isChecked, DialogInterface dialog) {
-							routingHelper.getVoiceRouter().setMute(
-									!routingHelper.getVoiceRouter().isMute());
-						}
-					}).reg();
-		}
+		
 
 		// ROUTE DIALOG
 		boolean routeCalculated = routingHelper.getFinalLocation() != null
@@ -1084,15 +1085,17 @@ public class MapActivityActions implements DialogProvider {
 							boolean isChecked, DialogInterface dialog) {
 						// 1. Work for almost all cases when user open apps from
 						// main menu
-						/*Intent newIntent = new Intent(mapActivity,
-								OsmandIntents.getMainMenuActivity());
-						newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						newIntent.putExtra(MainMenuActivity.APP_EXIT_KEY,
-								MainMenuActivity.APP_EXIT_CODE);
-						mapActivity.startActivity(newIntent);*/
+						/*
+						 * Intent newIntent = new Intent(mapActivity,
+						 * OsmandIntents.getMainMenuActivity());
+						 * newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						 * newIntent.putExtra(MainMenuActivity.APP_EXIT_KEY,
+						 * MainMenuActivity.APP_EXIT_CODE);
+						 * mapActivity.startActivity(newIntent);
+						 */
 						// In future when map will be main screen this should
 						// change
-					 app.closeApplication(mapActivity);
+						app.closeApplication(mapActivity);
 					}
 				}).reg();
 		return optionsMenuHelper;
@@ -1112,6 +1115,8 @@ public class MapActivityActions implements DialogProvider {
 			// restore default mode
 			settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE
 					.get());
+			getTargets().clearPointToNavigate(true);
+			mapView.refreshMap();
 		} else {
 			getTargets().clearPointToNavigate(true);
 			mapView.refreshMap();

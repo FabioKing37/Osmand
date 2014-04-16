@@ -12,6 +12,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -190,15 +191,12 @@ public class NavigateAction {
 					mapView.getLatitude(), mapView.getLongitude());
 			String mapLocation = mapActivity
 					.getString(R.string.route_descr_map_location) + " " + oname;
-			//mapActivity.getMapActions().KEY_DESTNAME = oname;
-			String destRota = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
+			// mapActivity.getMapActions().KEY_DESTNAME = oname;
+			String destRota = mapActivity.getMapLayers().getContextMenuLayer()
+					.getSelectedObjectName();
 			destination.setText(mapActivity.getMapView().getContext()
 					.getString(R.string.destination_point, oname));
 		}
-
-		// Preencher os detalhes se já ouver rota calculadoa
-		// TextView txt = (TextView)
-		// builderDialog.findViewById(R.id.routeDetails);
 
 		final CheckBox nonoptimal = (CheckBox) builderDialog
 				.findViewById(R.id.OptimalCheckox);
@@ -277,6 +275,96 @@ public class NavigateAction {
 			}
 		}
 
+		final ImageButton muteButton = (ImageButton) builderDialog
+				.findViewById(R.id.ImageButtonMute);
+		boolean muteVisible = mapActivity.getRoutingHelper().getFinalLocation() != null
+				&& mapActivity.getRoutingHelper().isFollowingMode();
+		// Mute
+		if (muteVisible) {
+			muteButton.setVisibility(View.VISIBLE);
+			boolean mute = mapActivity.getRoutingHelper().getVoiceRouter()
+					.isMute();
+
+			int iconLight;
+			if (mute) {
+
+				iconLight = R.drawable.a_10_device_access_volume_muted_dark;
+			} else {
+
+				iconLight = R.drawable.a_10_device_access_volume_on_dark;
+			}
+			muteButton.setImageResource(iconLight);
+			muteButton.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+
+					// Button Mute
+					mapActivity
+							.getRoutingHelper()
+							.getVoiceRouter()
+							.setMute(
+									!mapActivity.getRoutingHelper()
+											.getVoiceRouter().isMute());
+					boolean mute = mapActivity.getRoutingHelper()
+							.getVoiceRouter().isMute();
+					int iconLight;
+					if (mute) {
+						iconLight = R.drawable.a_10_device_access_volume_muted_dark;
+					} else {
+
+						iconLight = R.drawable.a_10_device_access_volume_on_dark;
+					}
+					muteButton.setImageResource(iconLight);
+
+				}
+			});
+
+		}
+		final ImageButton prefButton = (ImageButton) builderDialog
+				.findViewById(R.id.ImageButtonPref);
+		ApplicationMode mode = getAppMode(buttons, settings, values);
+		if (mode != ApplicationMode.CAR) {
+			// Disable options
+			prefButton.setClickable(false);
+
+		} else {
+			prefButton.setClickable(true);
+
+			final String[] vals = new String[] {
+					getString(R.string.avoid_toll_roads),
+					getString(R.string.avoid_ferries),
+					getString(R.string.avoid_motorway) };
+			@SuppressWarnings("unchecked")
+			final OsmandPreference<Boolean>[] prefs = new OsmandPreference[] {
+					settings.AVOID_TOLL_ROADS, settings.AVOID_FERRIES,
+					settings.AVOID_MOTORWAY };
+
+			final Builder bld = new AlertDialog.Builder(mapActivity);
+			final boolean[] checkedItems = new boolean[prefs.length];
+			for (int i = 0; i < prefs.length; i++) {
+				checkedItems[i] = prefs[i].get();
+			}
+			prefButton.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					
+					bld.setMultiChoiceItems(vals, checkedItems,
+							new OnMultiChoiceClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which, boolean isChecked) {
+									prefs[which].set(isChecked);
+								}
+							});
+					bld.show();
+
+				}
+			});
+			// Abrir alertDialog
+
+		}
+
 		// BUTTONS
 
 		// adding button click event
@@ -342,18 +430,6 @@ public class NavigateAction {
 			stopRouteButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-
-					/*
-					 * int nav; //
-					 * mapActivity.getMapActions().stopNavigationAction
-					 * (mapActivity.getMapView()); if
-					 * (mapActivity.getRoutingHelper().isFollowingMode()) { nav
-					 * = R.string.cancel_navigation; } else if
-					 * (mapActivity.getRoutingHelper().isRouteCalculated() ||
-					 * mapActivity.getRoutingHelper().isRouteBeingCalculated())
-					 * { nav = R.string.cancel_route; } else { nav =
-					 * R.string.clear_destination; }
-					 */
 
 					mapActivity.getMapActions().stopNavigationActionConfirm(
 							mapActivity.getMapView());

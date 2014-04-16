@@ -71,7 +71,8 @@ public class SearchPoiFilterActivity extends SherlockListFragment implements
 		filters.addAll(poiFilters.getTopStandardFilters());
 		filters.addAll(poiFilters.getUserDefinedPoiFilters());
 		filters.addAll(poiFilters.getOsmDefinedPoiFilters());
-		filters.add(poiFilters.getNameFinderPOIFilter());
+		//Online POI Nominatim
+		//filters.add(poiFilters.getNameFinderPOIFilter());
 		setListAdapter(new AmenityAdapter(filters));
 	}
 

@@ -71,6 +71,7 @@ public class FailSafeFuntions {
 									quitRouteRestoreDialog = true;
 									ma.getMapActions().stopNavigationAction(
 											ma.getMapView());
+									
 
 									notRestoreRoutingMode(ma, app);
 								}

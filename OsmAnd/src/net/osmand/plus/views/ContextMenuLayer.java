@@ -104,8 +104,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		closeButton.setClickable(true);
 
 		textView = new TextView(view.getContext());
-		lp = new LayoutParams( LayoutParams.WRAP_CONTENT,
-				LayoutParams.WRAP_CONTENT + BASE_TEXT_SIZE, Gravity.BOTTOM);
+		lp = new LayoutParams( LayoutParams.WRAP_CONTENT + BASE_TEXT_SIZE,
+				LayoutParams.WRAP_CONTENT, Gravity.BOTTOM);
 		textView.setLayoutParams(lp);
 		textView.setTextSize(15);
 		textView.setTextColor(Color.argb(255, 255, 255, 255));
@@ -124,7 +124,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		
 		textView.getBackground().getPadding(textPadding);
-		textView.setPadding(CLOSE_BTN, 0, 0, 0);
+		//textView.setPadding(CLOSE_BTN, 0, 0, 0);
 
 		// TODO: Botões
 		/*
@@ -172,7 +172,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					view.refreshMap();
 				} else if (c == 1) {
 					// make 2 line description
-					String des = "" + textView.getText();
+					String des = "\n" + textView.getText();
 					textView.setText(des);
 					layoutText();
 					view.refreshMap();
@@ -214,7 +214,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 			//textView.setText("\n" + description);
 		} else {
-			textView.setText(""); //$NON-NLS-1$
+			textView.setText("\n"); //$NON-NLS-1$
 		}
 		layoutText();
 	}

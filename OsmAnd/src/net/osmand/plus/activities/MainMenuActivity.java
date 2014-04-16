@@ -461,38 +461,15 @@ public class MainMenuActivity extends Activity {
 	// TODO: Splash Class
 	private class PrefetchData extends AsyncTask<Void, Integer, Void> {
 
-		// Spinner
-		// TextView
 		ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBarSplash);
-
-		// ProgressDialog startProgressDialog = new
-		// ProgressDialog(MainMenuActivity.this);
+		TextView textLoading = (TextView) findViewById(R.id.textViewLoading);
 
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
 
-			/*
-			 * // Create a new progress dialog progressDialog = new
-			 * ProgressDialog(MainMenuActivity.this);
-			 * progressBar.setMessage("Downloading Music :) ");
-			 * progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			 * progressBar.setIndeterminate(true); progressBar.show(); // Set
-			 * the progress dialog to display a horizontal progress bar
-			 * progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-			 * // Set the dialog title to 'Loading...'
-			 * progressDialog.setTitle("Loading..."); // Set the dialog message
-			 * to 'Loading application View, please // wait...' progressDialog
-			 * .setMessage("Loading application View, please wait..."); // This
-			 * dialog can't be canceled by pressing the back key
-			 * progressDialog.setCancelable(false); // This dialog isn't
-			 * indeterminate progressDialog.setIndeterminate(false); // The
-			 * maximum number of items is 100 progressDialog.setMax(100); // Set
-			 * the current progress to zero progressDialog.setProgress(0); //
-			 * Display the progress dialog progressDialog.show();
-			 */
-
 			progressBar.setVisibility(View.VISIBLE);
+			textLoading.setVisibility(View.VISIBLE);
 
 		}
 
@@ -550,7 +527,7 @@ public class MainMenuActivity extends Activity {
 					// While the counter is smaller than four
 					while (counter <= 4) {
 						// Wait 850 milliseconds
-						this.wait(850);
+						this.wait(550);
 						// Increment the counter
 						counter++;
 						// Set the current progress.
@@ -579,9 +556,12 @@ public class MainMenuActivity extends Activity {
 			mapIndent.putExtra("FIRSTTIME", firstTime);
 
 			mainMenu.startActivityForResult(mapIndent, 0);
-			progressBar.setVisibility(View.GONE);
+			
 			// close this activity
 			finish();
+			progressBar.setVisibility(View.GONE);
+			textLoading.setVisibility(View.GONE);
+			
 		}
 
 		// Update the progress

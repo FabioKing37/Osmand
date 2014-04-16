@@ -257,7 +257,8 @@ public class PoiFiltersHelper {
 			putValues(types, AmenityType.TOURISM, "information");
 			// Public Transports
 			putValues(types, AmenityType.SEAMARK, "harbor");
-			putValues(types, AmenityType.TRANSPORTATION, "fuel", "aerodrome",
+			putValues(types, AmenityType.TRANSPORTATION, "fuel",
+					"aerodrome",
 					"airport",
 					"car rental",
 					"ferry terminal",
@@ -273,12 +274,14 @@ public class PoiFiltersHelper {
 					"tram_stop",
 					"subway_entrance",
 					"railway_buffer_stop", // bus, cars, bicycle
-					"bus_stop", "platform", "ferry_terminal", "taxi",
+					"bus_stop", "platform", "ferry_terminal",
+					"taxi",
 					"bicycle_rental",
 					"bus_station",
 					"car_rental",
 					"car_sharing", // aero
-					"airport", "aerodrome", "terminal",
+					"airport", "aerodrome",
+					"terminal",
 					"aerialway_cable_car",
 					"aerialway_gondola", //
 					"aerialway_chair_lift", "aerialway_mixed_lift",
@@ -392,11 +395,39 @@ public class PoiFiltersHelper {
 		helper.close();
 	}
 
-	public List<PoiFilter> getOsmDefinedPoiFilters() {
+	public List<PoiFilter> getOsmDefinedPoiFilters2() {
 		if (cacheOsmDefinedFilters == null) {
 			cacheOsmDefinedFilters = new ArrayList<PoiFilter>();
 			for (AmenityType t : AmenityType.getCategories()) {
 				cacheOsmDefinedFilters.add(new PoiFilter(t, application));
+			}
+			final Collator instance = Collator.getInstance();
+			Collections.sort(cacheOsmDefinedFilters,
+					new Comparator<PoiFilter>() {
+						@Override
+						public int compare(PoiFilter object1, PoiFilter object2) {
+							return instance.compare(object1.getName(),
+									object2.getName());
+						}
+					});
+		}
+		return Collections.unmodifiableList(cacheOsmDefinedFilters);
+	}
+
+	// Remove filters obsolete with new user defined filters
+	public List<PoiFilter> getOsmDefinedPoiFilters() {
+		if (cacheOsmDefinedFilters == null) {
+			cacheOsmDefinedFilters = new ArrayList<PoiFilter>();
+			for (AmenityType t : AmenityType.getCategories()) {
+				if (!(t.getCategoryName().equals("osmwiki")
+						|| t.getCategoryName().equals("sport")
+						|| t.getCategoryName().equals("shop")
+						|| t.getCategoryName().equals("user_defined")
+						|| t.getCategoryName().equals("education")
+						|| t.getCategoryName().equals("geocache")
+						|| t.getCategoryName().equals("barrier") || t
+						.getCategoryName().equals("healthcare")))
+					cacheOsmDefinedFilters.add(new PoiFilter(t, application));
 			}
 			final Collator instance = Collator.getInstance();
 			Collections.sort(cacheOsmDefinedFilters,

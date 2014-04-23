@@ -318,8 +318,8 @@
     <string name="mark_point">Destino</string>
     <string name="show_osm_bugs_descr">Ver bugs OpenStreet no mapa</string>
     <string name="show_osm_bugs">Ver bugs OpenStreet</string>
-    <string name="favourites_activity">Lista dos pontos favoritos</string>
-    <string name="add_to_favourite">Adicionar aos Favoritos</string>
+    <string name="favourites_activity">Favoritos</string>
+    <string name="add_to_favourite">Adicionar Favorito</string>
     <string name="use_english_names_descr">Escolher entre os nomes nativos e inglês</string>
     <string name="use_english_names">Utilizar nomes em inglês</string>
     <string name="app_settings">Configurações da aplicação</string>
@@ -584,7 +584,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="tip_recent_changes_0_7_0_t">"Changes in 0.7.0 : \n\t- Offline wikipedia data with articles \n\t- Updated maps \n\t- Other small features "</string>
     <string name="free_version_message">Esta versão gratuita do OsmAnd é limitada a %1$s downloads e não suporta artigos off-line da Wikipedia.</string>
     <string name="free_version_title">Versão gratuita</string>
-    <string name="poi_context_menu_showdescription">Ver descritivo do POI</string>
+    <string name="poi_context_menu_showdescription">Descrição</string>
     <string name="index_name_north_america">América do Norte</string>
     <string name="index_name_us">América do Norte - Estados Unidos</string>
     <string name="index_name_central_america">América Central</string>
@@ -1172,7 +1172,7 @@ Quer seguir uma trilha GPX ?</string>
     <string name="context_menu_item_directions_to">Direções Para</string>
     <string name="context_menu_item_directions_from">Direções a partir De</string>
     <string name="route_descr_map_location">Mapa: </string>
-    <string name="route_descr_lat_lon">Latitude: %1$.3f\n Longitude: %2$.3f</string>
+    <string name="route_descr_lat_lon">Latitude: %1$.3f\nLongitude: %2$.3f</string>
     <string name="route_to">Para:</string>
     <string name="route_via">Via:</string>
     <string name="route_from">A partir:</string>

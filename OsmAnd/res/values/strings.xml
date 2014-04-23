@@ -109,7 +109,7 @@
     <string name="context_menu_item_directions_to">Directions To</string>
     <string name="context_menu_item_directions_from">Directions From</string>
     <string name="route_descr_map_location">Map: </string>
-    <string name="route_descr_lat_lon">Latitude: %1$.3f \n Longitude: %2$.3f</string>
+    <string name="route_descr_lat_lon">Latitude: %1$.3f \nLongitude: %2$.3f</string>
     <string name="route_descr_current_location">Current position</string>
     <string name="route_descr_destination"></string>
     <string name="route_to">To:</string>
@@ -870,7 +870,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t- Other small features</string>
     <string name="free_version_message">This free OsmAnd version is limited to %1$s downloads and does not support offline Wikipedia articles.</string>
     <string name="free_version_title">Free version</string>
-    <string name="poi_context_menu_showdescription">Show POI description</string>
+    <string name="poi_context_menu_showdescription">Description</string>
     <string name="index_name_north_america">North America</string>
     <string name="index_name_us">North America - United States</string>
     <string name="index_name_central_america">Central America</string>
@@ -1531,7 +1531,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="add_favorite_dialog_top_text">Enter favorite name</string>
     <string name="add_favorite_dialog_default_favourite_name">Favorite</string>
     <string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>
-    <string name="favourites_context_menu_edit">Edit favorite</string>
+    <string name="favourites_context_menu_edit">Modify favorite</string>
     <string name="favourites_context_menu_delete">Delete favorite</string>
     <string name="favourites_remove_dialog_msg">Remove favorite point \'%s\'?</string>
     <string name="favourites_remove_dialog_success">Favorite point {0} was successfully deleted.</string>

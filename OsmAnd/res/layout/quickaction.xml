@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    android:fillViewport="true" >
 
     <FrameLayout
         android:id="@+id/header2"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dip"
         android:background="@drawable/quickaction_top_frame" />
@@ -21,34 +23,38 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/header2"
-        android:background="@drawable/quickaction_slider_background"
+        android:background="@drawable/ab_bottom_solid_mapandgoactionbar"
         android:fadingEdgeLength="0dip"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true"
         android:paddingLeft="1dip"
         android:scrollbars="none" >
 
         <LinearLayout
             android:id="@+id/tracks"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
             android:orientation="horizontal"
             android:paddingBottom="4dip"
-            android:paddingTop="4dip" >
+            android:paddingTop="4dip"
+            android:fillViewport="true" >
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/quickaction_slider_grip_left" />
+                android:src="@drawable/quickaction_slider_grip_left_dark" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/quickaction_slider_grip_right" />
+                android:src="@drawable/quickaction_slider_grip_right_dark" />
         </LinearLayout>
     </HorizontalScrollView>
 
     <FrameLayout
         android:id="@+id/footer"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/scroll"
         android:background="@drawable/quickaction_bottom_frame" />

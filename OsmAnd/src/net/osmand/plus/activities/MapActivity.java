@@ -34,6 +34,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.actions.NavigateAction;
 import net.osmand.plus.activities.actions.NavigateAction.DirectionDialogStyle;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.activities.search.SearchPOIActivity;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.render.MapRenderRepositories;
@@ -82,7 +83,7 @@ public class MapActivity extends AccessibleActivity {
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	private static final int LONG_KEYPRESS_DELAY = 500;
-	
+
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 	private static final String VECTOR_INDEXES_CHECK = "VECTOR_INDEXES_CHECK"; //$NON-NLS-1$
 
@@ -144,12 +145,13 @@ public class MapActivity extends AccessibleActivity {
 		startProgressDialog.setCancelable(true);
 		getApp().checkApplicationIsBeingInitialized(this, startProgressDialog);
 		parseLaunchIntentLocation();
-		
+
 		checkVectorIndexesDownloaded();
 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			Boolean firstTime = extras.getBoolean("FIRSTTIME");
+			
 			checkPreviousRunsForExceptions(firstTime);
 		}
 
@@ -221,7 +223,7 @@ public class MapActivity extends AccessibleActivity {
 			((FrameLayout) mapView.getParent()).addView(lockView);
 		}
 	}
-	
+
 	protected void checkVectorIndexesDownloaded() {
 		MapRenderRepositories maps = getMyApplication().getResourceManager()
 				.getRenderer();
@@ -272,8 +274,7 @@ public class MapActivity extends AccessibleActivity {
 				String msg = MessageFormat.format(
 						getString(R.string.previous_run_crashed),
 						OsmandApplication.EXCEPTION_PATH);
-				Builder builder = new AccessibleAlertBuilder(
-						MapActivity.this);
+				Builder builder = new AccessibleAlertBuilder(MapActivity.this);
 				builder.setMessage(msg).setNeutralButton(
 						getString(R.string.close), null);
 				builder.setPositiveButton(R.string.send_report,
@@ -448,7 +449,28 @@ public class MapActivity extends AccessibleActivity {
 			Location loc = new Location("map");
 			loc.setLatitude(mapView.getLatitude());
 			loc.setLongitude(mapView.getLongitude());
-			new NavigateAction(this).getDirections(loc, null, null,
+			
+			Intent intent = getIntent();
+			Bundle b = intent.getExtras();
+			Bundle b1 = getIntent().getExtras();
+			Bundle bundle = this.getIntent().getExtras();
+			
+			int value = b1.getInt("state", 0);
+
+			String name = "teste";
+			String data = "teste";
+			
+			if (b != null) {
+				
+				name = bundle.getString("name");
+				data = bundle.getString(SearchPOIActivity.POI_NAME);
+				if(SearchPOIActivity.POI_NAME == null)
+					data = "DEU NULL";				
+				int value1 = value;
+			}
+			
+
+			new NavigateAction(this).getDirections(loc, data, null,
 					DirectionDialogStyle.create());
 		}
 		if (mapLabelToShow != null && latLonToShow != null) {
@@ -844,7 +866,17 @@ public class MapActivity extends AccessibleActivity {
 
 	public static void launchMapActivityMoveToTop(Context activity) {
 		Intent newIntent = new Intent(activity, OsmandIntents.getMapActivity());
-		newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+		newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		activity.startActivity(newIntent);
+	}
+
+	public static void launchMapActivityMoveToTopWithName(Context activity,
+			String name) {
+		Intent newIntent = new Intent(activity, OsmandIntents.getMapActivity());
+		newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		//newIntent.putExtra(OsmandSettings.MAP_LABEL_TO_SHOW, name);
+		newIntent.putExtra("name", name);		
+		newIntent.putExtra(SearchPOIActivity.POI_NAME, name);		
 		activity.startActivity(newIntent);
 	}
 

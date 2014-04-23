@@ -69,7 +69,7 @@ public class QuickAction extends CustomPopupWindow {
 		setContentView(root);
 		
 		mTrackAnim 	= AnimationUtils.loadAnimation(anchor.getContext(), R.anim.rail);
-		
+		/*
 		mTrackAnim.setInterpolator(new Interpolator() {
 			@Override
 			public float getInterpolation(float t) {
@@ -80,7 +80,7 @@ public class QuickAction extends CustomPopupWindow {
 	            return 1.2f - inner * inner;
 	        }
 		});
-	        
+	        */
 		mTrack 			= (ViewGroup) root.findViewById(R.id.tracks);
 		animStyle		= ANIM_AUTO;
 		animateTrack	= true;
@@ -135,8 +135,8 @@ public class QuickAction extends CustomPopupWindow {
 		Rect anchorRect 	= new Rect(location[0], location[1], location[0] + anchor.getWidth(), location[1] 
 		                	+ anchor.getHeight());
 
-		root.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-		root.measure(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		root.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+		root.measure(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 		
 		int rootWidth 		= root.getMeasuredWidth();
 		int rootHeight 		= root.getMeasuredHeight();
@@ -145,6 +145,7 @@ public class QuickAction extends CustomPopupWindow {
 		//int screenHeight 	= windowManager.getDefaultDisplay().getHeight();
 
 		int xPos 			= (screenWidth - rootWidth) / 2;
+		//int xPos 			= rootWidth;
 		int yPos	 		= anchorRect.top - rootHeight;
 
 		boolean onTop		= true;
@@ -163,7 +164,7 @@ public class QuickAction extends CustomPopupWindow {
 		
 		window.showAtLocation(this.anchor, Gravity.NO_GRAVITY, xPos, yPos);
 		
-		if (animateTrack) mTrack.startAnimation(mTrackAnim);
+		//if (animateTrack) mTrack.startAnimation(mTrackAnim);
 	}
 	
 	/**

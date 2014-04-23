@@ -41,7 +41,7 @@ public class FailSafeFuntions {
 		} else {
 			quitRouteRestoreDialog = false;
 			Runnable encapsulate = new Runnable() {
-				int delay = 7;
+				int delay = 10;
 				Runnable delayDisplay = null;
 
 				@Override

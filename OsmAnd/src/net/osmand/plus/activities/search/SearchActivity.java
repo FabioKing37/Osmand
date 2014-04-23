@@ -14,9 +14,11 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.FavouritesListActivity;
 import net.osmand.plus.activities.FavouritesListFragment;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.NavigatePointFragment;
 import net.osmand.util.Algorithms;
 import android.app.ActionBar;
@@ -27,6 +29,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -50,6 +53,7 @@ public class SearchActivity extends SherlockFragmentActivity implements
 	private static final String SEARCH_LOCATION = "Search_Location";
 	private static final String SEARCH_ADDRESS = "Search_Address";
 	private static final String SEARCH_POI = "Search_POI";
+
 	public static final int POI_TAB_INDEX = 0;
 	public static final int ADDRESS_TAB_INDEX = 1;
 	public static final int LOCATION_TAB_INDEX = 2;
@@ -68,6 +72,8 @@ public class SearchActivity extends SherlockFragmentActivity implements
 
 	public static final String SEARCH_LAT = "net.osmand.search_lat"; //$NON-NLS-1$
 	public static final String SEARCH_LON = "net.osmand.search_lon"; //$NON-NLS-1$
+	public static final String POI_CLOSE = "net.osmand.poi_close";
+	public static boolean closePoi = false;
 
 	Button searchPOIButton;
 	private LatLon searchPoint = null;
@@ -90,8 +96,8 @@ public class SearchActivity extends SherlockFragmentActivity implements
 				tabHost, false);
 
 		// TextView tabName = (TextView) r.findViewById(R.id.TabNames);
-			ImageView tabImage = (ImageView) r.findViewById(R.id.TabImage);
-			CharSequence b = getText(stringId);
+		ImageView tabImage = (ImageView) r.findViewById(R.id.TabImage);
+		CharSequence b = getText(stringId);
 		// if (b != null)
 		// tabName.setText(b);
 		tabImage.setImageResource(imageId);
@@ -105,14 +111,36 @@ public class SearchActivity extends SherlockFragmentActivity implements
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		long t = System.currentTimeMillis();
+
 		getSherlock().setUiOptions(
 				ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		setContentView(R.layout.search_main);
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		//getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 		getSupportActionBar().setTitle("");
 		// getSupportActionBar().setTitle(R.string.select_search_position);
+
+		Intent intent = getIntent();
+		closePoi = intent.getBooleanExtra(POI_CLOSE, false);
+		
+		if (closePoi) {
+			final PoiFilter filterClosePoi = new PoiFilter(null,
+					(OsmandApplication) getApplication());
+			final Intent newIntent = new Intent(this, SearchPOIActivity.class);
+			newIntent.putExtra(SearchPOIActivity.AMENITY_FILTER,
+					filterClosePoi.getFilterId());
+			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
+			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
+			newIntent.putExtra(SearchActivity.SEARCH_LAT, lat);
+			newIntent.putExtra(SearchActivity.SEARCH_LON, lon);
+			newIntent.putExtra(SearchActivity.POI_CLOSE, closePoi);
+			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			// updateIntentToLaunchClosePoi(newIntent);
+			startActivityForResult(newIntent, 0);
+		}
 
 		final TextView tabinfo = (TextView) findViewById(R.id.textViewADesc);
 
@@ -127,8 +155,11 @@ public class SearchActivity extends SherlockFragmentActivity implements
 		TabSpec poiTab = tabHost.newTabSpec(SEARCH_POI).setIndicator(
 				getTabIndicator(tabHost, R.drawable.tab_search_poi_icon,
 						R.string.poi));
-		mTabsAdapter.addTab(poiTab, SearchPoiFilterActivity.class, null);
 
+		Bundle args = new Bundle();
+		args.putBoolean("poi_close", closePoi);
+		mTabsAdapter.addTab(poiTab, SearchPoiFilterActivity.class, args);
+		setTopSpinner();
 		TabSpec addressSpec = tabHost.newTabSpec(SEARCH_ADDRESS).setIndicator(
 				getTabIndicator(tabHost, R.drawable.tab_search_address_icon,
 						R.string.address));
@@ -162,12 +193,9 @@ public class SearchActivity extends SherlockFragmentActivity implements
 			tabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
 		}
 
-		setTopSpinner();
-
 		Log.i("net.osmand", "Start on create "
 				+ (System.currentTimeMillis() - t));
 
-		Intent intent = getIntent();
 		int tabIndex = 0;
 		if (intent != null) {
 			if (intent.hasExtra(TAB_INDEX_EXTRA)) {
@@ -176,6 +204,7 @@ public class SearchActivity extends SherlockFragmentActivity implements
 			}
 			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
 			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
+			closePoi = intent.getBooleanExtra(POI_CLOSE, false);
 			if (lat != 0 || lon != 0) {
 				LatLon l = new LatLon(lat, lon);
 				if (!Algorithms.objectEquals(reqSearchPoint, l)) {
@@ -202,6 +231,8 @@ public class SearchActivity extends SherlockFragmentActivity implements
 		switch (itemId) {
 		case android.R.id.home:
 			finish();
+			MapActivity.launchMapActivityMoveToTop(this);
+			//NavUtils.navigateUpTo(this, new Intent(this, MapActivity.class));
 			return true;
 
 		}

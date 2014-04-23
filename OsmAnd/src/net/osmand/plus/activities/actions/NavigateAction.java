@@ -156,6 +156,7 @@ public class NavigateAction {
 		}
 
 		final TargetPointsHelper targets = app.getTargetPointsHelper();
+		
 
 		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(
 				ApplicationMode.values(app.getSettings()));
@@ -187,8 +188,10 @@ public class NavigateAction {
 					+ getRoutePointDescription(targets.getPointToNavigate(),
 							targets.getPointNavigateDescription());
 
-			String oname = name != null ? name : getRoutePointDescription(
-					mapView.getLatitude(), mapView.getLongitude());
+			
+				String oname = name != null ? name : getRoutePointDescription(
+						mapView.getLatitude(), mapView.getLongitude());
+			
 			String mapLocation = mapActivity
 					.getString(R.string.route_descr_map_location) + " " + oname;
 			// mapActivity.getMapActions().KEY_DESTNAME = oname;
@@ -347,7 +350,7 @@ public class NavigateAction {
 			prefButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					
+
 					bld.setMultiChoiceItems(vals, checkedItems,
 							new OnMultiChoiceClickListener() {
 

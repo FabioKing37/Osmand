@@ -38,6 +38,7 @@ public class SearchPoiFilterActivity extends SherlockListFragment implements
 
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
+	public static final String POI_CLOSE = SearchActivity.POI_CLOSE;
 	public static final int REQUEST_POI_EDIT = 55;
 
 	@Override
@@ -63,6 +64,7 @@ public class SearchPoiFilterActivity extends SherlockListFragment implements
 		});
 
 		refreshPoiListAdapter();
+
 	}
 
 	public void refreshPoiListAdapter() {
@@ -71,8 +73,8 @@ public class SearchPoiFilterActivity extends SherlockListFragment implements
 		filters.addAll(poiFilters.getTopStandardFilters());
 		filters.addAll(poiFilters.getUserDefinedPoiFilters());
 		filters.addAll(poiFilters.getOsmDefinedPoiFilters());
-		//Online POI Nominatim
-		//filters.add(poiFilters.getNameFinderPOIFilter());
+		// Online POI Nominatim
+		// filters.add(poiFilters.getNameFinderPOIFilter());
 		setListAdapter(new AmenityAdapter(filters));
 	}
 
@@ -97,6 +99,28 @@ public class SearchPoiFilterActivity extends SherlockListFragment implements
 					loc.getLatitude());
 			intentToLaunch.putExtra(SearchActivity.SEARCH_LON,
 					loc.getLongitude());
+		}
+	}
+
+	private void updateIntentToLaunchClosePoi(Intent intentToLaunch) {
+		LatLon loc = null;
+		boolean searchAround = false;
+		SherlockFragmentActivity parent = getSherlockActivity();
+		if (loc == null && parent instanceof SearchActivity) {
+			loc = ((SearchActivity) parent).getSearchPoint();
+			searchAround = ((SearchActivity) parent)
+					.isSearchAroundCurrentLocation();
+		}
+		if (loc == null && !searchAround) {
+			loc = getApp().getSettings().getLastKnownMapLocation();
+		}
+		if (loc != null && !searchAround) {
+			intentToLaunch.putExtra(SearchActivity.SEARCH_LAT,
+					loc.getLatitude());
+			intentToLaunch.putExtra(SearchActivity.SEARCH_LON,
+					loc.getLongitude());
+			intentToLaunch.putExtra(SearchActivity.POI_CLOSE, "false");
+
 		}
 	}
 

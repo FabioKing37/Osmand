@@ -1,56 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TabHost
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/tabhost"
     android:layout_width="fill_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
+
     <LinearLayout
         android:id="@+id/LinearLayoutTabs"
-        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
-                <HorizontalScrollView
+        <HorizontalScrollView
             android:id="@+id/horizontalScrollViewTabs"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:fillViewport="true" > 
-            
-        <TabWidget
-            android:id="@android:id/tabs"
-            android:orientation="horizontal"
+            android:fillViewport="true"
+            android:scrollbars="none" >
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:measureWithLargestChild="true"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-           />
-        </HorizontalScrollView>H
-        <LinearLayout
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:orientation="vertical"
-	        android:background="@drawable/ic_background_topofsearchactivities">
-       		<TextView
-				android:id="@+id/textViewADesc"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center"
-				android:background="@drawable/ic_background_tabinfotext"
-				android:textColor="@color/color_white"
-				android:text="@string/poi_search_desc"
-				android:textAppearance="?android:attr/textAppearanceSmall"/>
-		</LinearLayout>
+            android:background="@drawable/ic_background_topofsearchactivities"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewADesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_background_tabinfotext"
+                android:text="@string/poi_search_desc"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/color_white"
+                android:visibility="gone" />
+        </LinearLayout>
 
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            />
+            android:layout_height="0dp" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
-
+            android:layout_weight="1" />
     </LinearLayout>
+
 </TabHost>

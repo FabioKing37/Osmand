@@ -40,6 +40,7 @@ public class RendererRegistry {
 		internalRenderers.put("Cycle-map", "Cycle-map" + ".render.xml");
 		internalRenderers.put("Winter-and-ski", "Winter-and-ski" + ".render.xml");
 		internalRenderers.put("Topo-map-assimilation", "Topo-map-assimilation" + ".render.xml");
+		//internalRenderers.put("teste", "teste" + ".render.xml");
 	}
 	
 	public RenderingRulesStorage defaultRender() {

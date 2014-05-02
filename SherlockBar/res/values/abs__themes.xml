@@ -162,7 +162,6 @@
         <item name="windowContentOverlay">@drawable/abs__ab_solid_shadow_holo</item>
         <item name="actionBarStyle">@style/Widget.Sherlock.Light.ActionBar.Solid.Inverse</item>
         <item name="actionBarWidgetTheme">@style/Theme.Sherlock</item>
-        
 
         <item name="actionDropDownStyle">@style/Widget.Sherlock.Spinner.DropDown.ActionBar</item>
         <item name="actionButtonStyle">@style/Widget.Sherlock.ActionButton</item>

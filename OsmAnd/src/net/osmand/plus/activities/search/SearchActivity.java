@@ -95,13 +95,13 @@ public class SearchActivity extends SherlockFragmentActivity implements
 		View r = getLayoutInflater().inflate(R.layout.search_main_tab_header,
 				tabHost, false);
 
-		// TextView tabName = (TextView) r.findViewById(R.id.TabNames);
 		ImageView tabImage = (ImageView) r.findViewById(R.id.TabImage);
+		TextView tabName = (TextView) r.findViewById(R.id.TabtextView);
 		CharSequence b = getText(stringId);
-		// if (b != null)
-		// tabName.setText(b);
+		if (b != null)
+			tabName.setText(b);
 		tabImage.setImageResource(imageId);
-		tabImage.setBackgroundResource(R.drawable.mapngo_tab_indicator_holo);
+		// tabName.setBackgroundResource(R.drawable.mapngo_tab_indicator_holo);
 		tabImage.setContentDescription(getString(stringId));
 		return r;
 	}
@@ -118,14 +118,14 @@ public class SearchActivity extends SherlockFragmentActivity implements
 		setContentView(R.layout.search_main);
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		//getSupportActionBar().setDisplayShowHomeEnabled(true);
+		// getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-		getSupportActionBar().setTitle("");
-		// getSupportActionBar().setTitle(R.string.select_search_position);
+		// getSupportActionBar().setTitle("");
+		getSupportActionBar().setTitle(R.string.select_search_position);
 
 		Intent intent = getIntent();
 		closePoi = intent.getBooleanExtra(POI_CLOSE, false);
-		
+
 		if (closePoi) {
 			final PoiFilter filterClosePoi = new PoiFilter(null,
 					(OsmandApplication) getApplication());
@@ -145,7 +145,7 @@ public class SearchActivity extends SherlockFragmentActivity implements
 		final TextView tabinfo = (TextView) findViewById(R.id.textViewADesc);
 
 		TabWidget tabs = (TabWidget) findViewById(android.R.id.tabs);
-		tabs.setBackgroundResource(R.drawable.mapngo_tab_indicator_holo);
+		//tabs.setBackgroundResource(R.drawable.mapngo_tab_indicator_holo);
 
 		TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
 		tabHost.setup();
@@ -168,10 +168,7 @@ public class SearchActivity extends SherlockFragmentActivity implements
 						: SearchAddressFragment.class, null);
 		// mTabsAdapter.addTab(addressSpec, SearchAddressOnlineActivity.class,
 		// null);
-		TabSpec locationTab = tabHost.newTabSpec(SEARCH_LOCATION).setIndicator(
-				getTabIndicator(tabHost, R.drawable.tab_search_location_icon,
-						R.string.search_tabs_location));
-		mTabsAdapter.addTab(locationTab, NavigatePointFragment.class, null);
+
 		TabSpec favoriteTab = tabHost.newTabSpec(SEARCH_FAVORITES)
 				.setIndicator(
 						getTabIndicator(tabHost,
@@ -182,12 +179,17 @@ public class SearchActivity extends SherlockFragmentActivity implements
 				getTabIndicator(tabHost, R.drawable.tab_search_history_icon,
 						R.string.history));
 		mTabsAdapter.addTab(historyTab, SearchHistoryFragment.class, null);
+		// TODO: To remove
+		/*TabSpec locationTab = tabHost.newTabSpec(SEARCH_LOCATION).setIndicator(
+				getTabIndicator(tabHost, R.drawable.tab_search_location_icon,
+						R.string.search_tabs_location));
+		mTabsAdapter.addTab(locationTab, NavigatePointFragment.class, null);
 		TabSpec transportTab = tabHost.newTabSpec(SEARCH_TRANSPORT)
 				.setIndicator(
 						getTabIndicator(tabHost,
 								R.drawable.tab_search_transport_icon,
 								R.string.transport));
-		mTabsAdapter.addTab(transportTab, SearchTransportFragment.class, null);
+		mTabsAdapter.addTab(transportTab, SearchTransportFragment.class, null);*/
 		tabHost.setCurrentTab(POI_TAB_INDEX);
 		if (savedInstanceState != null) {
 			tabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
@@ -232,7 +234,7 @@ public class SearchActivity extends SherlockFragmentActivity implements
 		case android.R.id.home:
 			finish();
 			MapActivity.launchMapActivityMoveToTop(this);
-			//NavUtils.navigateUpTo(this, new Intent(this, MapActivity.class));
+			// NavUtils.navigateUpTo(this, new Intent(this, MapActivity.class));
 			return true;
 
 		}

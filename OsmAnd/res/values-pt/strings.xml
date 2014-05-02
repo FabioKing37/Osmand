@@ -271,7 +271,7 @@
     <string name="loading_streets">A carregar ruas…</string>
     <string name="loading_cities">A carregar cidades…</string>
     <string name="loading">A carregar…</string>
-    <string name="poi">POI</string>
+    <string name="poi">Locais</string>
     <string name="error_occurred_saving_gpx">Erro ao gravar GPX</string>
     <string name="error_calculating_route">Erro de calculando a rota</string>
     <string name="error_calculating_route_occured">Ocorreu um erro ao calcular a rota</string>
@@ -377,7 +377,7 @@
     <string name="search_address_building">Edifício</string>
     <string name="search_address_building_option">Edifício</string>
     <string name="search_address_street_option">Rua transversal</string>
-    <string name="search_tabs_location">Localização</string>
+    <string name="search_tabs_location">Coordenadas</string>
     <string name="context_menu_item_add_favorite">Adicionar aos favoritos</string>
     <string name="context_menu_item_update_map">Atualizar mapa</string>
     <string name="context_menu_item_open_bug">Reportar problema OSM</string>
@@ -661,7 +661,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="search_position_fixed">Fixo</string>
     <string name="search_position_current_location">Posição atual…</string>
     <string name="search_position_map_view">Última vista do mapa</string>
-    <string name="select_search_position">Search near :</string>
+    <string name="select_search_position">Pesquisar perto :</string>
     <string name="context_menu_item_search">Pesquisar aqui perto</string>
     <string name="tip_recent_changes_0_6_7_t">"Recent changes for 0.6.7 : \n\t- Offline data manager (download, delete, activate / deactivate offline data directly in MapnGo) \n\t- Favorite points and groups (categorize, delete, manage favorites) \n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.) \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts) \n\t- Function to save route as GPX track for offline use \n\t- Improve GPX monitoring (filter some inaccurate position and save accuracy/elevation/speed) \n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/) \n\t- Improve vector rendering \n\t- Improvement of TTS engine (announce exact distance, enable miles) \n\t- Bug fixes "</string>
     <string name="save_route_dialog_title">Guardar a rota como trilha GPX</string>

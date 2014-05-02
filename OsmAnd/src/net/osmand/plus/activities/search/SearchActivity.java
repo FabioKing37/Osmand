@@ -146,6 +146,7 @@ public class SearchActivity extends SherlockFragmentActivity implements
 
 		TabWidget tabs = (TabWidget) findViewById(android.R.id.tabs);
 		//tabs.setBackgroundResource(R.drawable.mapngo_tab_indicator_holo);
+		//TESTE
 
 		TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
 		tabHost.setup();

@@ -63,6 +63,8 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 		android.widget.FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		lp.gravity = Gravity.CENTER_HORIZONTAL;
 		searchAllStrets.setLayoutParams(lp);
+		searchAllStrets.setTextColor(getResources().getColor(
+				R.color.color_white));
 		searchAllStrets.setText(R.string.search_street_in_neighborhood_cities);
 		ll.addView(searchAllStrets);
 		searchAllStrets.setOnClickListener(new View.OnClickListener() {

@@ -33,21 +33,31 @@
 
                     <Button
                         android:id="@+id/CountryButton"
-                        android:text="@string/ChooseCountry" 
-                        android:scrollHorizontally="true" 
-    					android:lines="1"
-    					android:ellipsize="end"
-    					android:layout_width="150dp"
-    					/>
+                        android:layout_width="150dp"
+                        android:background="@drawable/dialogbutton_btn_default_disabled_holo_light"
+                        android:clickable="true"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:scrollHorizontally="true"
+                        android:shadowRadius="1000"
+                        android:text="@string/ChooseCountry"
+                        android:textColor="@color/mapngo_color" />
 
                     <ImageButton
                         android:id="@+id/ResetCountry"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="5dp"
                         android:background="?attr/reset_image"
-                        android:contentDescription="@string/default_buttons_reset" >
+                        android:contentDescription="@string/default_buttons_reset"
+                        android:visibility="gone" >
                     </ImageButton>
                 </TableRow>
+
+                <View
+                    android:id="@+id/separator1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/mapngo_color" />
 
                 <TableRow
                     android:id="@+id/TableRow"
@@ -60,21 +70,28 @@
 
                     <Button
                         android:id="@+id/CityButton"
+                        android:layout_width="150dp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:scrollHorizontally="true"
                         android:text="@string/choose_city"
-                        android:scrollHorizontally="true" 
-    					android:lines="1"
-    					android:ellipsize="end" 
-    					android:layout_width="150dp"
-                        />
+                        android:textColor="#FFFFFF" />
 
                     <ImageButton
                         android:id="@+id/ResetCity"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="5dp"
-                        android:background="?attr/reset_image"
+                        android:background="@drawable/ic_action_delete_light"
                         android:contentDescription="@string/default_buttons_reset" >
                     </ImageButton>
                 </TableRow>
+
+                <View
+                    android:id="@+id/separator2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/mapngo_color"
+                    android:visibility="gone" />
 
                 <TableRow
                     android:id="@+id/TableRow"
@@ -87,12 +104,12 @@
 
                     <Button
                         android:id="@+id/StreetButton"
+                        android:layout_width="150dp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:scrollHorizontally="true"
                         android:text="@string/choose_street"
-                        android:scrollHorizontally="true" 
-    					android:lines="1"
-    					android:ellipsize="end"
-    					android:layout_width="150dp"
-                         />
+                        android:textColor="#FFFFFF" />
 
                     <ImageButton
                         android:id="@+id/ResetStreet"
@@ -102,6 +119,13 @@
                         android:contentDescription="@string/default_buttons_reset" >
                     </ImageButton>
                 </TableRow>
+
+                <View
+                    android:id="@+id/separator3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/mapngo_color"
+                    android:visibility="gone" />
 
                 <TableRow
                     android:id="@+id/TableRow"
@@ -114,12 +138,12 @@
 
                     <Button
                         android:id="@+id/BuildingButton"
+                        android:layout_width="150dp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:scrollHorizontally="true"
                         android:text="@string/choose_building"
-                        android:scrollHorizontally="true" 
-    					android:lines="1"
-    					android:ellipsize="end"
-    					android:layout_width="150dp"
-    					 />
+                        android:textColor="#FFFFFF" />
 
                     <ImageButton
                         android:id="@+id/ResetBuilding"
@@ -129,31 +153,46 @@
                         android:contentDescription="@string/default_buttons_reset" >
                     </ImageButton>
                 </TableRow>
+
+                <View
+                    android:id="@+id/separator1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/mapngo_color" />
             </TableLayout>
 
             <RadioGroup
                 android:id="@+id/RadioGroup"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
-                android:layout_span="3"
+                android:layout_span="2"
+                android:layout_weight="1"
                 android:orientation="horizontal" >
 
                 <RadioButton
                     android:id="@+id/RadioBuilding"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/search_address_building_option" >
                 </RadioButton>
 
                 <RadioButton
                     android:id="@+id/RadioIntersStreet"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="@string/search_address_street_option" >
-                </RadioButton>
+                    android:layout_weight="1"
+                    android:text="@string/search_address_street_option" />
             </RadioGroup>
+
+            <View
+                android:id="@+id/separator1"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/mapngo_color" />
         </net.osmand.view.ExpandableLinearLayout>
     </LinearLayout>
 

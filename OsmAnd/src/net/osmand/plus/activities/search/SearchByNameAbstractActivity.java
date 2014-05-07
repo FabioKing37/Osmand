@@ -94,7 +94,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setTitle(R.string.search_activity);
-		getSupportActionBar().setIcon(R.drawable.tab_search_address_icon);
+		getSupportActionBar().setIcon(R.drawable.tab_search_address_icon_light);
 	}
 	
 	@Override
@@ -525,6 +525,8 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 					return true;
 				}
 			});
+			//WayPoints
+			/*
 			TargetPointsHelper targets = ((OsmandApplication) getApplication()).getTargetPointsHelper();
 			if (targets.getPointToNavigate() != null) {
 				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point)
@@ -542,6 +544,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 					return true;
 				}
 			});
+			*/
 			menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map).setShowAsActionFlags(
 					MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_marker_dark : R.drawable.ic_action_marker_dark);

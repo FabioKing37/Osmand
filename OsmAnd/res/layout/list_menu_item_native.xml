@@ -6,7 +6,8 @@
     android:layout_marginLeft="5dip"
     android:layout_marginRight="5dip"
     android:background="@drawable/mapngo_btn_default_holo_light"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:scrollbars="none" >
 
     <TextView
         android:id="@+id/title"
@@ -23,7 +24,8 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        android:scrollbars="none" >
 
         <!-- android:button="@drawable/ic_btn_wocheckbox" -->
 

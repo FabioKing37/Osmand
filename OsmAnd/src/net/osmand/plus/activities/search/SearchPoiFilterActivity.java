@@ -187,7 +187,7 @@ public class SearchPoiFilterActivity extends SherlockListFragment implements
 			label.setText(model.getName());
 			if (getApp().getSettings().isLightContentMenu()) {
 				if (model.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)) {
-					icon.setImageResource(android.R.drawable.ic_input_get);
+					icon.setImageResource(R.drawable.ic_input_get);
 				} else if (model.getFilterId().equals(
 						PoiFilter.BY_NAME_FILTER_ID)) {
 					icon.setImageResource(R.drawable.ic_action_gsearch_poi_dark);
@@ -213,7 +213,7 @@ public class SearchPoiFilterActivity extends SherlockListFragment implements
 			} else {
 
 				if (model.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)) {
-					icon.setImageResource(android.R.drawable.ic_input_get);
+					icon.setImageResource(R.drawable.ic_input_get);
 				} else if (model.getFilterId().equals(
 						PoiFilter.BY_NAME_FILTER_ID)) {
 					icon.setImageResource(android.R.drawable.ic_search_category_default);

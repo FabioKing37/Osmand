@@ -313,8 +313,8 @@
     <string name="map_widget_max_speed">Speed limit</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">No buildings found.</string>
-    <string name="incremental_search_city">Search city incrementally</string>
-    <string name="search_villages_and_postcodes">Search villages/postcode</string>
+    <string name="incremental_search_city">Cities</string>
+    <string name="search_villages_and_postcodes">Villages/Postcode</string>
     <string name="rendering_attr_showRoadMaps_description">Select when to display roads-only maps:</string>
     <string name="rendering_attr_showRoadMaps_name">Roads-only maps</string>
     <string name="safe_mode_description">Run the application in safe mode (using slower Android instead of native code).</string>
@@ -1512,7 +1512,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="search_shown_on_map">Show on map</string>
     <string name="navigate_point_cancel">Cancel</string>
     <string name="search_address_top_text">Select address</string>
-    <string name="search_address_region">Region</string>
+    <string name="search_address_region">Country</string>
     <string name="search_address_city">City</string>
     <string name="search_address_street">Street</string>
     <string name="search_address_building">Building</string>

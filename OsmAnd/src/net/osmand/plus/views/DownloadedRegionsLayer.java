@@ -206,7 +206,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 			if (zoom < ZOOM_TO_SHOW_MAP_NAMES && !basemapExists) {
 				filter.setLength(0);
 				filter.append("basemap");
-				downloadBtn.setVisibility(View.VISIBLE);
+				downloadBtn.setVisibility(View.GONE);
 				downloadBtn.setText(view.getResources().getString(R.string.download_files) + " "
 						+ view.getResources().getString(R.string.base_world_map));
 			} else if(zoom >= ZOOM_TO_SHOW_MAP_NAMES && noMapsPresent && Math.abs(queriedBox.getZoom() - zoom) <= ZOOM_THRESHOLD &&

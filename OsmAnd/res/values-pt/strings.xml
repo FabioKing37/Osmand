@@ -353,11 +353,11 @@
     <string name="search_activity">Pesquisar</string>
     <string name="searchpoi_activity">Escolher POI</string>
     <string name="search_POI_level_btn">Encontrar mais</string>
-    <string name="incremental_search_city">Pesquisa progressiva de cidade. Para encontrar cidades/código postal, insira pelo menos os três primeiros caracteres</string>
-    <string name="incremental_search_street">Pesquisa progressiva das ruas</string>
-    <string name="incremental_search_building">Pesquisa progressiva dos edificios</string>
-    <string name="choose_available_region">Escolher uma região na lista</string>
-    <string name="choose_intersected_street">Escolher a rua transversal</string>
+    <string name="incremental_search_city">Cidades</string>
+    <string name="incremental_search_street">Ruas</string>
+    <string name="incremental_search_building">Edifícios</string>
+    <string name="choose_available_region">Escolher País</string>
+    <string name="choose_intersected_street">Escolher rua transversal</string>
     <string name="Closest_Amenities">Locais mais próximos</string>
     <string name="app_mode_default">Escolha mapa</string>
     <string name="app_mode_car">Carro</string>
@@ -371,7 +371,7 @@
     <string name="search_shown_on_map">Mostrar no mapa</string>
     <string name="navigate_point_cancel">Cancelar</string>
     <string name="search_address_top_text">Escolher endereço</string>
-    <string name="search_address_region">Região</string>
+    <string name="search_address_region">País</string>
     <string name="search_address_city">Cidade</string>
     <string name="search_address_street">Rua</string>
     <string name="search_address_building">Edifício</string>
@@ -1006,7 +1006,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="background_service_is_enabled_question">Serviço em segundo plano ainda em execução. Deseja cancelá-lo?</string>
     <string name="close_changeset">Fechar conjunto de alterações</string>
     <string name="route_descr_current_location">Localização atual</string>
-    <string name="search_villages_and_postcodes">Pesquisa por CEP</string>
+    <string name="search_villages_and_postcodes">Pesquisa por Código Postal</string>
     <string name="dropbox_plugin_description">O plugin Dropbox permite sincronizar trilhos e notas de vídeo/audio com a sua conta Dropbox.</string>
     <string name="animate_routing_using_gpx">Open a pre-recorded GPX route to follow?
 Quer seguir uma trilha GPX ?</string>

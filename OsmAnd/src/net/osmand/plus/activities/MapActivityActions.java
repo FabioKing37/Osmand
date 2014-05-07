@@ -960,20 +960,17 @@ public class MapActivityActions implements DialogProvider {
 
 		// 5-9. Default actions (Layers, Configure Map screen, Settings, Search,
 		// Favorites)
-		// Layer que passou a POI...
-		optionsMenuHelper
-				.item(R.string.menu_layers)
-				.icons(R.drawable.ic_action_layers_dark,
-						R.drawable.ic_action_layers_dark)
-				.listen(new OnContextMenuClick() {
-					@Override
-					public void onContextMenuClick(int itemId, int pos,
-							boolean isChecked, DialogInterface dialog) {
-						mapActivity.getMapLayers().openLayerSelectionDialog(
-								mapView);
-					}
-				}).reg();
-
+		// COMMENTED : Layer que passou a POI...
+		/*
+		 * optionsMenuHelper .item(R.string.menu_layers)
+		 * .icons(R.drawable.ic_action_layers_dark,
+		 * R.drawable.ic_action_layers_dark) .listen(new OnContextMenuClick() {
+		 * 
+		 * @Override public void onContextMenuClick(int itemId, int pos, boolean
+		 * isChecked, DialogInterface dialog) {
+		 * mapActivity.getMapLayers().openLayerSelectionDialog( mapView); }
+		 * }).reg();
+		 */
 		// POI filtro
 
 		optionsMenuHelper

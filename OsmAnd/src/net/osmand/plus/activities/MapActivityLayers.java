@@ -52,6 +52,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -268,6 +269,7 @@ public class MapActivityLayers {
 		}
 	}
 
+	// TODO:COMMENT
 	public void openLayerSelectionDialog(final OsmandMapTileView mapView) {
 		final OsmandSettings settings = getApplication().getSettings();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
@@ -364,6 +366,7 @@ public class MapActivityLayers {
 			public void onClick(DialogInterface dialog, int position) {
 			}
 		};
+
 		b.setAdapter(listAdapter, onClickListener);
 		b.setPositiveButton(R.string.default_buttons_ok, null);
 
@@ -394,7 +397,7 @@ public class MapActivityLayers {
 		final OsmandSettings settings = getApplication().getSettings();
 
 		// OsmandPlugin.registerLayerContextMenu(mapView, adapter, activity);
-		settings.SHOW_POI_OVER_MAP.set(true);
+		// settings.SHOW_POI_OVER_MAP.set(true);
 		selectPOIFilterLayer(mapView);
 		updateLayers(mapView);
 		mapView.refreshMap();
@@ -592,23 +595,25 @@ public class MapActivityLayers {
 		}, "Loading gpx").start(); //$NON-NLS-1$
 	}
 
+	// TODO:FIX
 	private void selectPOIFilterLayer(final OsmandMapTileView mapView) {
 		final List<PoiFilter> userDefined = new ArrayList<PoiFilter>();
 		OsmandApplication app = (OsmandApplication) getApplication();
+		final OsmandSettings settings = app.getSettings();
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
 		// ALL POI Layers
 		Item is = adapter.item(getString(R.string.any_poi));
 		if (RenderingIcons.containsBigIcon("null")) {
 			is.icon(RenderingIcons.getBigIconResourceId("null"));
+			is.selected(settings.SHOW_ALL_POI_OVER_MAP.get() ? 1 : 0);
 		}
 		is.reg();
 
-		// 2nd custom
-		/*adapter.item(getString(R.string.poi_filter_custom_filter))
-				.icon(RenderingIcons.getBigIconResourceId("user_defined"))
-				.reg();*/
-
+		adapter.item(R.string.layer_favorites)
+				.selected(settings.SHOW_FAVORITES.get() ? 1 : 0)
+				.icons(R.drawable.ic_action_fav_dark,
+						R.drawable.ic_action_fav_dark).reg();
 		// ICONS IN POI CATEGORIES
 		for (PoiFilter f : poiFilters.getUserDefinedPoiFilters()) {
 			Item it = adapter.item(f.getName());
@@ -631,63 +636,142 @@ public class MapActivityLayers {
 		 * it.reg(); }
 		 */
 		Builder builder = new AlertDialog.Builder(activity);
-		ListAdapter listAdapter;
+		final int layout;
+		final boolean light = getApplication().getSettings()
+				.isLightContentMenu();
+
+		final LayerMenuListener listener = new LayerMenuListener(adapter,
+				mapView, settings);
+		final int padding = (int) (12 * activity.getResources()
+				.getDisplayMetrics().density + 0.5f);
+
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-			listAdapter = adapter.createListAdapter(activity,
-					R.layout.list_menu_item, app.getSettings()
-							.isLightContentMenu());
+			layout = R.layout.list_menu_item;
+
 		} else {
-			listAdapter = adapter.createListAdapter(activity,
-					R.layout.list_menu_item_native, app.getSettings()
-							.isLightContentMenu());
+			layout = R.layout.list_menu_item_native;
 		}
+		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(
+				activity, layout, R.id.title, adapter.getItemNames()) {
+			@Override
+			public View getView(final int position, View convertView,
+					ViewGroup parent) {
+				// User super class to create the View
+				View v = activity.getLayoutInflater().inflate(layout, null);
+				TextView tv = (TextView) v.findViewById(R.id.title);
+				tv.setText(adapter.getItemName(position));
+
+				// Put the image on the TextView
+				if (adapter.getImageId(position, light) != 0) {
+					tv.setCompoundDrawablesWithIntrinsicBounds(
+							adapter.getImageId(position, light), 0, 0, 0);
+				} else {
+					tv.setCompoundDrawablesWithIntrinsicBounds(
+							R.drawable.ic_action_transparent, 0, 0, 0);
+				}
+				tv.setCompoundDrawablePadding(padding);
+
+				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
+				// ch.setVisibility(View.GONE);
+
+				// TODO: Multiple POIfilters at once not implemented
+				/*
+				 * if (adapter.getSelection(position) == -1) {
+				 * ch.setVisibility(View.INVISIBLE); } else {
+				 * ch.setOnCheckedChangeListener(null);
+				 * ch.setChecked(adapter.getSelection(position) > 0);
+				 * ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				 * 
+				 * @Override public void onCheckedChanged(CompoundButton
+				 * buttonView, boolean isChecked) { listener.onClick(position,
+				 * isChecked); } }); }
+				 */
+
+				final LinearLayout ll = ((LinearLayout) v
+						.findViewById(R.id.LinearLayout1));
+				if (adapter.getSelection(position) == 1) {
+					ll.setBackgroundResource(R.drawable.mapngo_btn_default_focused_holo_light);
+					ch.setVisibility(View.INVISIBLE);
+				} else if (adapter.getSelection(position) == 0) {
+					ll.setBackgroundResource(R.drawable.mapngo_btn_default_holo_light);
+					ch.setVisibility(View.INVISIBLE);
+				} else {
+					ll.setBackgroundResource(R.drawable.mapngo_btn_default_holo_light);
+
+				}
+				return v;
+			}
+		};
+
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-			/*	if (which == 1) {
-					String filterId = PoiFilter.CUSTOM_FILTER_ID;
-					getApplication().getSettings().setPoiFilterForMap(filterId);
-					Intent newIntent = new Intent(activity,
-							EditPOIFilterActivity.class);
-					newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER,
-							filterId);
-					newIntent.putExtra(EditPOIFilterActivity.SEARCH_LAT,
-							mapView.getLatitude());
-					newIntent.putExtra(EditPOIFilterActivity.SEARCH_LON,
-							mapView.getLongitude());
-					activity.startActivity(newIntent);
-				} else {*/
-					String filterId;
-					if (which == 0) {
-						filterId = PoiFiltersHelper.getOsmDefinedFilterId(null);
-					} else if (which <= userDefined.size() + 1) {
-						filterId = userDefined.get(which - 1).getFilterId();
-						/*
-						 * getApplication().getSettings().setPoiFilterForMap(
-						 * filterId); PoiFilter f =
-						 * poiFilters.getFilterById(filterId); if (f != null) {
-						 * f.clearNameFilter(); } poiMapLayer.setFilter(f);
-						 */
+
+				String filterId;
+				if (which == 0) {
+					if (settings.SHOW_ALL_POI_OVER_MAP.get()) {
+
+						settings.SHOW_POI_OVER_MAP.set(false);
+						settings.SHOW_ALL_POI_OVER_MAP.set(false);
 					} else {
-						filterId = PoiFiltersHelper
-								.getOsmDefinedFilterId(categories[which
-										- userDefined.size() - 1]);
+						// if(poiFilters.getFilters() != null)
+						filterId = PoiFiltersHelper.getOsmDefinedFilterId(null);
+						getApplication().getSettings().setPoiFilterForMap(
+								filterId);
+						PoiFilter f = poiFilters.getFilterById(filterId);
+						if (f != null) {
+							f.clearNameFilter();
+						}
+
+						poiMapLayer.setFilter(f);
+						settings.SHOW_POI_OVER_MAP.set(true);
+						settings.SHOW_ALL_POI_OVER_MAP.set(true);
 					}
-					//filterId = "std_emergency";
+				} else if (which == 1) {
+					// FAv
+					if (settings.SHOW_FAVORITES.get() == false)
+						settings.SHOW_FAVORITES.set(true);
+					else
+						settings.SHOW_FAVORITES.set(false);
+				} else if (which <= userDefined.size() + 2) {
+					PoiFilter poifilter_teste = userDefined.get(which - 2);
+					filterId = poifilter_teste.getFilterId();
+
 					getApplication().getSettings().setPoiFilterForMap(filterId);
 					PoiFilter f = poiFilters.getFilterById(filterId);
 					if (f != null) {
 						f.clearNameFilter();
 					}
-					// poiMapLayer.setShopFilter(f);
+					//setShopFilter(f);
 					poiMapLayer.setFilter(f);
+					settings.SHOW_POI_OVER_MAP.set(true);
 
-					mapView.refreshMap();
 				}
-			//}
+
+				else {
+					filterId = PoiFiltersHelper
+							.getOsmDefinedFilterId(categories[which
+									- userDefined.size() - 3]);
+
+					getApplication().getSettings().setPoiFilterForMap(filterId);
+					PoiFilter f = poiFilters.getFilterById(filterId);
+					if (f != null) {
+						f.clearNameFilter();
+					}
+
+					poiMapLayer.setFilter(f);
+					settings.SHOW_POI_OVER_MAP.set(true);
+				}
+
+				updateLayers(mapView);
+				mapView.refreshMap();
+			}
 
 		});
+		builder.setTitle("  ");
+		builder.setIcon(R.drawable.logocompleto);
+		builder.setNegativeButton(R.string.close, null);
 		builder.show();
 	}
 

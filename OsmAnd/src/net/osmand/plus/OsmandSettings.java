@@ -707,6 +707,10 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SHOW_POI_OVER_MAP = new BooleanPreference(
 			"show_poi_over_map", true).makeGlobal();
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> SHOW_ALL_POI_OVER_MAP = new BooleanPreference(
+			"show_all_poi_over_map", true).makeGlobal();
 
 	public final OsmandPreference<Boolean> SHOW_POI_LABEL = new BooleanPreference(
 			"show_poi_label", false).makeGlobal();

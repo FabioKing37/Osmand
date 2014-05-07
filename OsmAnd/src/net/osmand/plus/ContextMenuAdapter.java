@@ -11,16 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
 public class ContextMenuAdapter {
-	
+
 	public interface OnContextMenuClick {
-		
-		public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog);
+
+		public void onContextMenuClick(int itemId, int pos, boolean isChecked,
+				DialogInterface dialog);
 	}
-	
+
 	private final Context ctx;
 	final TIntArrayList items = new TIntArrayList();
 	final ArrayList<String> itemNames = new ArrayList<String>();
@@ -32,53 +34,52 @@ public class ContextMenuAdapter {
 	public ContextMenuAdapter(Context ctx) {
 		this.ctx = ctx;
 	}
-	
-	public int length(){
+
+	public int length() {
 		return items.size();
 	}
-	
-	public int getItemId(int pos){
+
+	public int getItemId(int pos) {
 		return items.get(pos);
 	}
-	
+
 	public OnContextMenuClick getClickAdapter(int i) {
 		return listeners.get(i);
 	}
-	
-	public String getItemName(int pos){
+
+	public String getItemName(int pos) {
 		return itemNames.get(pos);
 	}
-	
+
 	public int getSelection(int pos) {
 		return selectedList.get(pos);
 	}
-	
+
 	public void setSelection(int pos, int s) {
 		selectedList.set(pos, s);
 	}
-	
+
 	public int getImageId(int pos, boolean light) {
-		if(!light || iconListLight.get(pos) == 0) {
+		if (!light || iconListLight.get(pos) == 0) {
 			return iconList.get(pos);
 		}
 		return iconListLight.get(pos);
 	}
-	
-	
-	public Item item(String name){
+
+	public Item item(String name) {
 		Item i = new Item();
 		i.id = (name.hashCode() << 4) | items.size();
 		i.name = name;
 		return i;
 	}
-	
-	public Item item(int resId){
+
+	public Item item(int resId) {
 		Item i = new Item();
 		i.id = resId;
 		i.name = ctx.getString(resId);
 		return i;
 	}
-	
+
 	public class Item {
 		int icon = 0;
 		int lightIcon = 0;
@@ -132,22 +133,22 @@ public class ContextMenuAdapter {
 		}
 
 	}
-	
+
 	public String[] getItemNames() {
 		return itemNames.toArray(new String[itemNames.size()]);
 	}
 
-	
-
-	public ListAdapter createListAdapter(final Activity activity, final int layoutId, final boolean holoLight) {
-		final int padding = (int) (2 * activity.getResources().getDisplayMetrics().density + 0.5f);
-		ListAdapter listadapter = new ArrayAdapter<String>(activity, layoutId, R.id.title,
-				getItemNames()) {
+	public ListAdapter createListAdapter(final Activity activity,
+			final int layoutId, final boolean holoLight) {
+		final int padding = (int) (2 * activity.getResources()
+				.getDisplayMetrics().density + 0.5f);
+		ListAdapter listadapter = new ArrayAdapter<String>(activity, layoutId,
+				R.id.title, getItemNames()) {
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
 				// User super class to create the View
 				View v = convertView;
-				
+
 				if (v == null) {
 					v = activity.getLayoutInflater().inflate(layoutId, null);
 				}
@@ -156,9 +157,11 @@ public class ContextMenuAdapter {
 
 				// Put the image on the TextView
 				if (getImageId(position, holoLight) != 0) {
-					tv.setCompoundDrawablesWithIntrinsicBounds(getImageId(position, holoLight), 0, 0, 0);
+					tv.setCompoundDrawablesWithIntrinsicBounds(
+							getImageId(position, holoLight), 0, 0, 0);
 				} else {
-					tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_transparent, 0, 0, 0);
+					tv.setCompoundDrawablesWithIntrinsicBounds(
+							R.drawable.ic_action_transparent, 0, 0, 0);
 				}
 				tv.setCompoundDrawablePadding(padding);
 
@@ -169,5 +172,4 @@ public class ContextMenuAdapter {
 		};
 		return listadapter;
 	}
-
 }

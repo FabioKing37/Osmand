@@ -82,7 +82,7 @@ public class SearchAddressFragment extends SherlockFragment {
 			com.actionbarsherlock.view.MenuItem menuItem = menu.add(0,
 					SELECT_POINT, 0, "").setShowAsActionFlags(
 					MenuItem.SHOW_AS_ACTION_ALWAYS);
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_ok_light
+			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_ok_dark
 					: R.drawable.ic_action_ok_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
@@ -95,9 +95,7 @@ public class SearchAddressFragment extends SherlockFragment {
 		} else {
 			com.actionbarsherlock.view.MenuItem menuItem = menu.add(0,
 					NAVIGATE_TO, 0, R.string.get_directions)
-					.setShowAsActionFlags(
-							MenuItem.SHOW_AS_ACTION_ALWAYS
-									| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+					.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			menuItem = menuItem
 					.setIcon(light ? R.drawable.ic_action_gdirections_dark
 							: R.drawable.ic_action_gdirections_dark);
@@ -135,9 +133,7 @@ public class SearchAddressFragment extends SherlockFragment {
 			 */
 			menuItem = menu
 					.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map)
-					.setShowAsActionFlags(
-							MenuItem.SHOW_AS_ACTION_ALWAYS
-									| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+					.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			menuItem = menuItem
 					.setIcon(light ? R.drawable.ic_action_marker_dark
 							: R.drawable.ic_action_marker_dark);
@@ -153,8 +149,7 @@ public class SearchAddressFragment extends SherlockFragment {
 
 			menuItem = menu.add(0, ADD_TO_FAVORITE, 0,
 					R.string.add_to_favourite).setShowAsActionFlags(
-					MenuItem.SHOW_AS_ACTION_ALWAYS
-							| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+					MenuItem.SHOW_AS_ACTION_ALWAYS);
 			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_fav_dark
 					: R.drawable.ic_action_fav_dark);
 
@@ -212,6 +207,30 @@ public class SearchAddressFragment extends SherlockFragment {
 		return newIntent;
 	}
 
+	private Intent createIntentStreet(Class<?> cl) {
+		LatLon location = null;
+		Intent intent = getActivity().getIntent();
+		if (intent != null) {
+			double lat = intent.getDoubleExtra(SearchActivity.SEARCH_LAT, 0);
+			double lon = intent.getDoubleExtra(SearchActivity.SEARCH_LON, 0);
+			if (lat != 0 || lon != 0) {
+				location = new LatLon(lat, lon);
+			}
+		}
+		if (location == null && getActivity() instanceof SearchActivity) {
+			location = ((SearchActivity) getActivity()).getSearchPoint();
+		}
+		Intent newIntent = new Intent(getActivity(), cl);
+		if (location != null) {
+			newIntent.putExtra(SearchActivity.SEARCH_LAT,
+					location.getLatitude());
+			newIntent.putExtra(SearchActivity.SEARCH_LON,
+					location.getLongitude());
+		}
+		newIntent.putExtra("no_city", true);
+		return newIntent;
+	}
+
 	private void attachListeners() {
 		countryButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -228,7 +247,13 @@ public class SearchAddressFragment extends SherlockFragment {
 		streetButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(createIntent(SearchStreetByNameActivity.class));
+				// Se não escolheu cidade
+				if (cityButton.getText()
+						.equals(getString(R.string.choose_city)))
+					startActivity(createIntentStreet(SearchStreetByNameActivity.class));
+				else
+					// Se escolheu Cidade
+					startActivity(createIntent(SearchStreetByNameActivity.class));
 			}
 		});
 		buildingButton.setOnClickListener(new View.OnClickListener() {
@@ -404,9 +429,13 @@ public class SearchAddressFragment extends SherlockFragment {
 			getActivity().finish();
 		} else {
 			if (mode == NAVIGATE_TO) {
+				osmandSettings.setMapLocationToShow(searchPoint.getLatitude(),
+						searchPoint.getLongitude(), ai.zoom, ai.historyName);
+
 				MapActivityActions.directionsToDialogAndLaunchMap(
 						getActivity(), searchPoint.getLatitude(),
 						searchPoint.getLongitude(), ai.historyName);
+
 			} else if (mode == ADD_WAYPOINT) {
 				MapActivityActions.addWaypointDialogAndLaunchMap(getActivity(),
 						searchPoint.getLatitude(), searchPoint.getLongitude(),
@@ -468,7 +497,7 @@ public class SearchAddressFragment extends SherlockFragment {
 		findViewById(R.id.ResetCity).setEnabled(
 				!Algorithms.isEmpty(city) || !Algorithms.isEmpty(postcode));
 		if (Algorithms.isEmpty(city) && Algorithms.isEmpty(postcode)) {
-			//cityButton.setTextColor(getResources().getColor(R.color.mapngo_color));
+			// cityButton.setTextColor(getResources().getColor(R.color.mapngo_color));
 			cityButton.setText(R.string.choose_city);
 		} else {
 			if (!Algorithms.isEmpty(postcode)) {
@@ -482,14 +511,18 @@ public class SearchAddressFragment extends SherlockFragment {
 
 		findViewById(R.id.ResetStreet).setEnabled(!Algorithms.isEmpty(street));
 		if (Algorithms.isEmpty(street)) {
-			//streetButton.setTextColor(getResources().getColor(R.color.mapngo_color));
+			// streetButton.setTextColor(getResources().getColor(R.color.mapngo_color));
 			streetButton.setText(R.string.choose_street);
 		} else {
 
 			streetButton.setText(street);
 		}
-		streetButton.setEnabled(!Algorithms.isEmpty(city)
-				|| !Algorithms.isEmpty(postcode));
+		// Escolher a rua sem ter que escolher a cidade
+		streetButton.setEnabled(!Algorithms.isEmpty(region));
+		/*
+		 * streetButton.setEnabled(!Algorithms.isEmpty(city) ||
+		 * !Algorithms.isEmpty(postcode));
+		 */
 
 		buildingButton.setEnabled(!Algorithms.isEmpty(street));
 		((RadioGroup) findViewById(R.id.RadioGroup)).setVisibility(Algorithms

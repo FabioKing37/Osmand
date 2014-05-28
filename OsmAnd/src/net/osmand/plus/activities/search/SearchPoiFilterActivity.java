@@ -72,7 +72,7 @@ public class SearchPoiFilterActivity extends SherlockListFragment implements
 		List<PoiFilter> filters = new ArrayList<PoiFilter>();
 		filters.addAll(poiFilters.getTopStandardFilters());
 		filters.addAll(poiFilters.getUserDefinedPoiFilters());
-		filters.addAll(poiFilters.getOsmDefinedPoiFilters());
+		// filters.addAll(poiFilters.getOsmDefinedPoiFilters());
 		// Online POI Nominatim
 		// filters.add(poiFilters.getNameFinderPOIFilter());
 		setListAdapter(new AmenityAdapter(filters));
@@ -231,7 +231,13 @@ public class SearchPoiFilterActivity extends SherlockListFragment implements
 			if (model.isStandardFilter()) {
 				editIcon.setVisibility(View.GONE);
 			} else {
-				editIcon.setVisibility(View.VISIBLE);
+				if (model
+						.getSimplifiedId()
+						.matches(
+								"accomodation|restaurants_nightlife|visit|sports|shoptype|culture|education|health_wellness|services")) {
+					editIcon.setVisibility(View.GONE);
+				} else
+					editIcon.setVisibility(View.VISIBLE);
 			}
 			editIcon.setOnClickListener(new View.OnClickListener() {
 

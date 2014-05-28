@@ -746,6 +746,7 @@ public class MapActivityLayers {
 					//setShopFilter(f);
 					poiMapLayer.setFilter(f);
 					settings.SHOW_POI_OVER_MAP.set(true);
+					settings.SHOW_ALL_POI_OVER_MAP.set(false);
 
 				}
 
@@ -762,6 +763,7 @@ public class MapActivityLayers {
 
 					poiMapLayer.setFilter(f);
 					settings.SHOW_POI_OVER_MAP.set(true);
+					settings.SHOW_ALL_POI_OVER_MAP.set(false);
 				}
 
 				updateLayers(mapView);

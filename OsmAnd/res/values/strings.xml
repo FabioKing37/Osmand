@@ -131,7 +131,7 @@
 	\n\t* Support GPX subfolders (organize your GPX tracks)
 	\n\t* Delete SRTM files
 	\n\t* Support OSM Notes </string>
-    <string name="search_street_in_neighborhood_cities">Search street in neighborhood cities</string>
+    <string name="search_street_in_neighborhood_cities">Search street in all cities</string>
     <string name="intermediate_items_sort_return">Intermediate waypoints resorted to optimize their order on the way to the destination.</string>
     <string name="intermediate_items_sort_by_distance">Sort (door-to-door)</string>
     <string name="local_osm_changes_backup_successful">OSM change file successfully generated %1$s</string>
@@ -985,7 +985,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="show_gpx_route">Show on map</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>
     <string name="search_position_current_location_search">Searching position&#8230;</string>
-    <string name="search_position_current_location_found">Position (found)</string>
+    <string name="search_position_current_location_found">Current Position</string>
     <string name="search_position_address">Address&#8230;</string>
     <string name="search_position_favorites">Favorites&#8230;</string>
     <string name="search_position_undefined">Undefined</string>
@@ -1513,7 +1513,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="navigate_point_cancel">Cancel</string>
     <string name="search_address_top_text">Select address</string>
     <string name="search_address_region">Country</string>
-    <string name="search_address_city">City</string>
+    <string name="search_address_city">Town</string>
     <string name="search_address_street">Street</string>
     <string name="search_address_building">Building</string>
     <string name="search_address_building_option">Building</string>

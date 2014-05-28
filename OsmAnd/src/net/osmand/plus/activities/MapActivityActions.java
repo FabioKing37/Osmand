@@ -1258,6 +1258,7 @@ public class MapActivityActions implements DialogProvider {
 				saveHistory, onShow, true);
 	}
 
+	// TODO : Create DirectionsActions
 	public static void createDirectionsActions(final QuickAction qa,
 			final LatLon location, final Object obj, final String name,
 			final int z, final Activity activity, final boolean saveHistory,
@@ -1278,8 +1279,12 @@ public class MapActivityActions implements DialogProvider {
 				if (onShow != null) {
 					onShow.onClick(v);
 				}
+
 				qa.dismiss();
 				String teste = name;
+				app.getSettings().setMapLocationToShow(location.getLatitude(),
+						location.getLongitude(), z, saveHistory ? name : null,
+						name, obj);
 				MapActivityActions.directionsToDialogAndLaunchMap(activity,
 						location.getLatitude(), location.getLongitude(), name);
 			}
@@ -1375,18 +1380,14 @@ public class MapActivityActions implements DialogProvider {
 					});
 			builder.show();
 		} else {
-
-			String teste = name;
-			ctx.getSettings().navigateDialog();
-			// targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true,
-			// -1, name);
-			Location loc = new Location("map");
-			loc.setLatitude(lat);
-			loc.setLongitude(lon);
-			// new NavigateAction(mapActivity).getDirections(loc, name,null,
-			// DirectionDialogStyle.create().routeToMapPoint());
-			MapActivity.launchMapActivityMoveToTopWithName(act, name);
-			// MapActivity.launchMapActivityMoveToTop(act);
+			if (targetPointsHelper.checkPointToNavigateMapnGo(ctx)) {
+				targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true,
+						-1, name);
+				MapActivity.launchMapActivityMoveToTop(act);
+			} else {
+				ctx.getSettings().navigateDialog();				
+				MapActivity.launchMapActivityMoveToTop(act);
+			}
 		}
 	}
 

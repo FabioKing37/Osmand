@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.text.Collator;
 import java.text.MessageFormat;
@@ -464,6 +465,7 @@ public class ResourceManager {
 					AssetManager assetManager = context.getAssets();
 					boolean isFirstInstall = context.getSettings().PREVIOUS_INSTALLED_VERSION.get().equals("");
 					unpackBundledAssets(assetManager, applicationDataDir, progress, isFirstInstall);
+					
 					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(Version.getFullVersion(context));
 					
 					context.getPoiFilters().updateFilters(false);
@@ -530,9 +532,64 @@ public class ResourceManager {
 					copyAssets(assetManager, source, destinationFile);
 			}
 		}
-		
+		copyAssetFolder(assetManager, "voice", 
+				appDataDir + "/voice/");
 		isBundledAssetsXml.close();
+		
 	}
+	
+	private static boolean copyAssetFolder(AssetManager assetManager,
+            String fromAssetPath, String toPath) {
+        try {
+            String[] files = assetManager.list(fromAssetPath);
+            new File(toPath).mkdirs();
+            boolean res = true;
+            for (String file : files)
+                if (file.contains("."))
+                    res &= copyAsset(assetManager, 
+                            fromAssetPath + "/" + file,
+                            toPath + "/" + file);
+                else 
+                    res &= copyAssetFolder(assetManager, 
+                            fromAssetPath + "/" + file,
+                            toPath + "/" + file);
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private static boolean copyAsset(AssetManager assetManager,
+            String fromAssetPath, String toPath) {
+        InputStream in = null;
+        OutputStream out = null;
+        try {
+          in = assetManager.open(fromAssetPath);
+          new File(toPath).createNewFile();
+          out = new FileOutputStream(toPath);
+          copyFile(in, out);
+          in.close();
+          in = null;
+          out.flush();
+          out.close();
+          out = null;
+          return true;
+        } catch(Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private static void copyFile(InputStream in, OutputStream out) throws IOException {
+        byte[] buffer = new byte[1024];
+        int read;
+        while((read = in.read(buffer)) != -1){
+          out.write(buffer, 0, read);
+        }
+    }
+
+
 
 	//TODO consider some other place for this method?
 	public static void copyAssets(AssetManager assetManager, String assetName, File file) throws IOException {
@@ -546,6 +603,8 @@ public class ResourceManager {
 		Algorithms.closeStream(out);
 		Algorithms.closeStream(is);
 	}
+	
+	
 
 	private void initRenderers(IProgress progress) {
 		File file = context.getAppPath(IndexConstants.RENDERERS_DIR);

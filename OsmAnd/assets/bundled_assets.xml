@@ -5,15 +5,18 @@
 	<!-- 	alwaysCopyOnFirstInstall - Copies file on first install, always -->
 	<!-- 	alwaysOverwriteOrCopy - Copies or overwrites file unconditionally -->
 	<!-- 	copyOnlyIfDoesNotExist - Copies file only this file is not present on target system -->
-	<asset source="maps/map_agd.obf" destination="map_agd.obf" mode="alwaysOverwriteOrCopy" />
 	
+	<!--<asset source="maps/Portugal_europe.obf" destination="Portugal_europe.obf" mode="copyOnlyIfDoesNotExist" /> -->	
 	<asset source="voice/en/ttsconfig.p" destination="voice/en-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
 	<asset source="voice/es/ttsconfig.p" destination="voice/es-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />	
 	<asset source="voice/fr/ttsconfig.p" destination="voice/fr-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
 	<asset source="voice/it/ttsconfig.p" destination="voice/it-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
 	<asset source="voice/pt/ttsconfig.p" destination="voice/pt-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
-	<asset source="voice/en/config.p" destination="voice/en/_config.p" mode="overwriteOnlyIfExists" />	
-	<asset source="voice/es/config.p" destination="voice/es/_config.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/pt/config.p" destination="voice/pt/_config.p" mode="overwriteOnlyIfExists" />
+	<asset source="voice/pt-br/ttsconfig.p" destination="voice/pt-br-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
+	<asset source="voice/de/ttsconfig.p" destination="voice/de-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
+	
+	<asset source="voice/en/config.p" destination="voice/en/_config.p" mode="alwaysOverwriteOrCopy" />		
+	<asset source="voice/pt/config.p" destination="voice/pt/_config.p" mode="alwaysOverwriteOrCopy" />	
+	
 	<asset source="sounds/camera_click.ogg" destination="sounds/camera_click.ogg" mode="copyOnlyIfDoesNotExist" />
 </assets>

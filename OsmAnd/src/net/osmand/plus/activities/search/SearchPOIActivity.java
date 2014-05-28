@@ -313,7 +313,7 @@ public class SearchPOIActivity extends OsmandListActivity implements
 						searchPOILevel.setTitle(R.string.search_button);
 					}
 					searchFooterButton.setEnabled(true);
-					searchFooterButton.setText(R.string.search_button);
+					searchFooterButton.setText(R.string.search_POI_level_btn);
 					// Cancel current search request here?
 				}
 			}

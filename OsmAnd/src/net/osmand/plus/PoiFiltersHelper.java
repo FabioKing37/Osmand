@@ -414,7 +414,7 @@ public class PoiFiltersHelper {
 		return Collections.unmodifiableList(cacheOsmDefinedFilters);
 	}
 
-	// Remove filters obsolete with new user defined filters
+	// TODO:Remove filters obsolete with new user defined filters
 	public List<PoiFilter> getOsmDefinedPoiFilters() {
 		if (cacheOsmDefinedFilters == null) {
 			cacheOsmDefinedFilters = new ArrayList<PoiFilter>();

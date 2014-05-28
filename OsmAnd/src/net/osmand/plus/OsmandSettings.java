@@ -1539,7 +1539,7 @@ public class OsmandSettings {
 	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE";
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<String> VOICE_PROVIDER = new StringPreference(
-			"voice_provider", null).makeProfile();
+			"voice_provider", "pt").makeProfile();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	// public final OsmandPreference<Boolean> USE_COMPASS_IN_NAVIGATION = new

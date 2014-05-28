@@ -208,5 +208,13 @@ public class TargetPointsHelper {
     	return true;
     }
 	
+	public boolean checkPointToNavigateMapnGo(ClientContext ctx ){
+    	if(pointToNavigate == null){
+    		//ctx.showToastMessage(R.string.mark_final_location_first);
+			return false;
+		}
+    	return true;
+    }
+	
 	
 }

@@ -269,7 +269,7 @@
     <string name="loading_streets_buildings">A carregar ruas/prédios…</string>
     <string name="loading_postcodes">A carregar códigos postais…</string>
     <string name="loading_streets">A carregar ruas…</string>
-    <string name="loading_cities">A carregar cidades…</string>
+    <string name="loading_cities">A carregar localidades…</string>
     <string name="loading">A carregar…</string>
     <string name="poi">Locais</string>
     <string name="error_occurred_saving_gpx">Erro ao gravar GPX</string>
@@ -326,7 +326,7 @@
     <string name="search_address">Pesquisar endereço</string>
     <string name="choose_building">Escolher edifício</string>
     <string name="choose_street">Escolher rua</string>
-    <string name="choose_city">Escolher cidade</string>
+    <string name="choose_city">Escolher localidade</string>
     <string name="ChooseCountry">Escolher país</string>
     <string name="position_on_map_descr">Escolha a posição do marcador no mapa</string>
     <string name="position_on_map">Posição do marcador</string>
@@ -353,7 +353,7 @@
     <string name="search_activity">Pesquisar</string>
     <string name="searchpoi_activity">Escolher POI</string>
     <string name="search_POI_level_btn">Encontrar mais</string>
-    <string name="incremental_search_city">Cidades</string>
+    <string name="incremental_search_city">Localidades</string>
     <string name="incremental_search_street">Ruas</string>
     <string name="incremental_search_building">Edifícios</string>
     <string name="choose_available_region">Escolher País</string>
@@ -372,7 +372,7 @@
     <string name="navigate_point_cancel">Cancelar</string>
     <string name="search_address_top_text">Escolher endereço</string>
     <string name="search_address_region">País</string>
-    <string name="search_address_city">Cidade</string>
+    <string name="search_address_city">Localidade</string>
     <string name="search_address_street">Rua</string>
     <string name="search_address_building">Edifício</string>
     <string name="search_address_building_option">Edifício</string>
@@ -654,13 +654,14 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="show_gpx_route">Mostrar no mapa</string>
     <string name="poi_filter_nominatim">Online Nomeação</string>
     <string name="search_position_current_location_search">Procurando posição…</string>
-    <string name="search_position_current_location_found">Position (Found)</string>
+    <string name="search_position_current_location_found">Posição Atual</string>
     <string name="search_position_address">Endereço…</string>
     <string name="search_position_favorites">Favoritos…</string>
     <string name="search_position_undefined">Sem definir</string>
     <string name="search_position_fixed">Fixo</string>
+        <string name="route_updated_loc_found">A rota vai ser calculada quando a posição for encontrada.</string>
     <string name="search_position_current_location">Posição atual…</string>
-    <string name="search_position_map_view">Última vista do mapa</string>
+    <string name="search_position_map_view">Posição no mapa</string>
     <string name="select_search_position">Pesquisar perto :</string>
     <string name="context_menu_item_search">Pesquisar aqui perto</string>
     <string name="tip_recent_changes_0_6_7_t">"Recent changes for 0.6.7 : \n\t- Offline data manager (download, delete, activate / deactivate offline data directly in MapnGo) \n\t- Favorite points and groups (categorize, delete, manage favorites) \n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.) \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts) \n\t- Function to save route as GPX track for offline use \n\t- Improve GPX monitoring (filter some inaccurate position and save accuracy/elevation/speed) \n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/) \n\t- Improve vector rendering \n\t- Improvement of TTS engine (announce exact distance, enable miles) \n\t- Bug fixes "</string>
@@ -1180,7 +1181,7 @@ Quer seguir uma trilha GPX ?</string>
     <string name="local_index_gpx_timespan">\nTempo decorrido: %1$d:%2$02d:%3$02d</string>
     <string name="destination_point">Destino:  %1$s</string>
     <string name="context_menu_item_destination_point">Defina como destino</string>
-    <string name="please_select_address">Selecione cidade ou rua primeiro</string>
+    <string name="please_select_address">Selecione localidade ou rua primeiro</string>
     <string name="tip_recent_changes_1_4_t">Mudanças na versão 1.4:
 	\n\t* Otimize ordenação de waypoints para visitá-los (vendedor itinerante, porta a porta)
 	\n\t* Procure rua por nome (na vizinhança) 
@@ -1189,7 +1190,7 @@ Quer seguir uma trilha GPX ?</string>
 	\n\t* Suporte de GPX subdiretórios (organize suas rotas GPX)
 	\n\t* Apague arquivos SRTM
 	\n\t* Suporte de Notas </string>
-    <string name="search_street_in_neighborhood_cities">Procure rua nas cidades vizinhas</string>
+    <string name="search_street_in_neighborhood_cities">Procure rua em todas as localidades</string>
     <string name="intermediate_items_sort_return">Waypoints intermediários reordenados para otimizar sua ordem no caminho para o destino.</string>
     <string name="intermediate_items_sort_by_distance">Ordene(porta a porta)</string>
     <string name="use_distance_measurement_help">Toque para marcar um pont.\n

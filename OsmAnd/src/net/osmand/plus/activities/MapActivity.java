@@ -151,7 +151,7 @@ public class MapActivity extends AccessibleActivity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			Boolean firstTime = extras.getBoolean("FIRSTTIME");
-			
+
 			checkPreviousRunsForExceptions(firstTime);
 		}
 
@@ -443,32 +443,38 @@ public class MapActivity extends AccessibleActivity {
 		LatLon latLonToShow = settings.getAndClearMapLocationToShow();
 		String mapLabelToShow = settings.getAndClearMapLabelToShow();
 		Object toShow = settings.getAndClearObjectToShow();
+
+		// TODO: Se o Dialog Estiver aberto?
 		if (settings.isRouteToPointNavigateAndClear()) {
 			// always enable and follow and let calculate it (GPS is not
 			// accessible in garage)
 			Location loc = new Location("map");
-			loc.setLatitude(mapView.getLatitude());
-			loc.setLongitude(mapView.getLongitude());
-			
+			if (latLonToShow != null) {
+				loc.setLatitude(latLonToShow.getLatitude());
+				loc.setLongitude(latLonToShow.getLongitude());
+			} else {
+				loc.setLatitude(mapView.getLatitude());
+				loc.setLongitude(mapView.getLongitude());
+			}
+
 			Intent intent = getIntent();
 			Bundle b = intent.getExtras();
 			Bundle b1 = getIntent().getExtras();
 			Bundle bundle = this.getIntent().getExtras();
-			
+
 			int value = b1.getInt("state", 0);
 
 			String name = "teste";
 			String data = "teste";
-			
+
 			if (b != null) {
-				
+
 				name = bundle.getString("name");
 				data = bundle.getString(SearchPOIActivity.POI_NAME);
-				if(SearchPOIActivity.POI_NAME == null)
-					data = "DEU NULL";				
+				if (SearchPOIActivity.POI_NAME == null)
+					data = "DEU NULL";
 				int value1 = value;
 			}
-			
 
 			new NavigateAction(this).getDirections(loc, data, null,
 					DirectionDialogStyle.create());
@@ -874,10 +880,23 @@ public class MapActivity extends AccessibleActivity {
 			String name) {
 		Intent newIntent = new Intent(activity, OsmandIntents.getMapActivity());
 		newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		//newIntent.putExtra(OsmandSettings.MAP_LABEL_TO_SHOW, name);
-		newIntent.putExtra("name", name);		
-		newIntent.putExtra(SearchPOIActivity.POI_NAME, name);		
+		// newIntent.putExtra(OsmandSettings.MAP_LABEL_TO_SHOW, name);
+		newIntent.putExtra("name", name);
+		newIntent.putExtra(SearchPOIActivity.POI_NAME, name);
 		activity.startActivity(newIntent);
+	}
+
+	public static void launchMapActivityMoveToTopWithName(Context activity,
+			String name, Location loc) {
+		Intent newIntent = new Intent(activity, OsmandIntents.getMapActivity());
+		newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		// newIntent.putExtra(OsmandSettings.MAP_LABEL_TO_SHOW, name);
+		newIntent.putExtra("name", name);
+		newIntent.putExtra(SearchPOIActivity.POI_NAME, name);
+		activity.startActivity(newIntent);
+
+		// new NavigateAction().getDirections(loc, name,null,
+		// DirectionDialogStyle.create().routeToMapPoint());
 	}
 
 	@Override

@@ -211,7 +211,7 @@ public class SearchActivity extends SherlockFragmentActivity implements
 				LatLon l = new LatLon(lat, lon);
 				if (!Algorithms.objectEquals(reqSearchPoint, l)) {
 					reqSearchPoint = l;
-					updateSearchPoint(reqSearchPoint,
+					updateSearchPointAndString(reqSearchPoint,
 							getString(R.string.search_position_fixed), true);
 				}
 			}
@@ -274,7 +274,7 @@ public class SearchActivity extends SherlockFragmentActivity implements
 								searchAroundCurrentLocation = false;
 								endSearchCurrentLocation();
 								if (position == POSITION_LAST_MAP_VIEW) {
-									updateSearchPoint(
+									updateSearchPointAndString(
 											settings.getLastKnownMapLocation(),
 											getString(R.string.search_position_fixed),
 											true);
@@ -339,7 +339,7 @@ public class SearchActivity extends SherlockFragmentActivity implements
 			if (name != null) {
 				updateSearchPoint(latLon, name, false);
 			} else {
-				updateSearchPoint(latLon,
+				updateSearchPointAndString(latLon,
 						getString(R.string.search_position_fixed), true);
 			}
 		}
@@ -399,11 +399,32 @@ public class SearchActivity extends SherlockFragmentActivity implements
 	public void updateSearchPoint(LatLon searchPoint, String message,
 			boolean showLoc) {
 		spinnerAdapter.remove(spinnerAdapter.getItem(0));
+		//Adiciona as coordenadas à string
 		String suffix = "";
 		if (showLoc && searchPoint != null) {
 			suffix = formatLatLon(searchPoint);
 		}
 		spinnerAdapter.insert(message + suffix, 0);
+		this.searchPoint = searchPoint;
+		for (WeakReference<Fragment> ref : fragList) {
+			Fragment f = ref.get();
+			if (f instanceof SearchActivityChild) {
+				if (!f.isDetached()) {
+					((SearchActivityChild) f).locationUpdate(searchPoint);
+				}
+			}
+		}
+		getSupportActionBar().setSelectedNavigationItem(0);
+	}
+	
+	//Ppsição vista no Mapa
+	public void updateSearchPointAndString(LatLon searchPoint, String message,
+			boolean showLoc) {
+		spinnerAdapter.remove(spinnerAdapter.getItem(0));
+
+		message = getString(R.string.search_position_map_view);
+ 
+		spinnerAdapter.insert(message, 0);
 		this.searchPoint = searchPoint;
 		for (WeakReference<Fragment> ref : fragList) {
 			Fragment f = ref.get();

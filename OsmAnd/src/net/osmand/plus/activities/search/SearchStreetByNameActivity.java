@@ -1,6 +1,5 @@
 package net.osmand.plus.activities.search;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -28,39 +27,46 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Street> {
+public class SearchStreetByNameActivity extends
+		SearchByNameAbstractActivity<Street> {
 	private RegionAddressRepository region;
 	private City city;
 	private Button searchAllStrets;
-	private int searchWithCity = -1; // -1 - default, 0 - filter city, 1 - deep search
-	
+	private int searchWithCity = -1;
+
+	// -1 - default, 0 - filter city, 1 - deep
+	// search
+
 	@Override
 	protected Comparator<? super Street> createComparator() {
-		return new MapObjectComparator(getMyApplication().getSettings().usingEnglishNames()) {
+		return new MapObjectComparator(getMyApplication().getSettings()
+				.usingEnglishNames()) {
 			@Override
 			public int compare(MapObject o1, MapObject o2) {
-				if(searchWithCity >= 0 && city != null) {
-					double d1 = MapUtils.getDistance(city.getLocation(), o1.getLocation());
-					double d2 = MapUtils.getDistance(city.getLocation(), o2.getLocation());
+				if (searchWithCity >= 0 && city != null) {
+					double d1 = MapUtils.getDistance(city.getLocation(),
+							o1.getLocation());
+					double d2 = MapUtils.getDistance(city.getLocation(),
+							o2.getLocation());
 					return Double.compare(d1, d2);
 				}
 				return super.compare(o1, o2);
 			}
 		};
 	}
-	
+
 	@Override
 	protected void reset() {
 		searchWithCity = -1;
 		super.reset();
 	}
-	
 
 	@Override
 	protected void addFooterViews() {
 		final FrameLayout ll = new FrameLayout(this);
 		searchAllStrets = new Button(this);
-		android.widget.FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		android.widget.FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		lp.gravity = Gravity.CENTER_HORIZONTAL;
 		searchAllStrets.setLayoutParams(lp);
 		searchAllStrets.setTextColor(getResources().getColor(
@@ -77,7 +83,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 		});
 		getListView().addFooterView(ll);
 	}
-	
+
 	@Override
 	public AsyncTask<Object, ?, ?> getInitializeTask() {
 		return new AsyncTask<Object, Street, List<Street>>() {
@@ -96,11 +102,25 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 
 			@Override
 			protected List<Street> doInBackground(Object... params) {
-				region = ((OsmandApplication) getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
+				region = ((OsmandApplication) getApplication())
+						.getResourceManager().getRegionRepository(
+								settings.getLastSearchedRegion());
+
 				if (region != null) {
-					city = region.getCityById(settings.getLastSearchedCity(), settings.getLastSearchedCityName());
+					if (isNo_city()) {
+						city = null;
+					} else {
+
+						city = region.getCityById(
+								settings.getLastSearchedCity(),
+								settings.getLastSearchedCityName());
+					}
 					if (city == null) {
+						// Se não tiver escolhido uma localidade
+						searchWithCity = 1;
+						research();
 						return new ArrayList<Street>();
+
 					}
 					region.preloadStreets(city, new ResultMatcher<Street>() {
 						@Override
@@ -120,54 +140,57 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 			}
 		};
 	}
-	
+
 	@Override
 	protected void filterLoop(String query, Collection<Street> list) {
-		if(searchWithCity == -1){
+		if (searchWithCity == -1) {
 			filter(query, list);
-		} else if(searchWithCity == 0){
+		} else if (searchWithCity == 0) {
 			for (Street obj : list) {
-				if(namesFilter.isCancelled){
+				if (namesFilter.isCancelled) {
 					break;
 				}
-				if(filterObject(obj, query)){
-					Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, obj);
+				if (filterObject(obj, query)) {
+					Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY,
+							obj);
 					msg.sendToTarget();
 				}
 			}
 		} else {
 			searchWithCity = 0;
-			final List res = region.searchMapObjectsByName(query, new ResultMatcher<MapObject>() {
-				@Override
-				public boolean publish(MapObject object) {
-					if (object instanceof Street) {
-						if(city == null ||
-								MapUtils.getDistance(city.getLocation(), object.getLocation()) < 100*1000) {
-							Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, object);
-							msg.sendToTarget();
-							return true;
+			final List res = region.searchMapObjectsByName(query,
+					new ResultMatcher<MapObject>() {
+						@Override
+						public boolean publish(MapObject object) {
+							if (object instanceof Street) {
+								if (city == null
+										|| MapUtils.getDistance(
+												city.getLocation(),
+												object.getLocation()) < 100 * 1000) {
+									Message msg = uiHandler.obtainMessage(
+											MESSAGE_ADD_ENTITY, object);
+									msg.sendToTarget();
+									return true;
+								}
+							}
+							return false;
 						}
-					}
-					return false;
-				}
-				
-				@Override
-				public boolean isCancelled() {
-					return namesFilter.isCancelled;
-				}
-			});
+
+						@Override
+						public boolean isCancelled() {
+							return namesFilter.isCancelled;
+						}
+					});
 			runOnUiThread(new Runnable() {
-				
+
 				@Override
 				public void run() {
-					finishInitializing(res);					
+					finishInitializing(res);
 				}
 			});
 		}
-		
-		
-	}
 
+	}
 
 	private void filter(String query, Collection<Street> list) {
 		boolean emptyQuery = query == null || query.length() == 0;
@@ -175,8 +198,10 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 			if (namesFilter.isCancelled) {
 				break;
 			}
-			if (emptyQuery || CollatorStringMatcher.cmatches(collator, obj.getNameWithoutCityPart(region.useEnglishNames()), 
-					query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+			if (emptyQuery
+					|| CollatorStringMatcher.cmatches(collator, obj
+							.getNameWithoutCityPart(region.useEnglishNames()),
+							query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
 				Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, obj);
 				msg.sendToTarget();
 			}
@@ -186,47 +211,58 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 				if (namesFilter.isCancelled) {
 					break;
 				}
-				if (CollatorStringMatcher.cmatches(collator, obj.getNameWithoutCityPart(region.useEnglishNames()), query, StringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING)) {
-					Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, obj);
+				if (CollatorStringMatcher
+						.cmatches(
+								collator,
+								obj.getNameWithoutCityPart(region
+										.useEnglishNames()),
+								query,
+								StringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING)) {
+					Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY,
+							obj);
 					msg.sendToTarget();
 				}
 			}
 		}
 	}
-	
+
 	@Override
 	public String getText(Street obj) {
-		if(searchWithCity >= 0 || city == null) {
-			String nameWithCity = obj.getName(region.useEnglishNames()) + " - " + obj.getCity().getName(region.useEnglishNames());
-			return nameWithCity ;
+		if (searchWithCity >= 0 || city == null) {
+			String nameWithCity = obj.getName(region.useEnglishNames()) + " - "
+					+ obj.getCity().getName(region.useEnglishNames());
+			return nameWithCity;
 		}
 		return obj.getName(region.useEnglishNames());
 	}
-	
+
 	@Override
 	public String getDistanceText(Street obj) {
-		if(searchWithCity >= 0 && city != null) {
-			return OsmAndFormatter.getFormattedDistance((float) MapUtils.getDistance(obj.getLocation(), city.getLocation()),
-					getMyApplication());			
+		if (searchWithCity >= 0 && city != null) {
+			return OsmAndFormatter.getFormattedDistance(
+					(float) MapUtils.getDistance(obj.getLocation(),
+							city.getLocation()), getMyApplication());
 		}
 		return null;
 	}
-	
-	
+
 	@Override
 	public void itemSelected(Street obj) {
-		if(!Algorithms.objectEquals(settings.getLastSearchedCity(), obj.getCity().getId())) {
-			settings.setLastSearchedCity(obj.getCity().getId(), obj.getCity().getName(), obj.getLocation());
+		if (!Algorithms.objectEquals(settings.getLastSearchedCity(), obj
+				.getCity().getId())) {
+			settings.setLastSearchedCity(obj.getCity().getId(), obj.getCity()
+					.getName(), obj.getLocation());
 		}
-		settings.setLastSearchedStreet(obj.getName(region.useEnglishNames()), obj.getLocation());
-//		if(obj.getBuildings().size() == 0){
-//			quitActivity(null);
-//		} else {
+		settings.setLastSearchedStreet(obj.getName(region.useEnglishNames()),
+				obj.getLocation());
+		if (obj.getBuildings().size() == 0) {
+			quitActivity(null);
+		} else {
 			quitActivity(SearchBuildingByNameActivity.class);
-//		}
-		
+		}
+
 	}
-	
+
 	protected AddressInformation getAddressInformation() {
 		return AddressInformation.buildCity(this, settings);
 	}

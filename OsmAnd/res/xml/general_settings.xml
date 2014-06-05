@@ -7,6 +7,11 @@
         android:title="@string/settings_preset" >
     </ListPreference>
     <ListPreference
+        android:key="daynight_mode"
+        android:summary="@string/daynight_descr"
+        android:title="@string/daynight" >
+    </ListPreference>
+    <ListPreference
         android:key="rotate_map"
         android:summary="@string/rotate_map_to_bearing_descr"
         android:title="@string/rotate_map_to_bearing" >

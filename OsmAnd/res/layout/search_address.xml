@@ -47,9 +47,8 @@
                         android:id="@+id/ResetCountry"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="5dp"
-                        android:background="?attr/reset_image"
-                        android:contentDescription="@string/default_buttons_reset"
-                        android:visibility="gone" >
+                        android:background="@drawable/ic_action_delete_light"
+                        android:contentDescription="@string/default_buttons_reset" >
                     </ImageButton>
                 </TableRow>
 
@@ -115,7 +114,7 @@
                         android:id="@+id/ResetStreet"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="5dp"
-                        android:background="?attr/reset_image"
+                        android:background="@drawable/ic_action_delete_light"
                         android:contentDescription="@string/default_buttons_reset" >
                     </ImageButton>
                 </TableRow>
@@ -149,7 +148,7 @@
                         android:id="@+id/ResetBuilding"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="5dp"
-                        android:background="?attr/reset_image"
+                        android:background="@drawable/ic_action_delete_light"
                         android:contentDescription="@string/default_buttons_reset" >
                     </ImageButton>
                 </TableRow>

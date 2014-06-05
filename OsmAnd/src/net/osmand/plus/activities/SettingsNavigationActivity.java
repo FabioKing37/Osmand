@@ -64,7 +64,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		settings = getMyApplication().getSettings();
 		
 		registerBooleanPreference(settings.FAST_ROUTE_MODE, screen);
-		registerBooleanPreference(settings.PRECISE_ROUTING_MODE, screen);
+		//registerBooleanPreference(settings.PRECISE_ROUTING_MODE, screen);
 		registerBooleanPreference(settings.SNAP_TO_ROAD, screen);
 		registerBooleanPreference(settings.USE_COMPASS_IN_NAVIGATION, screen);
 		
@@ -80,9 +80,9 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		for(int i=0; i<entries.length; i++){
 			entries[i] = RouteService.values()[i].getName();
 		}
-		registerListPreference(settings.ROUTER_SERVICE, screen, entries, RouteService.values());
+		//registerListPreference(settings.ROUTER_SERVICE, screen, entries, RouteService.values());
 		
-		routerServicePreference = (ListPreference) screen.findPreference(settings.ROUTER_SERVICE.getId());
+		//routerServicePreference = (ListPreference) screen.findPreference(settings.ROUTER_SERVICE.getId());
 		
 		entries = new String[AutoZoomMap.values().length];
 		for(int i=0; i<entries.length; i++){
@@ -107,7 +107,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		
 		reloadVoiceListPreference(screen);
 		
-		profileDialog();
+		//profileDialog();
 	}
 
 
@@ -135,7 +135,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	public void updateAllSettings() {
 		reloadVoiceListPreference(getPreferenceScreen());
 		super.updateAllSettings();
-		routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + settings.ROUTER_SERVICE.get() + "]");
+		//routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + settings.ROUTER_SERVICE.get() + "]");
 	}
 
 	@Override

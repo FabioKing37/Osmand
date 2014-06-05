@@ -57,8 +57,8 @@ public class SettingsActivity extends SettingsBaseActivity {
 		localIndexes.setOnPreferenceClickListener(this);
 //		bidforfix = (Preference) screen.findPreference("bidforfix");
 //		bidforfix.setOnPreferenceClickListener(this);
-		plugins = (Preference) screen.findPreference("plugins");
-		plugins.setOnPreferenceClickListener(this);
+	//	plugins = (Preference) screen.findPreference("plugins");
+	//	plugins.setOnPreferenceClickListener(this);
 		general = (Preference) screen.findPreference("general_settings");
 		general.setOnPreferenceClickListener(this);
 		routing = (Preference) screen.findPreference("routing_settings");

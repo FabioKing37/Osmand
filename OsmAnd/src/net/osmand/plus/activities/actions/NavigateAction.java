@@ -156,7 +156,6 @@ public class NavigateAction {
 		}
 
 		final TargetPointsHelper targets = app.getTargetPointsHelper();
-		
 
 		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(
 				ApplicationMode.values(app.getSettings()));
@@ -188,10 +187,9 @@ public class NavigateAction {
 					+ getRoutePointDescription(targets.getPointToNavigate(),
 							targets.getPointNavigateDescription());
 
-			
-				String oname = name != null ? name : getRoutePointDescription(
-						mapView.getLatitude(), mapView.getLongitude());
-			
+			String oname = name != null ? name : getRoutePointDescription(
+					mapView.getLatitude(), mapView.getLongitude());
+
 			String mapLocation = mapActivity
 					.getString(R.string.route_descr_map_location) + " " + oname;
 			// mapActivity.getMapActions().KEY_DESTNAME = oname;
@@ -468,19 +466,22 @@ public class NavigateAction {
 							R.string.unknown_from_location, Toast.LENGTH_LONG)
 							.show();
 					return;
-				}
+				} else {
 
-				ApplicationMode mode = getAppMode(buttons, settings, values);
-				app.getRoutingHelper().setAppMode(mode);
-				settings.OPTIMAL_ROUTE_MODE.setModeValue(mode,
-						!nonoptimal.isChecked());
-				settings.FOLLOW_THE_ROUTE.set(false);
-				settings.FOLLOW_THE_GPX_ROUTE.set(null);
-				app.getRoutingHelper().setFollowingMode(false);
-				app.getRoutingHelper().setFinalAndCurrentLocation(
-						targets.getPointToNavigate(),
-						targets.getIntermediatePoints(), from, null);
+					ApplicationMode mode = getAppMode(buttons, settings, values);
+					app.getRoutingHelper().setAppMode(mode);
+					settings.OPTIMAL_ROUTE_MODE.setModeValue(mode,
+							!nonoptimal.isChecked());
+					settings.FOLLOW_THE_ROUTE.set(false);
+					settings.FOLLOW_THE_GPX_ROUTE.set(null);
+					app.getRoutingHelper().setFollowingMode(false);
+
+					app.getRoutingHelper().setFinalAndCurrentLocation(
+							targets.getPointToNavigate(),
+							targets.getIntermediatePoints(), from, null);
+				}
 				builderDialog.dismiss();
+
 			}
 		});
 

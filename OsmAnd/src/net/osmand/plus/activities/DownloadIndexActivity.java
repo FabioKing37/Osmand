@@ -102,7 +102,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		progressMessage = (TextView) findViewById(R.id.ProgressMessage);
 		progressPercent = (TextView) findViewById(R.id.ProgressPercent);
 		cancel = (ImageView) findViewById(R.id.Cancel);
-		int d = settings.isLightContent() ? R.drawable.a_1_navigation_cancel_small_light : R.drawable.a_1_navigation_cancel_small_dark;
+		int d = settings.isLightContent() ? R.drawable.a_1_navigation_cancel_small_light : R.drawable.a_1_navigation_cancel_small_light;
 		cancel.setImageDrawable(getResources().getDrawable(d));
 		cancel.setOnClickListener(new View.OnClickListener() {
 			
@@ -250,7 +250,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		s.add(0, SELECT_ALL_ID, 0, R.string.select_all);
 		s.add(0, DESELECT_ALL_ID, 0, R.string.deselect_all);
 		
-		s.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light : R.drawable.abs__ic_menu_moreoverflow_holo_dark);
+		s.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_dark : R.drawable.abs__ic_menu_moreoverflow_holo_dark);
         s.getItem().setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		return super.onCreateOptionsMenu(menu);
 	}

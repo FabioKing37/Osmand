@@ -32,8 +32,8 @@
             <TextView
                 android:id="@+id/ProgressPercent"
                 android:layout_width="48dp"
-                android:layout_alignParentRight="true"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:gravity="right|center_vertical"
                 android:text=""
@@ -81,9 +81,9 @@
         android:id="@+id/search_box"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
-        android:layout_marginBottom="5dp"
         android:hint="@string/download_type_to_filter"
         android:inputType="textFilter"
         android:maxLines="1" />
@@ -108,6 +108,7 @@
         android:layout_marginTop="3dp"
         android:gravity="center"
         android:text="@string/download_files"
+        android:textColor="@color/color_white"
         android:visibility="gone" />
 
 </LinearLayout>

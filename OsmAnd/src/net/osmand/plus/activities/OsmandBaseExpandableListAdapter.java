@@ -11,12 +11,12 @@ public abstract class OsmandBaseExpandableListAdapter extends BaseExpandableList
 		ImageView indicator = (ImageView) row.findViewById(R.id.explist_indicator);
 		if (!isExpanded) {
 			if (getChildrenCount(groupPosition) == 0) {
-				indicator.setImageResource(R.drawable.expandable_category_empty);
+				indicator.setImageResource(R.drawable.expandable_category_empty_light);
 			} else {
-				indicator.setImageResource(R.drawable.expandable_category_unpushed);
+				indicator.setImageResource(R.drawable.expandable_category_unpushed_light);
 			}
 		} else {
-			indicator.setImageResource(R.drawable.expandable_category_pushed);
+			indicator.setImageResource(R.drawable.expandable_category_pushed_light);
 		}
 	}
 

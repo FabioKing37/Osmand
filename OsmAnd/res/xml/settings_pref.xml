@@ -14,10 +14,13 @@
         android:key="routing_settings"
         android:summary="@string/routing_settings_descr"
         android:title="@string/routing_settings" />
+    <!--
     <Preference
         android:key="plugins"
         android:summary="@string/prefs_plugins_descr"
-        android:title="@string/prefs_plugins" />
+        android:title="@string/prefs_plugins" />
+    -->
+
 
     <!-- <Preference android:title="@string/support_new_features" android:summary="@string/support_new_features_descr" android:key="bidforfix"/> -->
 

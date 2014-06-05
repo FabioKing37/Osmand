@@ -787,9 +787,13 @@ public class MapActivityActions implements DialogProvider {
 	public AlertDialog openOptionsMenuAsList() {
 		final ContextMenuAdapter cm = createOptionsMenu();
 		final Builder bld = new AlertDialog.Builder(mapActivity);
-		// TODO: NOVO DIALOG
 		bld.setTitle("  ");
-		bld.setIcon(R.drawable.logocompleto);
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+			bld.setIcon(R.drawable.logocompleto_white);
+		} else {
+			bld.setIcon(R.drawable.logocompleto);
+
+		}
 		bld.setNegativeButton(R.string.close,
 				new DialogInterface.OnClickListener() {
 					@Override
@@ -987,7 +991,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).reg();
 		// Configurar Tela
-		optionsMenuHelper
+	/*	optionsMenuHelper
 				.item(R.string.layer_map_appearance)
 				.icons(R.drawable.ic_action_settings_dark,
 						R.drawable.ic_action_settings_dark)
@@ -999,6 +1003,7 @@ public class MapActivityActions implements DialogProvider {
 								.openViewConfigureDialog();
 					}
 				}).reg();
+				*/
 		// Settings
 		optionsMenuHelper
 				.item(R.string.settings_Button)
@@ -1049,6 +1054,7 @@ public class MapActivityActions implements DialogProvider {
 		 */
 		final OsmAndLocationProvider loc = app.getLocationProvider();
 		// INICIAR ANIMAÇÂO - DEBUG
+		/*
 		if (app.getTargetPointsHelper().getPointToNavigate() != null
 				|| loc.getLocationSimulation().isRouteAnimating()) {
 
@@ -1068,6 +1074,7 @@ public class MapActivityActions implements DialogProvider {
 						}
 					}).reg();
 		}
+		*/
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
 		optionsMenuHelper
 				.item(R.string.exit_Button)
@@ -1385,7 +1392,7 @@ public class MapActivityActions implements DialogProvider {
 						-1, name);
 				MapActivity.launchMapActivityMoveToTop(act);
 			} else {
-				ctx.getSettings().navigateDialog();				
+				ctx.getSettings().navigateDialog();
 				MapActivity.launchMapActivityMoveToTop(act);
 			}
 		}

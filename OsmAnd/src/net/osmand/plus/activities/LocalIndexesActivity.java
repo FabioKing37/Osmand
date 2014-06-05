@@ -509,19 +509,19 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			}
 		};
 		optionsMenuAdapter.item(R.string.local_index_download)
-						.icons(R.drawable.ic_action_gdown_dark, R.drawable.ic_action_gdown_light)
+						.icons(R.drawable.ic_action_gdown_dark, R.drawable.ic_action_gdown_dark)
 						.listen(listener).position(0).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_reload)
-						.icons(R.drawable.ic_action_refresh_dark, R.drawable.ic_action_refresh_light)
+						.icons(R.drawable.ic_action_refresh_dark, R.drawable.ic_action_refresh_dark)
 						.listen(listener).position(1).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_backup)
-						.icons(R.drawable.ic_action_undo_dark, R.drawable.ic_action_undo_light)
+						.icons(R.drawable.ic_action_undo_dark, R.drawable.ic_action_undo_dark)
 						.listen(listener).position(2).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_restore)
 				.icons(R.drawable.ic_action_redo_dark, R.drawable.ic_action_redo_dark)
 						.listen(listener).position(3).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_delete)
-						.icons(R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_light)
+						.icons(R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_dark)
 						.listen(listener).position(4).reg();
 		OsmandPlugin.onOptionsMenuLocalIndexes(this, optionsMenuAdapter);
 		// doesn't work correctly
@@ -532,7 +532,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			if (j + 1 >= max && optionsMenuAdapter.length() > max) {
 				if (split == null) {
 					split = menu.addSubMenu(0, 1, 0, R.string.default_buttons_other_actions);
-					split.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light
+					split.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_dark
 							: R.drawable.abs__ic_menu_moreoverflow_holo_dark);
 					split.getItem().setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 				}
@@ -677,6 +677,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		}
 		TextView ds = (TextView) findViewById(R.id.DescriptionText);
 		String text = getString(R.string.download_link_and_local_description, size);
+		/*
 		int l = text.indexOf('.');
 		if(l == -1) {
 			l = text.length();
@@ -697,6 +698,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		}, 0, l, 0);
 		ds.setText(content);
 		ds.setMovementMethod(LinkMovementMethod.getInstance());
+		*/
 	}
 	
 	
@@ -708,7 +710,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		} else if (itemId == R.string.local_index_mi_reload) {
 			reloadIndexes();
 		} else if (itemId == R.string.local_index_mi_delete) {
-			openSelectionMode(itemId, R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_light,
+			openSelectionMode(itemId, R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_dark,
 					new DialogInterface.OnClickListener() {
 
 						@Override
@@ -717,7 +719,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 						}
 					}, null, null);
 		} else if (itemId == R.string.local_index_mi_backup) {
-			openSelectionMode(itemId, R.drawable.ic_action_undo_dark, R.drawable.ic_action_undo_light,
+			openSelectionMode(itemId, R.drawable.ic_action_undo_dark, R.drawable.ic_action_undo_dark,
 					new DialogInterface.OnClickListener() {
 
 						@Override
@@ -726,7 +728,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 						}
 					}, Boolean.FALSE, LocalIndexType.MAP_DATA);
 		} else if (itemId == R.string.local_index_mi_restore) {
-			openSelectionMode(itemId, R.drawable.ic_action_redo_dark, R.drawable.ic_action_redo_light,
+			openSelectionMode(itemId, R.drawable.ic_action_redo_dark, R.drawable.ic_action_redo_dark,
 					new DialogInterface.OnClickListener() {
 
 						@Override

@@ -722,7 +722,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="basemap_was_selected_to_download">Basemap is required for proper application functioning and was selected to download.</string>
     <string name="select_index_file_to_download">Nothing was found. If you can\'t find your region, you can make it yourself (see http://osmand.net).</string>
     <string name="local_indexes_cat_tile">Online and tile maps</string>
-    <string name="local_indexes_cat_map">Offline maps (vector)</string>
+    <string name="local_indexes_cat_map">Maps</string>
     <string name="index_settings_descr">Download maps and manage offline data stored on your device</string>
     <string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
     <string name="map_online_data">Online and tile maps</string>
@@ -1042,14 +1042,14 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="local_index_mi_backup">Deactivate</string>
     <string name="local_index_mi_delete">Delete</string>
     <string name="local_index_mi_reload">Reload from sdcard</string>
-    <string name="local_index_download">Download</string>
+    <string name="local_index_download">Tranferências</string>
     <string name="local_index_poi_data">POI data</string>
     <string name="local_index_address_data">Address data</string>
     <string name="local_index_transport_data">Transportation data</string>
     <string name="local_index_map_data">Map data</string>
     <string name="local_indexes_cat_backup">Deactivated</string>
-    <string name="local_indexes_cat_tts">Voice data (TTS)</string>
-    <string name="local_indexes_cat_voice">Voice data (recorded)</string>
+    <string name="local_indexes_cat_tts">Voices Synthesized (TTS)</string>
+    <string name="local_indexes_cat_voice">Voice Recorded</string>
     <string name="local_indexes_cat_gpx">GPX data</string>
     <string name="local_indexes_cat_poi">POI data</string>
     <string name="ttsvoice">TTS Voice</string>

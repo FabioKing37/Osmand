@@ -30,6 +30,7 @@ public class AppearanceWidgetsFactory {
     public void registerAppearanceWidgets(final MapActivity map, final MapInfoLayer mapInfoLayer,
                                           final MapWidgetRegistry mapInfoControls) {
         final OsmandMapTileView view = map.getMapView();
+        
 
 
         final MapWidgetRegistry.MapWidgetRegInfo displayViewDirections = mapInfoControls.registerAppearanceWidget(R.drawable.widget_viewing_direction, R.string.map_widget_view_direction,

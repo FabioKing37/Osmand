@@ -32,7 +32,8 @@ import android.widget.TextView.BufferType;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 
-public class SearchHistoryFragment extends SherlockListFragment  implements SearchActivityChild {
+public class SearchHistoryFragment extends SherlockListFragment implements
+		SearchActivityChild {
 	private LatLon location;
 	private SearchHistoryHelper helper;
 	private Button clearButton;
@@ -40,24 +41,27 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
 	private HistoryAdapter historyAdapter;
 
-	
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		
+
 	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		helper = SearchHistoryHelper.getInstance((ClientContext) getActivity().getApplicationContext());
+		helper = SearchHistoryHelper.getInstance((ClientContext) getActivity()
+				.getApplicationContext());
 	}
-	
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		historyAdapter = new HistoryAdapter(helper.getHistoryEntries());
 		clearButton = new Button(getActivity());
 		clearButton.setText(R.string.clear_all);
+		clearButton.setTextColor(getResources().getColorStateList(
+				R.color.color_white));
 		clearButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -69,8 +73,7 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 		getListView().addFooterView(clearButton);
 		setListAdapter(historyAdapter);
 	}
-	
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -87,40 +90,44 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 			location = ((SearchActivity) activity).getSearchPoint();
 		}
 		if (location == null) {
-			location = ((OsmandApplication) activity.getApplication()).getSettings().getLastKnownMapLocation();
+			location = ((OsmandApplication) activity.getApplication())
+					.getSettings().getLastKnownMapLocation();
 		}
 
-		clearButton.setVisibility(historyAdapter.isEmpty() ? View.GONE : View.VISIBLE);
-		
+		clearButton.setVisibility(historyAdapter.isEmpty() ? View.GONE
+				: View.VISIBLE);
+
 	}
 
 	@Override
 	public void locationUpdate(LatLon l) {
 		location = l;
-		if(historyAdapter != null) {
+		if (historyAdapter != null) {
 			historyAdapter.notifyDataSetChanged();
 		}
 	}
 
-
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		HistoryEntry model = ((HistoryAdapter) getListAdapter()).getItem(position);
+		HistoryEntry model = ((HistoryAdapter) getListAdapter())
+				.getItem(position);
 		selectModel(model, v);
 	}
 
 	private void selectModel(final HistoryEntry model, View v) {
 		QuickAction qa = new QuickAction(v);
 		String name = model.getName();
-		OsmandSettings settings = ((OsmandApplication) getActivity().getApplication()).getSettings();
+		OsmandSettings settings = ((OsmandApplication) getActivity()
+				.getApplication()).getSettings();
 		OnClickListener onShow = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				helper.selectEntry(model);				
+				helper.selectEntry(model);
 			}
 		};
-		MapActivityActions.createDirectionsActions(qa, new LatLon(model.getLat(), model.getLon()),
-				model, name, settings.getLastKnownMapZoom(), getActivity(), false, onShow);
+		MapActivityActions.createDirectionsActions(qa,
+				new LatLon(model.getLat(), model.getLon()), model, name,
+				settings.getLastKnownMapZoom(), getActivity(), false, onShow);
 		qa.show();
 	}
 
@@ -131,22 +138,28 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 		}
 
 		@Override
-		public View getView(final int position, View convertView, ViewGroup parent) {
+		public View getView(final int position, View convertView,
+				ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {
 				LayoutInflater inflater = getActivity().getLayoutInflater();
-				row = inflater.inflate(R.layout.search_history_list_item, parent, false);
+				row = inflater.inflate(R.layout.search_history_list_item,
+						parent, false);
 			}
 			TextView label = (TextView) row.findViewById(R.id.label);
 			String distance = "";
 			ImageButton icon = (ImageButton) row.findViewById(R.id.remove);
 			final HistoryEntry model = getItem(position);
 			if (location != null) {
-				int dist = (int) (MapUtils.getDistance(location, model.getLat(), model.getLon()));
-				distance = OsmAndFormatter.getFormattedDistance(dist, (ClientContext) getActivity().getApplication()) + "  ";
+				int dist = (int) (MapUtils.getDistance(location,
+						model.getLat(), model.getLon()));
+				distance = OsmAndFormatter.getFormattedDistance(dist,
+						(ClientContext) getActivity().getApplication()) + "  ";
 			}
 			label.setText(distance + model.getName(), BufferType.SPANNABLE);
-			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length(), 0);
+			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(
+					getResources().getColor(R.color.color_distance)), 0,
+					distance.length(), 0);
 			icon.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
